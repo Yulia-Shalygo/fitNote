@@ -1,0 +1,14 @@
+<div class="header">
+    <div class="container test">
+        <div class="header__inner">
+            <a routerLink="" class="nav__link logo">FitNote</a>
+
+            <nav class="nav">
+                <a *ngIf="!userUID" routerLink="login" class="links nav__link">Sign In</a>
+                <a *ngIf="!userUID" routerLink="about" class="links nav__link">About Us</a>
+                <a *ngIf="userUID" (click)="logout()" class="links nav__link">Logout</a>
+            </nav>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>
