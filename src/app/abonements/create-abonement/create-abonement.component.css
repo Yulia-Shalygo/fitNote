@@ -1,0 +1,8 @@
+.calendar{
+    max-width: 470px;
+}
+
+.col {
+    display: flex;
+    justify-content: space-between;
+}

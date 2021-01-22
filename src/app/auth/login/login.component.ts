@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.disable();
 
     await this.firebaseServiсe.signin(email, password)
-      .catch(error => {      
+      .catch(() => {      
         this.loginForm.reset();
         this.loginForm.enable();
         this.err = true;

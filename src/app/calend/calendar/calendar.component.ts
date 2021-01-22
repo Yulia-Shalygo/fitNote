@@ -8,16 +8,18 @@ import { Task } from 'src/app/interfaces/task';
 import firebase from 'firebase/app';
 
 @Component({
-  selector: 'app-diary',
-  templateUrl: './diary.component.html',
-  styleUrls: ['./diary.component.css']
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
+  styleUrls: ['./calendar.component.css']
 })
-export class DiaryComponent implements OnInit {
+export class CalendarComponent implements OnInit {
   userUID: any;
 
   calendar: Week[];
 
-  modal: boolean = false;
+  modal: boolean = true;
+  
+  flip: boolean = false;
   calendarForm: FormGroup;
 
   arr: Task[] = [];
@@ -26,7 +28,6 @@ export class DiaryComponent implements OnInit {
 
   tempTask: Task = {
     description: '',
-    time: '',
     date: '',
     user: ''
   };
@@ -36,8 +37,6 @@ export class DiaryComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.date.subscribe(this.calend.bind(this));
     this.calendarForm = new FormGroup({
-      hours: new FormControl(null,
-        [Validators.required,  Validators.max(24), Validators.min(0)]),
       description: new FormControl(null,
         [Validators.required])
     })
@@ -76,6 +75,8 @@ export class DiaryComponent implements OnInit {
 
   changeModal(day: moment.Moment): void {
     this.modal = true;
+    this.flip = true;
+    
     this.dataService.changeDate(day);
 
     this.readTaskForModal();
@@ -83,10 +84,13 @@ export class DiaryComponent implements OnInit {
 
   closeModal(): void {
     this.modal = false;
+
+    this.flip = false;
     this.calendarForm.reset();
   }
 
   submit(): void {
+    this.flip = false;
     const { description, hours } = this.calendarForm.value;
 
     this.userUID = firebase.auth().currentUser.uid;
@@ -94,7 +98,6 @@ export class DiaryComponent implements OnInit {
     const task: Task = {
       date: this.dataService.date.value.format('YYYY-MM-DD'),
       description,
-      time: hours,
       user: this.userUID
     };
 
@@ -110,13 +113,11 @@ export class DiaryComponent implements OnInit {
     if (this.tempArr.length) {
       this.tempArr.map((item) => {
         this.tempTask.description = item.description;
-        this.tempTask.time = item.time;
         this.tempTask.date = item.date;
         this.tempTask.user = item.user;
       });
     } else {
       this.tempTask.description = '';
-      this.tempTask.time = '';
       this.tempTask.date = '';
       this.tempTask.user = '';
     }

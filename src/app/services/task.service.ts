@@ -15,7 +15,7 @@ export class TaskService {
   constructor() { }
 
   create(task: Task): void { 
-    firebase.database().ref(`tasks/${task.user}/${task.date}`).set(task).catch(error => {
+    firebase.database().ref(`users/${task.user}/tasks/${task.date}`).set(task).catch(error => {
       console.log(error);
     });
   }
@@ -25,7 +25,7 @@ export class TaskService {
 
     const userUID = firebase.auth().currentUser.uid; 
 
-    firebase.database().ref(`tasks/${userUID}`) 
+    firebase.database().ref(`users/${userUID}/tasks`) 
     .on('value', (data: DataSnapshot) => {
        data.forEach((child: DataSnapshot) => {
          arr.push(child.val());

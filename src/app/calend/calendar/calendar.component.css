@@ -1,0 +1,182 @@
+.container {
+  margin-top: 20px;
+  background: #333;
+	border-radius: 10px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+  /* height: 560px; */
+  height: 460px;
+  perspective: 1000;
+	transition: .9s;
+	transform-style: preserve-3d;
+  width: 100%;
+}
+
+/* Calendar header with date*/
+.date__header {
+  border-bottom: 1px solid rgba(73, 114, 133, .6);
+	display: flex;
+	justify-content: space-between;
+	padding: 30px 40px;
+}
+.material-icons {
+  padding-top: 10px;
+  cursor: pointer;
+  color: #dfebed;
+	font-size: 1.4em;
+	font-weight: 300;
+}
+.year {
+  color: #dfebed;
+	font-size: 30px;
+	font-weight: 300;
+}
+
+/* Calendar */
+.calendar {
+  margin-left: 50px;
+}
+.tbody{
+  border-collapse: separate;
+}
+td {
+  text-align: center;
+}
+a {
+  padding: 10px;
+}
+.months {
+  color: #dfebed;
+	font-weight: 600;
+  text-align: center;
+}
+.calendar__number{
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+.tdata {
+  padding: 0px 5px;
+  cursor: pointer;
+}
+.calendar__day:nth-child(7) {
+  color: #ff685d;
+}
+.calendar__day{
+  font-size: 10px;
+  padding: 10px;
+}
+
+.active {  /* today */
+  padding: 2px 8px;
+  background: #009688;
+  border-radius: 50%;
+  color: #fff !important;
+}
+.selected {
+  font-weight: 900;
+  color: #009688;
+}
+.disable {
+  opacity: .3;
+}
+
+/* Modal */
+.modal-title {
+  color: #fff;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+}
+.header_popup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.show {
+  display: block;
+}
+.text-area {
+  margin-bottom: 7px;
+}
+.close {
+  padding: 0rem;
+  margin: 0rem;
+  color:#009688;
+  font-weight: 900;
+  outline: none;
+}
+.btn {
+  cursor: pointer;
+  background-color: #009688;
+}
+
+
+
+@media (max-width: 1200px) {
+  .calendar__day {
+    font-size: 20px;
+  }
+}
+@media (max-width: 992px) {
+  .calendar__day {
+    font-size: 18px; 
+  }
+  .calendar {
+    margin-left: 0;
+  }
+}
+@media (max-width: 800px) {
+  .calendar__day {
+    font-size: 10px;
+  }
+  .calendar {
+    margin-left: 0;
+  }
+}
+@media (max-width: 500px) {
+  .calendar__day {
+    font-size: 10px;
+  }
+  .calendar {
+    margin-left: 0;
+  }
+}
+
+
+.flip-container {
+  perspective: 1000;
+ }
+  
+ .flip-container, .front, .back {
+  width: 450px;
+  height: 480px;
+ }
+  
+ /* здесь находится скорость перевертывания */
+ .flipper {
+  transition: 0.9s;
+  transform-style: preserve-3d;
+  
+  position: relative;
+ }
+  
+ /* скройте обратную сторону во время переворота */
+ .front, .back {
+  backface-visibility: hidden;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+ }
+  
+ /* лицевая сторона размещена над обратной */
+ .front {
+  z-index: 2;
+ }
+  
+ /* обратная, изначально скрытая сторона */
+ .back {
+  transform: rotateY(180deg);
+ }
+
+ .flip-container .flipper,  .flip-container.flip .flipper {
+  transform: rotateY(180deg);
+ }

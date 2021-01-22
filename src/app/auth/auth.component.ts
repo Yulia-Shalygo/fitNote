@@ -24,6 +24,8 @@ export class AuthComponent implements OnInit {
     } catch(error){
       this.error = error;
     };
+
+    // this.firebaseService.isAdmin(firebase.auth().currentUser.uid).then(isAdmin => {console.log(isAdmin)})
   }
 
   logout(): void { 

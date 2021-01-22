@@ -1,0 +1,60 @@
+<div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+    <div [class.flipper]="flip">
+
+<div class=" container">
+    <div class="front date-item">
+        
+        <div class="date__header">
+            <i class="material-icons" (click)="minusMonth()">arrow_left</i>
+            <div class="year">{{dataService.date | async | moment}}</div>
+            <i class="material-icons" (click)="plusMonth()">arrow_right</i>
+        </div>
+
+        <div id="calendar">
+            <table class="tbody">
+                <thead>
+                <tr class="months">
+                    <th class="calendar__day">Monday</th>
+                    <th class="calendar__day">Tuesday</th>
+                    <th class="calendar__day">Wednesday</th>
+                    <th class="calendar__day">Thursday</th>
+                    <th class="calendar__day">Friday</th>
+                    <th class="calendar__day">Saturday</th>
+                    <th class="calendar__day">Sunday</th>
+                </tr>
+                </thead>
+                <tbody >
+                    <tr class="trow" *ngFor="let week of calendar">
+                        <td class="tdata" *ngFor="let day of week.days"  (click)="changeModal(day.value)" [class.disable]="day.disable">
+                            <a type="button" class="active calendar__number" [class.selected]="day.selected"  [class.active]="day.active">  {{day.value | date: 'd'}}</a>                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- back  -->
+    <form class="back calendar-form" [formGroup]="calendarForm">
+        <div class="modal-header">
+
+            <div class="task">
+                <div class="header_popup">
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{dataService.date | async | moment: 'DD-MMMM'}}</h5>
+                    <button type="button" class="close"  (click)="closeModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <textarea [(ngModel)]="tempTask.description" id="description" class="text-area form-control" formControlName="description" cols="100" rows="12" placeholder="Description"></textarea>
+                <span *ngIf="calendarForm.get('description').invalid && calendarForm.get('description').touched" class="error-text">Description can't be empty</span>
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" (click)="submit()" class="btn btn-primary" [disabled]="calendarForm.invalid">Save changes</button>
+        </div>
+    </form>
+</div>
+</div>

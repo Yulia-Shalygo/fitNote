@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CalendarPageComponent } from './diary-page/diary-page.component';
+import { AbonementComponent } from './abonement/abonement.component';
 
-const routes: Routes = [{ path: '', component: CalendarPageComponent }];
+const routes: Routes = [{ path: '', component: AbonementComponent }];
 
 @NgModule({
   imports: [
@@ -10,4 +10,4 @@ const routes: Routes = [{ path: '', component: CalendarPageComponent }];
   ],
   exports: [RouterModule]
 })
-export class CalendarPageMRoutingModule { }
+export class AbonementPageMRoutingModule { }
