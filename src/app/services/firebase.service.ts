@@ -35,8 +35,10 @@ export class FirebaseService {
    await this.getUser(userUID).then((user) => {
       if (user[1]) {
         admin = true;
+        localStorage.setItem("admin", "true");
       } else {
         admin = false;
+        localStorage.setItem("admin", "false");
       }
     })
     return admin;
@@ -51,6 +53,7 @@ export class FirebaseService {
         
         let userId = firebase.auth().currentUser.uid;
 
+        
         // this.user = {
         //   email,
         //   isAdmin: false
@@ -86,17 +89,19 @@ export class FirebaseService {
     });
   }
 
-  async register(email: string, password: string): Promise<void> {
-    await this.fireAuth.createUserWithEmailAndPassword(email, password).then(res => {
-      this.router.navigate(['/calendar']);
-    }).catch((error) => {
-      this.error = error;
-      console.log(error);
-      this.router.errorHandler(error);
-    });
-  } 
+  // async register(email: string, password: string): Promise<void> {
+  //   await this.fireAuth.createUserWithEmailAndPassword(email, password).then(res => {
+  //     this.router.navigate(['/calendar']);
+  //   }).catch((error) => {
+  //     this.error = error;
+  //     console.log(error);
+  //     this.router.errorHandler(error);
+  //   });
+  // } 
 
   logout(): void {
+    localStorage.setItem("admin", "guest");
+
     firebase.auth().signOut().catch((error) => {
       console.log(error);
     });

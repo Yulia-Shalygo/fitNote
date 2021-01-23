@@ -14,13 +14,13 @@
             <table class="tbody">
                 <thead>
                 <tr class="months">
-                    <th class="calendar__day">Monday</th>
-                    <th class="calendar__day">Tuesday</th>
-                    <th class="calendar__day">Wednesday</th>
-                    <th class="calendar__day">Thursday</th>
-                    <th class="calendar__day">Friday</th>
-                    <th class="calendar__day">Saturday</th>
-                    <th class="calendar__day">Sunday</th>
+                    <th class="calendar__day">Mon</th>
+                    <th class="calendar__day">Tue</th>
+                    <th class="calendar__day">Wed</th>
+                    <th class="calendar__day">Thu</th>
+                    <th class="calendar__day">Fri</th>
+                    <th class="calendar__day">Sat</th>
+                    <th class="calendar__day">Sun</th>
                 </tr>
                 </thead>
                 <tbody >
@@ -46,7 +46,7 @@
                     </button>
                 </div>
 
-                <textarea [(ngModel)]="tempTask.description" id="description" class="text-area form-control" formControlName="description" cols="100" rows="12" placeholder="Description"></textarea>
+                <textarea [(ngModel)]="tempTask.description" id="description" class="text-area form-control" formControlName="description" cols="100" rows="11" placeholder="Description"></textarea>
                 <span *ngIf="calendarForm.get('description').invalid && calendarForm.get('description').touched" class="error-text">Description can't be empty</span>
 
             </div>

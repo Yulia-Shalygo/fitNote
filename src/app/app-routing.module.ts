@@ -6,6 +6,8 @@ import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from
 import { LoginComponent } from './auth/login/login.component';
 import { AboutComponent } from './auth/about/about/about.component';
 import { AbonementComponent } from './abonements/abonement/abonement.component';
+import { AbonementGuard } from './guards/abonement.guard';
+import { DiaryGuard } from './guards/diary.guard';
 // import { RegisterComponent } from './auth/register/register.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -20,8 +22,8 @@ const routes: Routes = [
     // { path: 'register', component: RegisterComponent}
   ]},
   // canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToAbonement },
-  { path: 'abonement', component: AbonementComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },  loadChildren: () => import('./abonements/abonement.module').then(m => m.AbonementPageMModule)},
-  { path: 'calendar', component: AuthComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, }, //  loadChildren: () => import('./calend/calendar-page-m.module').then(m => m.CalendarPageMModule)
+  { path: 'abonement', component: AbonementComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },  loadChildren: () => import('./abonements/abonement.module').then(m => m.AbonementPageMModule)},
+  { path: 'calendar', component: AuthComponent, canActivate: [AngularFireAuthGuard, DiaryGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, }, //  loadChildren: () => import('./calend/calendar-page-m.module').then(m => m.CalendarPageMModule)
   // {path: 'logout', component: }
 ];
 

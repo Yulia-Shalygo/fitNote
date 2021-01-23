@@ -9,6 +9,7 @@ import { CreateAbonementComponent } from './create-abonement/create-abonement.co
 import { CalendarComponent } from '../calend/calendar/calendar.component';
 import { CalendarPageComponent } from '../calend/calendar-page/calendar-page.component';
 import { MomentPipe } from '../pipes/moment.pipe';
+import { AbonementTableComponent } from './abonement-table/abonement-table.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MomentPipe } from '../pipes/moment.pipe';
     CalendarComponent,
     CalendarPageComponent,
     MomentPipe,
+    AbonementTableComponent,
   ],
   imports: [
     FormsModule,

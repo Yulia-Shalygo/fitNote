@@ -6,7 +6,7 @@ import { FirebaseService } from '../services/firebase.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AbonementGuard implements CanActivate {
+export class DiaryGuard implements CanActivate {
 
   constructor(private router: Router) {}
   
@@ -16,10 +16,10 @@ export class AbonementGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     let user = localStorage.getItem("admin");
-    if(user === "true") { // admin
+    if(user === "false") { // admin
       return true;
     } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/abonement']);
     }
   }
   
