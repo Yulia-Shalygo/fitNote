@@ -1,6 +1,43 @@
 <app-create-abonement-page></app-create-abonement-page>
 
 <div class="section">
-    
+    <div class="container">
+        <div class="col">
+            <form class="form-group" [formGroup]="abonementForm">  
+
+                <!-- SELECT USER -->
+                <div class="form-group">
+                    <input #user formControlName="user" type="text" class="form-control" placeholder="Name and Surname">
+                    <!-- <span *ngIf="abonementForm.get('user').invalid && abonementForm.get('user').touched" class="error-text">This field can't be empty</span> -->
+                </div>
+            
+
+                <div class="main">
+                    <div class="form-group">
+                        <input #dateOfStart formControlName="dateOfStart" type="text" class="form-control" placeholder="Date of Start" onfocus="(this.type='date')">
+                    </div>
+
+                    <div class="form-group">
+                        <input #dateOfEnd formControlName="dateOfEnd" type="text" class="form-control" placeholder="Date of End" onfocus="(this.type='date')">
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="form-group">
+                        <input #numberDays formControlName="numberDays" placeholder="Days" class="form-control" type="number">
+                        <span *ngIf="abonementForm.get('numberDays').invalid && abonementForm.get('numberDays').touched" class="error-text">This field can't be empty</span>
+                    </div>
+
+                    <div class="form-group">
+                        <input #cost formControlName="cost" type="number" class="form-control" placeholder="Cost" value="{{getCost(numberDays.value)}}">
+                        <!-- <span *ngIf="userForm.get('phone').invalid && userForm.get('phone').touched" class="error-text">This field can't be empty</span> -->
+                    </div>
+                </div>
+
+                
+                <input  type="submit" class="btn btn-default"  value="Create" />
+            </form>
+        </div>
+    </div>
 </div>
 <router-outlet></router-outlet>

@@ -33,7 +33,11 @@
                 <div class="form-group">
                     <textarea #comment formControlName="comment" class="form-control textarea" cols="50" rows="11" placeholder="Comment"></textarea>
                 </div>
+                
                 <input (click)="createUser(name.value, email.value, birth.value, phone.value, comment.value)" type="submit" class="btn btn-default"  value="Create" />
+                <input (click)="createUser(name.value, email.value, birth.value, phone.value, comment.value, 'trainer')"  class="btn btn-default"  value="Create Trainer"/>
+                <input (click)="createUser(name.value, email.value, birth.value, phone.value, comment.value, 'admin')"  class="btn btn-default"  value="Create Administrator"/>
+
             </form>
         </div>
     </div>

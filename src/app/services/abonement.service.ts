@@ -5,11 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class AbonementService {
 
+  costOfDay: number = 5;
+
   constructor() { }
 
   createAbonement() {
 
   }
 
+  getCost(days: number): number {
+    return this.costOfDay * days;
+  }
   
 }

@@ -25,7 +25,7 @@ export class FirebaseService {
   ) { }
 
   async getUser(userUID: string) {
-    const snapshot = await firebase.database().ref(`users/${ userUID }`).once('value');
+    const snapshot = await firebase.database().ref(`users/admins/${ userUID }`).once('value');
     return Object.values(snapshot.val() || {});
   }
 
@@ -33,7 +33,8 @@ export class FirebaseService {
     let admin: boolean;
 
    await this.getUser(userUID).then((user) => {
-      if (user[1]) {
+     console.log(user[1])
+      if (user[1] != undefined) {
         admin = true;
         localStorage.setItem("admin", "true");
       } else {
@@ -44,14 +45,24 @@ export class FirebaseService {
     return admin;
   }
 
-  createUser(email: string, password: string, user: any): Promise<void> {
+  createUser(email: string, password: string, user: User, trainer: string): Promise<void> {
 
     let userUID;
    
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
       userUID = firebase.auth().currentUser.uid;
       console.log(userUID);
-      firebase.database().ref(`users/${userUID}`).set(user);
+
+      if (trainer === null) {
+        firebase.database().ref(`users/clients/${userUID}`).set(user);
+      } else if (trainer === 'trainer') {
+        firebase.database().ref(`users/trainers/${userUID}`).set(user);
+      } else {
+        user.isAdmin = true;
+        firebase.database().ref(`users/admins/${userUID}`).set(user);
+      }
+
+      
     }).catch(function (error) {
       this.error = error;
       console.log(error);

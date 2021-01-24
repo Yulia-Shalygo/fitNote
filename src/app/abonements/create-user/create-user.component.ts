@@ -13,6 +13,7 @@ export class CreateUserComponent implements OnInit {
 
   userForm: FormGroup;
   err = false;
+  trainer: boolean = false;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -34,13 +35,13 @@ export class CreateUserComponent implements OnInit {
     })
   }
 
-  createUser(name: string, email: string, birth: string, phone: string, comment: string): void {
+  createUser(name: string, email: string, birth: string, phone: string, comment: string, trainer = null): void {
     let user: User = {
       name, email, birth, phone, comment, isAdmin: false
     };
     this.userForm.disable();
 
-    this.firebaseService.createUser(email, 'qwerty', user).then(() =>
+    this.firebaseService.createUser(email, 'qwerty', user, trainer).then(() =>
       this.router.navigate(['/abonement'])
     ).catch(() => {
       this.userForm.reset();
