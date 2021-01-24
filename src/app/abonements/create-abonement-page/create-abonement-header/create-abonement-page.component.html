@@ -4,12 +4,12 @@
             <a routerLink="" class="nav__link logo">FitNote</a>
 
             <nav class="nav">
-                <a routerLink="create-abonement" class="links nav__link">Create abonement</a>
-                <a routerLink="create-user" class="links nav__link">Create user</a>
+                <a routerLink="/abonement" class="links nav__link">Abonements</a>
+                <a routerLink="/abonement/create-user" class="links nav__link">Create user</a>
                 <a (click)="logout()" class="links nav__link">Logout</a>
             </nav>
         </div>
     </div>
 </div>
-<app-abonement-page></app-abonement-page>
-<!-- <router-outlet></router-outlet> -->
+
+<router-outlet></router-outlet>

@@ -1,0 +1,8 @@
+.section {
+    padding-top: 10px;
+    min-height: 590px;
+    display: flex;
+    justify-content: space-around;
+    background: url('../../../../assets/img/abonement.jpg') no-repeat center;
+    background-size: 100%;
+}

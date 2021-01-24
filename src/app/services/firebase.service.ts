@@ -44,10 +44,24 @@ export class FirebaseService {
     return admin;
   }
 
+  createUser(email: string, password: string, user: any): Promise<void> {
+
+    let userUID;
+   
+    return firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+      userUID = firebase.auth().currentUser.uid;
+      console.log(userUID);
+      firebase.database().ref(`users/${userUID}`).set(user);
+    }).catch(function (error) {
+      this.error = error;
+      console.log(error);
+      this.router.errorHandler(error);
+    });
+  }
+
   async signin(email: string, password: string): Promise<void> {
     return this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       return this.fireAuth.signInWithEmailAndPassword(email, password).then(res => {
-        
         // TODO: if user = admin 
 
         

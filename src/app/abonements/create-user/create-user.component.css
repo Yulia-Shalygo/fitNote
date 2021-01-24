@@ -1,0 +1,72 @@
+.section {
+    padding-top: 10px;
+    min-height: 590px;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    background: url('../../../assets/img/abonement.jpg') no-repeat center;
+    background-size: 100%;
+}
+.form-control {
+    width: 600px;
+    margin-top: 5px;
+    margin-right: 5px;
+    background-color: rgba(244, 244, 245, 0.5);
+    border: none;
+    color: #333;
+}
+.main {
+    display: flex;
+}
+.textarea {
+    width: 1203px;
+}
+.btn {
+    margin-right: 3px;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    margin-top: 5px;
+    padding: 5px 20px 5px 20px;
+}
+.error-text {
+    font-weight: 700;
+}
+  
+
+@media (max-width: 1200px) {
+    .form-control {
+        width:700px;
+    }
+    .main {
+        flex-direction: column;
+    }
+  }
+  @media (max-width: 992px) {
+    .main {
+        flex-direction: column;
+    }
+    .form-control {
+        width:500px;
+    }
+  }
+  @media (max-width: 800px) {
+    .main {
+        flex-direction: column;
+    }
+    .form-control {
+        width:500px;
+    }
+    .textarea {
+        height: 200px;
+    }
+  }
+  @media (max-width: 500px) {
+    .form-control {
+        width:400px;
+    }
+    .textarea {
+        height: 100px;
+    }
+  }
+  
