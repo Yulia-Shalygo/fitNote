@@ -32,13 +32,13 @@
 
                 <div class="main">
                     <div class="form-group">
+                        <input #address formControlName="address" type="text" class="form-control" placeholder="Адрес">
+                        <span *ngIf="adminForm.get('address').invalid && adminForm.get('address').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                    
+                    <div class="form-group">
                         <input #workSchedule formControlName="workSchedule" type="text" class="form-control" placeholder="График работы">
                         <span *ngIf="adminForm.get('workSchedule').invalid && adminForm.get('workSchedule').touched" class="error-text">Это обязательное поле.</span>
-                    </div>
-                
-                    <div class="form-group">
-                        <input #address formControlName="address" type="text" class="form-control" placeholder="Адрес проживания">
-                        <span *ngIf="adminForm.get('address').invalid && adminForm.get('address').touched" class="error-text">Это обязательное поле.</span>
                     </div>
                 </div>
 
