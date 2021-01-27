@@ -3,13 +3,38 @@
     <div class="calendar">
         <app-calendar></app-calendar>
     </div>
-    
 
-    <div class="search-container">
+    <form class="search-container">
         <form action="" method="post" class="search">
-            <input type="search" name="" placeholder="Search..." class="input" />
+            <input (keyup)="updateSearch($event.target.value)" type="search" name="search" placeholder="Поиск..." class="input" />
         </form>
         
-        <app-abonement-table></app-abonement-table>
-    </div>
+        <table class="table scroll-table">
+            <thead>
+                <tr>
+                    <th>Имя и фамилия</th>
+                    <th>Телефон</th>
+                    <th>Дата начала</th>
+                    <th>Дата конца</th>
+                    <th>Форма</th>
+                    <th>Тренер</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="scroll-table-body">
+            <table class="table">
+                <tbody *ngFor="let user of needUsers">
+                    <tr>
+                        <td>{{user.name}}</td>
+                        <td>{{user.phone}}</td>
+                        <td>23.01.2021</td>
+                        <td>23.02.2022</td>
+                        <td>With trainer</td>
+                        <td>Max Shalypin</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </form>
 </div>

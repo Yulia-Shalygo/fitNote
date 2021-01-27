@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 import { AbonementService } from 'src/app/services/abonement.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -15,9 +15,10 @@ export class CreateAbonementFormComponent implements OnInit {
   err = false;
   cost: number;
 
+  users: User[];
+  
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router,
     private abonementService: AbonementService,
   ) { }
 
@@ -32,11 +33,13 @@ export class CreateAbonementFormComponent implements OnInit {
         Validators.required),
       cost: new FormControl(null)
     });
+
+    this.firebaseService.getAllUsers().then(res => {
+      this.users = res;
+    }); // all clients
   }
 
   getCost(days: number): number {
     return this.abonementService.getCost(days);
   }
-
-
 }

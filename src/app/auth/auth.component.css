@@ -2,11 +2,12 @@
 	font-family: Poppins-Regular;
 	src: url('../../fonts/poppins/Poppins-Regular.ttf'); 
 }  
+
 .header{
 	padding: 20px 0px;
 }
 .header__inner {
-    font-family: Poppins-Regular;
+	font-family: Poppins-Regular;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -17,7 +18,7 @@
 	font-weight: 700;
 }
 .links{
-	font-size: 20px;
+	font-size: 22px;
 }
 .nav__link{
 	margin: 0 15px;

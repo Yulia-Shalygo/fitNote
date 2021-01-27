@@ -5,15 +5,14 @@ import { User } from 'src/app/interfaces/user';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.css']
+  selector: 'app-create-trainer',
+  templateUrl: './create-trainer.component.html',
+  styleUrls: ['./create-trainer.component.css']
 })
-export class CreateUserComponent implements OnInit {
-
+export class CreateTrainerComponent implements OnInit {
+  
   userForm: FormGroup;
   err = false;
-  trainer: boolean = false;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -30,21 +29,21 @@ export class CreateUserComponent implements OnInit {
         [Validators.required]),
       phone: new FormControl(null,
         [Validators.required]),
-      comment: new FormControl(null,
-        [Validators.required])
+      comment: new FormControl(null),
+      workExperience: new FormControl(null),
+      education: new FormControl(null, Validators.required)
     })
   }
 
-  createUser(): void {
+  createTrainer(): void {
 
-    const {name, email, birth, phone, comment} = this.userForm.value;
+    const {name, email, birth, phone, comment, workExperience, education} = this.userForm.value;
 
     let user: User = {
-      name, email, birth, phone, comment, isAdmin: false
+      name, email, birth, phone, comment, isAdmin: false, workExperience, education
     };
     this.userForm.disable();
-
-    this.firebaseService.createUser(email, 'qwerty', user, null).then(() =>
+    this.firebaseService.createUser(email, 'qwerty', user, 'trainer').then(() =>
       this.router.navigate(['/abonement'])
     ).catch(() => {
       this.userForm.reset();
@@ -52,4 +51,5 @@ export class CreateUserComponent implements OnInit {
       this.err = true;
     })
   }
+
 }

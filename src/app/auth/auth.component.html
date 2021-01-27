@@ -4,9 +4,9 @@
             <a routerLink="" class="nav__link logo">FitNote</a>
 
             <nav class="nav">
-                <a *ngIf="!userUID" routerLink="login" class="links nav__link">Sign In</a>
-                <a *ngIf="!userUID" routerLink="about" class="links nav__link">About Us</a>
-                <a *ngIf="userUID" (click)="logout()" class="links nav__link">Logout</a>
+                <a *ngIf="!userUID" routerLink="login" class="links nav__link">Вход</a>
+                <a *ngIf="!userUID" routerLink="about" class="links nav__link">О нас</a>
+                <a *ngIf="userUID" (click)="logout()" class="links nav__link">Выйти</a>
             </nav>
         </div>
     </div>

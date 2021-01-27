@@ -9,23 +9,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./abonement.component.css']
 })
 export class AbonementComponent implements OnInit {
-
-  userUID: string;
-  error: any;
   
   constructor(
     private firebaseService: FirebaseService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-    // try {
-    //   this.userUID = firebase.auth().currentUser.uid; 
-    //   console.log("uid - ", this.userUID)
-    // } catch(error){
-    //   this.error = error;
-    // };
-  }
+  ngOnInit(): void { }
 
   logout(): void {
     this.firebaseService.logout();

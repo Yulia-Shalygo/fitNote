@@ -2,21 +2,21 @@
     <div class="container">
         <div class="col">
             <form class="form-group signin" [formGroup]="loginForm">
-                <span class="title">Sign In</span>
+                <span class="title">Вход</span>
 
                 <div class="form-group">
                     <input  #email formControlName="email" class="form-control" placeholder="E-mail">
-                    <span *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="error-text">Please enter a valid email address</span>
+                    <span *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched" class="error-text">Введите корректный e-mail</span>
                 </div>
 
                 <div class="form-group">
                     <input  #password formControlName="password" type="password" class="form-control" placeholder="Password">
                     <div class="help">
-                        <span *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="error-text">Please enter a valid password</span>
-                        <span *ngIf="err" class="error-text">Password doesn't match.</span>
+                        <span *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched" class="error-text">Введите корректный пароль</span>
+                        <span *ngIf="err" class="error-text">Этот пароль не по</span>
                     </div>
                 </div>
-                <input (click)="signin(email.value, password.value)" type="submit" class="btn btn-default" [disabled]="loginForm.invalid || loginForm.disabled" value="Sign In" />
+                <input (click)="signin(email.value, password.value)" type="submit" class="btn btn-default" [disabled]="loginForm.invalid || loginForm.disabled" value="Войти" />
             </form>
         </div>
     </div>

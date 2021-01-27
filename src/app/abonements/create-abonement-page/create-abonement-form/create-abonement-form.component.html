@@ -6,36 +6,43 @@
             <form class="form-group" [formGroup]="abonementForm">  
 
                 <!-- SELECT USER -->
+
+                <!-- <form name="selectUser">Client:
+                    <select name="user" id="user">
+                      <option *ngFor="let user of users" value="{{user.id}}" >{{user.name}}</option>
+                    </select>
+                </form>  -->
+
                 <div class="form-group">
-                    <input #user formControlName="user" type="text" class="form-control" placeholder="Name and Surname">
+                    <input #user formControlName="user" type="text" class="form-control" placeholder="Имя и фамилия">
                     <!-- <span *ngIf="abonementForm.get('user').invalid && abonementForm.get('user').touched" class="error-text">This field can't be empty</span> -->
                 </div>
             
 
                 <div class="main">
                     <div class="form-group">
-                        <input #dateOfStart formControlName="dateOfStart" type="text" class="form-control" placeholder="Date of Start" onfocus="(this.type='date')">
+                        <input #dateOfStart formControlName="dateOfStart" type="text" class="form-control" placeholder="Дата начала" onfocus="(this.type='date')">
                     </div>
 
                     <div class="form-group">
-                        <input #dateOfEnd formControlName="dateOfEnd" type="text" class="form-control" placeholder="Date of End" onfocus="(this.type='date')">
+                        <input #dateOfEnd formControlName="dateOfEnd" type="text" class="form-control" placeholder="Дата конца" onfocus="(this.type='date')">
                     </div>
                 </div>
 
                 <div class="main">
                     <div class="form-group">
-                        <input #numberDays formControlName="numberDays" placeholder="Days" class="form-control" type="number">
+                        <input #numberDays formControlName="numberDays" placeholder="Число дней" class="form-control" type="number">
                         <span *ngIf="abonementForm.get('numberDays').invalid && abonementForm.get('numberDays').touched" class="error-text">This field can't be empty</span>
                     </div>
 
                     <div class="form-group">
-                        <input #cost formControlName="cost" type="number" class="form-control" placeholder="Cost" value="{{getCost(numberDays.value)}}">
+                        <input #cost formControlName="cost" type="number" class="form-control" placeholder="Стоимость" value="{{getCost(numberDays.value)}}">
                         <!-- <span *ngIf="userForm.get('phone').invalid && userForm.get('phone').touched" class="error-text">This field can't be empty</span> -->
                     </div>
                 </div>
 
                 
-                <input  type="submit" class="btn btn-default"  value="Create" />
+                <input  type="submit" class="btn btn-default"  value="Сохранить" />
             </form>
         </div>
     </div>

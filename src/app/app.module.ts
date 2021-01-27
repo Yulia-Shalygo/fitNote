@@ -13,6 +13,8 @@ import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './auth/login/login.component';
 import { AboutComponent } from './auth/about/about/about.component';
+import { DiaryPageComponent } from './diary/diary-page/diary-page.component';
+import { AbonementPageMRoutingModule } from './abonements/abonement-routing.module';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,14 @@ import { AboutComponent } from './auth/about/about/about.component';
     AuthComponent,
     LoginComponent,
     AboutComponent,
+    DiaryPageComponent,
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
     HttpClientModule,
     
     AngularFireModule.initializeApp(environment.firebase)

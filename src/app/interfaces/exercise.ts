@@ -2,7 +2,7 @@ import { Body } from './body';
 
 export interface Exercise {
     id?: string;
-    body: Body;
+    body: string;
     name: string;
     complexity: number;
     comment: string;

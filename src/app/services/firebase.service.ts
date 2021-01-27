@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import { User } from '../interfaces/user';
-import { map } from 'rxjs/operators';
-import { DataSnapshot } from '@angular/fire/database/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -21,20 +18,23 @@ export class FirebaseService {
   constructor(
     public fireAuth: AngularFireAuth, 
     private router: Router,
-    private http: HttpClient
   ) { }
 
-  async getUser(userUID: string) {
+  async getAdmin(userUID: string) {
     const snapshot = await firebase.database().ref(`users/admins/${ userUID }`).once('value');
+    return Object.values(snapshot.val() || {});
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    const snapshot = await firebase.database().ref(`users/clients`).once('value');
     return Object.values(snapshot.val() || {});
   }
 
   async isAdmin(userUID: string): Promise<boolean> {
     let admin: boolean;
 
-   await this.getUser(userUID).then((user) => {
-     console.log(user[1])
-      if (user[1] != undefined) {
+   await this.getAdmin(userUID).then((user) => {
+      if (user.length != 0) {
         admin = true;
         localStorage.setItem("admin", "true");
       } else {
@@ -45,13 +45,9 @@ export class FirebaseService {
     return admin;
   }
 
-  createUser(email: string, password: string, user: User, trainer: string): Promise<void> {
-
-    let userUID;
-   
+  createUser(email: string, password: string, user: User, trainer: string): Promise<void> {   
     return firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
-      userUID = firebase.auth().currentUser.uid;
-      console.log(userUID);
+      let userUID = firebase.auth().currentUser.uid;
 
       if (trainer === null) {
         firebase.database().ref(`users/clients/${userUID}`).set(user);
@@ -61,8 +57,6 @@ export class FirebaseService {
         user.isAdmin = true;
         firebase.database().ref(`users/admins/${userUID}`).set(user);
       }
-
-      
     }).catch(function (error) {
       this.error = error;
       console.log(error);
@@ -72,36 +66,16 @@ export class FirebaseService {
 
   async signin(email: string, password: string): Promise<void> {
     return this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-      return this.fireAuth.signInWithEmailAndPassword(email, password).then(res => {
-        // TODO: if user = admin 
-
-        
+      return this.fireAuth.signInWithEmailAndPassword(email, password).then(res => {        
         let userId = firebase.auth().currentUser.uid;
 
-        
-        // this.user = {
-        //   email,
-        //   isAdmin: false
-        // }
-
-        // firebase.database().ref(`users/${userId}`).set(this.user);
-
         this.isAdmin(userId).then(admin => {  
-          console.log(admin);        
           if (admin) {
-            console.log("admin")
             this.router.navigate(['/abonement']);
           } else {
-            this.router.navigate(['/calendar']);
+            this.router.navigate(['/diary']);
           }
         });
-
-        
-        // // console.log(this.getUser(userId));
-
-        // firebase.database().ref(`users/${userId}`).set(this.user);
-
-        // this.router.navigate(['/calendar']);
       }).catch((error) => {
         this.error = error;
         console.log(error);
@@ -113,16 +87,6 @@ export class FirebaseService {
       this.router.errorHandler(error);
     });
   }
-
-  // async register(email: string, password: string): Promise<void> {
-  //   await this.fireAuth.createUserWithEmailAndPassword(email, password).then(res => {
-  //     this.router.navigate(['/calendar']);
-  //   }).catch((error) => {
-  //     this.error = error;
-  //     console.log(error);
-  //     this.router.errorHandler(error);
-  //   });
-  // } 
 
   logout(): void {
     localStorage.setItem("admin", "guest");

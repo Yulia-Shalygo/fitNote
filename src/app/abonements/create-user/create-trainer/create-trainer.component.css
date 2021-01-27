@@ -36,36 +36,37 @@
 
 @media (max-width: 1200px) {
     .form-control {
-        width:700px;
-    }
-    .main {
-        flex-direction: column;
-    }
-}
-@media (max-width: 992px) {
-    .main {
-        flex-direction: column;
-    }
-    .form-control {
-        width:500px;
-    }
-}
-@media (max-width: 800px) {
-    .main {
-        flex-direction: column;
-    }
-    .form-control {
         width:500px;
     }
     .textarea {
+        width: 1000px;
+        height: 200px;
+    }
+  }
+@media (max-width: 992px) {
+    .form-control {
+        width:400px;
+    }
+    .textarea {
+        width: 800px;
+        height: 200px;
+    }
+}
+@media (max-width: 800px) {
+    .form-control {
+        width: 300px;
+    }
+    .textarea {
+        width: 600px;
         height: 200px;
     }
 }
 @media (max-width: 500px) {
     .form-control {
-        width:400px;
+        width:300px;
     }
     .textarea {
         height: 100px;
     }
-}  
+}
+  

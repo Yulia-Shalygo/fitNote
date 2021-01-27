@@ -41,16 +41,16 @@
     .main {
         flex-direction: column;
     }
-  }
-  @media (max-width: 992px) {
+}
+@media (max-width: 992px) {
     .main {
         flex-direction: column;
     }
     .form-control {
         width:500px;
     }
-  }
-  @media (max-width: 800px) {
+}
+@media (max-width: 800px) {
     .main {
         flex-direction: column;
     }
@@ -60,13 +60,13 @@
     .textarea {
         height: 200px;
     }
-  }
-  @media (max-width: 500px) {
+}
+@media (max-width: 500px) {
     .form-control {
         width:400px;
     }
     .textarea {
         height: 100px;
     }
-  }
+}
   

@@ -1,0 +1,65 @@
+<app-create-user-header></app-create-user-header>
+
+<div class="section">
+    <div class="container">
+        <div class="col">
+            <form class="form-group" [formGroup]="adminForm">  
+
+                <div class="main">
+                    <div class="form-group">
+                        <input #name formControlName="name" type="text" class="form-control" placeholder="Имя и фамилия">
+                        <span *ngIf="adminForm.get('name').invalid && adminForm.get('name').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                
+
+                    <div class="form-group">
+                        <input #email formControlName="email" type="email" class="form-control" placeholder="E-mail">
+                        <span *ngIf="adminForm.get('email').invalid && adminForm.get('email').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="form-group">
+                        <input #birth formControlName="birth" placeholder="Дата рождения" class="form-control" type="text" onfocus="(this.type='date')">
+                        <span *ngIf="adminForm.get('birth').invalid && adminForm.get('birth').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <input #phone formControlName="phone" type="phone" class="form-control" placeholder="Телефон">
+                        <span *ngIf="adminForm.get('phone').invalid && adminForm.get('phone').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="form-group">
+                        <input #workSchedule formControlName="workSchedule" type="text" class="form-control" placeholder="График работы">
+                        <span *ngIf="adminForm.get('workSchedule').invalid && adminForm.get('workSchedule').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                
+                    <div class="form-group">
+                        <input #address formControlName="address" type="text" class="form-control" placeholder="Адрес проживания">
+                        <span *ngIf="adminForm.get('address').invalid && adminForm.get('address').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="form-group">
+                        <input #education formControlName="education" type="text" class="form-control" placeholder="Образование">
+                        <span *ngIf="adminForm.get('education').invalid && adminForm.get('education').touched" class="error-text">Это обязательное поле.</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input #workExperience formControlName="workExperience" type="text" class="form-control" placeholder="Опыт работы">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <textarea #comment formControlName="comment" class="form-control textarea" cols="50" rows="11" placeholder="Профессиональные достижения"></textarea>
+                </div>
+                
+                <input (click)="createAdmin()" type="submit" class="btn btn-default"  value="Создать" />
+            </form>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

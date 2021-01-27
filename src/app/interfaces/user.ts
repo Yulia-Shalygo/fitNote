@@ -6,4 +6,8 @@ export interface User {
     birth?: string;
     phone?: string;
     comment?: string;
+    workExperience?: string;
+    education?: string;
+    address?: string;
+    workSchedule?: string;
 };

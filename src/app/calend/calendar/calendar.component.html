@@ -46,14 +46,14 @@
                     </button>
                 </div>
 
-                <textarea [(ngModel)]="tempTask.description" id="description" class="text-area form-control" formControlName="description" cols="100" rows="11" placeholder="Description"></textarea>
-                <span *ngIf="calendarForm.get('description').invalid && calendarForm.get('description').touched" class="error-text">Description can't be empty</span>
+                <textarea [(ngModel)]="tempTask.description" id="description" class="text-area form-control" formControlName="description" cols="100" rows="11" placeholder="Описание"></textarea>
+                <span *ngIf="calendarForm.get('description').invalid && calendarForm.get('description').touched" class="error-text">Описание не может быть пустым</span>
 
             </div>
         </div>
 
         <div class="modal-footer">
-            <button type="button" (click)="submit()" class="btn btn-primary" [disabled]="calendarForm.invalid">Save changes</button>
+            <button type="button" (click)="submit()" class="btn btn-primary" [disabled]="calendarForm.invalid">Сохранить</button>
         </div>
     </form>
 </div>
