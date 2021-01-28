@@ -7,19 +7,25 @@
     background: url('../../../../assets/img/abonement.jpg') no-repeat center;
     background-size: 100%;
 }
+
 .form-control {
-    width: 600px;
+    min-width: 300px;
     margin-top: 5px;
-    margin-right: 5px;
-    background-color: rgba(244, 244, 245, 0.5);
+    background-color: rgba(244, 244, 245, 0.762);
+
     border: none;
     color: #333;
 }
 .main {
     display: flex;
 }
+.form-group {
+    margin-right: 30px;
+}
 .textarea {
-    width: 1203px;
+    max-width: 630px;
+    height: 200px;
+    /* width: 1203px; */
 }
 .btn {
     margin-right: 3px;
@@ -33,10 +39,22 @@
     font-weight: 700;
 }
   
+.info {
+    display: flex;
+}
+.image {
+    width: 400px;
+    height: 400px;
+}
+.img {
+    margin-bottom: 10px;
+    max-width: 400px;
+    max-height: 400px;
+}
 
 @media (max-width: 1200px) {
     .form-control {
-        width:500px;
+        width:300px;
     }
     .textarea {
         width: 1000px;
@@ -45,25 +63,41 @@
 }
 @media (max-width: 992px) {
     .form-control {
-        width:400px;
+        width:200px;
     }
     .textarea {
         width: 800px;
         height: 200px;
     }
-}
-@media (max-width: 800px) {
-    .form-control {
-        width: 300px;
-    }
-    .textarea {
-        width: 600px;
+    .image {
+        width: 200px;
         height: 200px;
     }
 }
-@media (max-width: 500px) {
+@media (max-width: 800px) {
+
     .form-control {
-        width:300px;
+        width: 100px;
+    }
+    .textarea {
+        width: 400px;
+        height: 200px;
+    }
+    .info {
+        display: block;
+    }
+    .image {
+        width: 200px;
+        height: 200px;
+    }
+
+}
+@media (max-width: 500px) {
+    .main{
+        flex-direction: column;
+    }
+    .form-control {
+        width: 100px;
     }
     .textarea {
         height: 100px;

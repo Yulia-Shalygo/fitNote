@@ -26,6 +26,7 @@
 	color: #333;
 	font-size: 30px;
 	font-weight: 700;
+	margin-bottom: 8px;
 }
 .nav__link:hover, .logo:hover{
 	color: #00897b;
@@ -45,7 +46,6 @@
 .nav__link:hover:after{
 	opacity: 1;
 }
-
 
 .menu li {
 	position: relative;

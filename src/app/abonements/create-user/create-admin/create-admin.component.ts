@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,10 +14,12 @@ export class CreateAdminComponent implements OnInit {
 
   adminForm: FormGroup;
   err = false;
+
+  url: string = "/assets/img/user.png"
   
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +36,9 @@ export class CreateAdminComponent implements OnInit {
       workExperience: new FormControl(null),
       education: new FormControl(null, Validators.required),
       address: new FormControl(null, [Validators.required]),
-      workSchedule: new FormControl(null)
+      workSchedule: new FormControl(null),
+
+      imageUrl: new FormControl(null)
     })
   }
 
@@ -51,6 +56,16 @@ export class CreateAdminComponent implements OnInit {
       this.adminForm.enable();
       this.err = true;
     })
+  }
+
+  onFileSelected(event): void {
+    if (event.target.files) {
+      let reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.url = event.target.result; 
+      }
+    }
   }
 
 }
