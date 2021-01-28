@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { getError } from 'src/app/calend/store/selectors/calendar.selectors';
 import { ErrorService } from 'src/app/services/error.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { signIn } from '../store/actions/auth.actions';
+import { User } from '../store/models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +19,12 @@ export class LoginComponent implements OnInit {
   err: string = '';
   userId: any;
 
+  subscription: Subscription;
+
   constructor(
     public firebaseServiсe: FirebaseService,
-    private errorService: ErrorService
-
+    private errorService: ErrorService,
+    private store: Store,
   ) { }
 
   ngOnInit(): void {
@@ -32,11 +39,17 @@ export class LoginComponent implements OnInit {
   async signin(email: string, password: string): Promise<void> {
     this.loginForm.disable();
 
-    await this.firebaseServiсe.signin(email, password)
-      .catch((errorCode) => {     
-        this.loginForm.reset();
-        this.loginForm.enable();
-        this.err = this.errorService.getErrorString(errorCode.code);
-      })
+    const user: User = {
+      email,
+      password
+    };
+    this.store.dispatch(signIn({ user }));
+
+    this.subscription = this.store.pipe(select(getError)).subscribe(errorCode => {
+      if(errorCode) this.err = this.errorService.getErrorString(errorCode);
+    });
+
+    this.loginForm.reset();
+    this.loginForm.enable();
   }
 }

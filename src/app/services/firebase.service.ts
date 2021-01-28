@@ -11,7 +11,7 @@ import { User } from '../interfaces/user';
 })
 export class FirebaseService {
   error: string;
-  user: User;
+  userId: any;
   public currentUser: any;
 
   admin: boolean;
@@ -59,19 +59,15 @@ export class FirebaseService {
         user.isAdmin = true;
         firebase.database().ref(`users/admins/${userUID}`).set(user);
       }
-    }).catch((error) => {
-      this.error = error;
-      this.router.errorHandler(error);
-    });
+    })
   }
 
-  async signin(email: string, password: string): Promise<void> {
+  async signin(email: string, password: string): Promise<string> {
     await this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-      return this.fireAuth.signInWithEmailAndPassword(email, password).then(res => {        
-        let userId = firebase.auth().currentUser.uid;
-        console.log(userId)
+      return this.fireAuth.signInWithEmailAndPassword(email, password).then(() => {        
+        this.userId = firebase.auth().currentUser.uid;
 
-        this.isAdmin(userId).then(admin => {  
+        this.isAdmin(this.userId).then(admin => {  
           if (admin) {
             this.router.navigate(['/abonement']);
           } else {
@@ -79,14 +75,17 @@ export class FirebaseService {
           }
         });
       })
-      });
+    });
+    return this.userId;
   }
 
-  logout(): void {
+  logout(): any {
     localStorage.setItem("admin", "guest");
 
-    firebase.auth().signOut().catch((error) => {
-      console.log(error);
-    });
+    return firebase.auth().signOut();
+  }
+
+  getUser(): string {
+    return firebase.auth().currentUser.uid;
   }
 }

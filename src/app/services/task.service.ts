@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../interfaces/task';
+import { Task } from '../calend/store/models/task';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';

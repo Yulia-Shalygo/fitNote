@@ -4,7 +4,7 @@ import { DateService } from 'src/app/services/date.service';
 import { Week  } from '../../interfaces/week';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from 'src/app/services/task.service';
-import { Task } from 'src/app/interfaces/task';
+import { Task } from 'src/app/calend/store/models/task';
 import firebase from 'firebase/app';
 
 @Component({

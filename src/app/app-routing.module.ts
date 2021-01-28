@@ -7,22 +7,20 @@ import { LoginComponent } from './auth/login/login.component';
 import { AboutComponent } from './auth/about/about/about.component';
 import { AbonementGuard } from './guards/abonement.guard';
 import { DiaryGuard } from './guards/diary.guard';
-import { DiaryPageComponent } from './diary/diary-page/diary-page.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToCalendar = () => redirectLoggedInTo(['calendar']);
+const redirectLoggedInToDiary = () => redirectLoggedInTo(['diary']);
 const redirectLoggedInToAbonement = () => redirectLoggedInTo(['abonement']);
 
 const routes: Routes = [
-  { path: '', component: AuthComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToCalendar }, children: [
+  { path: '', component: AuthComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToAbonement }, children: [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'about', component: AboutComponent },
   ]}, //  canActivate: [AngularFireAuthGuard, AbonementGuard], 
-  { path: 'abonement',data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./abonements/abonement.module').then(m => m.AbonementPageMModule)},
+  { path: 'abonement', canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./abonements/abonement.module').then(m => m.AbonementPageMModule)},
 
-  { path: 'calendar', component: AuthComponent, canActivate: [AngularFireAuthGuard, DiaryGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, }, //  loadChildren: () => import('./calend/calendar-page-m.module').then(m => m.CalendarPageMModule)
-  { path: 'diary', component: DiaryPageComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },}, 
+  { path: 'diary', component: AuthComponent, canActivate: [AngularFireAuthGuard, DiaryGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, }, //  loadChildren: () => import('./calend/calendar-page-m.module').then(m => m.CalendarPageMModule)
 ];
 
 @NgModule({

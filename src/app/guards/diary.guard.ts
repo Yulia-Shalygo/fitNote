@@ -14,13 +14,17 @@ export class DiaryGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+    // TODO
     
-    let user = localStorage.getItem("admin");
-    if(user === "false") { // admin
-      return true;
-    } else {
-      this.router.navigate(['/abonement']);
-    }
+    return true;
+    // let user = localStorage.getItem("admin");
+    // console.log(user)
+    // if(user === "false") { // admin
+    //   return true;
+    // } else {
+    //   this.router.navigate(['diary']);
+    // }
   }
   
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import  firebase from 'firebase/app';
 import { FirebaseService } from '../services/firebase.service';
+import { logOut } from './store/actions/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -15,7 +17,8 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +30,7 @@ export class AuthComponent implements OnInit {
   }
 
   logout(): void { 
-    this.firebaseService.logout();
+    this.store.dispatch(logOut());
     this.router.navigate(['/login']);
   }
 
