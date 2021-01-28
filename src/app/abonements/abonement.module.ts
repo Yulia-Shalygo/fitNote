@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirebaseService } from '../services/firebase.service';
 import { TaskService } from '../services/task.service';
 import { AbonementComponent } from './abonement/abonement.component';
-import { AbonementPageMRoutingModule } from './abonement-routing.module';
 import { CalendarComponent } from '../calend/calendar/calendar.component';
 import { CalendarPageComponent } from '../calend/calendar-page/calendar-page.component';
 import { MomentPipe } from '../pipes/moment.pipe';
@@ -15,7 +14,19 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { CreateUserHeaderComponent } from './create-user/create-user-header/create-user-header.component';
 import { CreateAdminComponent } from './create-user/create-admin/create-admin.component';
 import { CreateTrainerComponent } from './create-user/create-trainer/create-trainer.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { AbonementGuard } from '../guards/abonement.guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+
+const routes: Routes = [
+  { path: '', component: AbonementComponent, },
+  { path: 'create-abonement', component: CreateAbonementFormComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: 'create-user', component: CreateUserComponent,  canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: 'create-trainer', component: CreateTrainerComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: 'create-admin', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+];
 
 @NgModule({
   declarations: [
@@ -34,7 +45,8 @@ import { RouterModule } from '@angular/router';
     CreateAdminComponent,
   ],
   imports: [
-    AbonementPageMRoutingModule,
+    RouterModule.forChild(routes),
+
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
