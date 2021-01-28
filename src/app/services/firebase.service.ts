@@ -57,9 +57,8 @@ export class FirebaseService {
         user.isAdmin = true;
         firebase.database().ref(`users/admins/${userUID}`).set(user);
       }
-    }).catch(function (error) {
+    }).catch((error) => {
       this.error = error;
-      console.log(error);
       this.router.errorHandler(error);
     });
   }
@@ -78,12 +77,10 @@ export class FirebaseService {
         });
       }).catch((error) => {
         this.error = error;
-        console.log(error);
         this.router.errorHandler(error);
       });
     }).catch((error) => {
       this.error = error;
-      console.log(error);
       this.router.errorHandler(error);
     });
   }

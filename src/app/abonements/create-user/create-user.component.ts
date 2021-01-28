@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
+import { ErrorService } from 'src/app/services/error.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -12,12 +13,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CreateUserComponent implements OnInit {
 
   userForm: FormGroup;
-  err = false;
+  err: string = '';
   trainer: boolean = false;
 
   constructor(
     private firebaseService: FirebaseService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService
   ) { }
 
   ngOnInit(): void {
@@ -46,10 +48,11 @@ export class CreateUserComponent implements OnInit {
 
     this.firebaseService.createUser(email, 'qwerty', user, null).then(() =>
       this.router.navigate(['/abonement'])
-    ).catch(() => {
+    ).catch((errorCode) => {
       this.userForm.reset();
       this.userForm.enable();
-      this.err = true;
+
+      this.err = this.errorService.getErrorString(errorCode.code);
     })
   }
 }

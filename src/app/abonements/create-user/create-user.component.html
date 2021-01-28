@@ -8,25 +8,25 @@
                 <div class="main">
                     <div class="form-group">
                         <input #name formControlName="name" type="text" class="form-control" placeholder="Имя и фамилия">
-                        <span *ngIf="userForm.get('name').invalid && userForm.get('name').touched" class="error-text">This field can't be empty</span>
+                        <span *ngIf="userForm.get('name').invalid && userForm.get('name').touched" class="error-text">Это обязательное поле.</span>
                     </div>
                 
-
                     <div class="form-group">
                         <input #email formControlName="email" type="email" class="form-control" placeholder="E-mail">
                         <span *ngIf="userForm.get('email').invalid && userForm.get('email').touched" class="error-text">Please enter a valid email address</span>
-                        <span *ngIf="err" class="error-text">Account with this email address already exists</span>
+                        <span *ngIf="err" class="error-text">{{err}}</span>
                     </div>
                 </div>
 
                 <div class="main">
                     <div class="form-group">
                         <input #birth formControlName="birth" placeholder="Дата рождения" class="form-control" type="text" onfocus="(this.type='date')">
+                        <span *ngIf="userForm.get('birth').invalid && userForm.get('birth').touched" class="error-text">Это обязательное поле.</span>
                     </div>
 
                     <div class="form-group">
                         <input #phone formControlName="phone" type="phone" class="form-control" placeholder="Телефон">
-                        <span *ngIf="userForm.get('phone').invalid && userForm.get('phone').touched" class="error-text">This field can't be empty</span>
+                        <span *ngIf="userForm.get('phone').invalid && userForm.get('phone').touched" class="error-text">Это обязательное поле.</span>
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                     <textarea #comment formControlName="comment" class="form-control textarea" cols="50" rows="11" placeholder="Комментарии"></textarea>
                 </div>
                 
-                <input (click)="createUser()" type="submit" class="btn btn-default"  value="Создать" />
+                <input (click)="createUser()" type="submit" class="btn btn-default" [disabled]="userForm.invalid || userForm.disabled" value="Создать" />
             </form>
         </div>
     </div>
