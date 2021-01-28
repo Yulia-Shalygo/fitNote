@@ -1,36 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../calend/store/models/task';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import { DataSnapshot } from '@angular/fire/database/interfaces';
+import { Task } from '../calend/store/models/task.model';
+
+import { DateService } from './date.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class TaskService {
-  static url: string = 'https://time-tracker-9eb9c-default-rtdb.firebaseio.com/tasks';
+  static url: string = 'https://fitnote-ad140-default-rtdb.firebaseio.com/users';
 
-  constructor() { }
+  constructor(
+    public dataService: DateService,
+  ) { }
 
-  create(task: Task): void { 
-    firebase.database().ref(`users/admins/${task.user}/tasks/${task.date}`).set(task).catch(error => {
-      console.log(error);
-    });
+  create(task: Task): any { 
+    return firebase.database().ref(`users/admins/${task.user}/tasks/${task.date}`).set(task);
   }
 
-  readAll(): Task[] {
-    let arr:Task[] = [];
+  async readAll(userId: string): Promise<Task[]> {
+    console.log(userId)
 
-    const userUID = firebase.auth().currentUser.uid; 
-
-    firebase.database().ref(`users/admins/${userUID}/tasks`) 
-    .on('value', (data: DataSnapshot) => {
-       data.forEach((child: DataSnapshot) => {
-         arr.push(child.val());
-       });
-    });
-    return arr;
+    const snapshot = await firebase.database().ref(`users/admins/${userId}/tasks`).once('value');
+    return Object.values(snapshot.val() || {});
   }
 }

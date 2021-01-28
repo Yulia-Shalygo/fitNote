@@ -2,7 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/auth/store/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({

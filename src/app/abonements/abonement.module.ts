@@ -4,9 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirebaseService } from '../services/firebase.service';
 import { TaskService } from '../services/task.service';
 import { AbonementComponent } from './abonement.component';
-import { CalendarComponent } from '../calend/calendar/calendar.component';
-import { CalendarPageComponent } from '../calend/calendar-page/calendar-page.component';
-import { MomentPipe } from '../pipes/moment.pipe';
 import { AbonementPageComponent } from './abonement-page/abonement-page.component';
 import { CreateAbonementPageComponent } from './create-abonement-page/create-abonement-header/create-abonement-page.component';
 import { CreateAbonementFormComponent } from './create-abonement-page/create-abonement-form/create-abonement-form.component';
@@ -17,6 +14,7 @@ import { CreateTrainerComponent } from './create-users/create-trainer/create-tra
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { AbonementGuard } from '../guards/abonement.guard';
+import { CalendarPageMModule } from '../calend/calendar-page-m/calendar-page-m.module';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -34,10 +32,6 @@ const routes: Routes = [
     AbonementPageComponent,
     CreateAbonementPageComponent,
     CreateAbonementFormComponent,
-    
-    CalendarComponent,
-    CalendarPageComponent,
-    MomentPipe,
 
     CreateUserComponent,
     CreateUserHeaderComponent,
@@ -47,6 +41,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
 
+    CalendarPageMModule,
+    
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

@@ -1,4 +1,4 @@
-import { Task } from "../models/task";
+import { Task } from "../models/task.model";
 
 export const tasksInitialState: TaskState = {
     tasks: []

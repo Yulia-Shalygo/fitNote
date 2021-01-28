@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/auth/store/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./abonement-page.component.css']
 })
 export class AbonementPageComponent implements OnInit {
-
+  
   users: User[];
   private _searchSubject: Subject<string> = new Subject();
 

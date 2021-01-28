@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import { User } from '../interfaces/user';
+import { User } from '../auth/store/models/user.model';
 
 @Injectable({
   providedIn: 'root'
