@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ErrorService } from 'src/app/services/error.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -10,11 +11,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  err = false;
+  err: string = '';
   userId: any;
 
   constructor(
-    public firebaseServiсe: FirebaseService
+    public firebaseServiсe: FirebaseService,
+    private errorService: ErrorService
+
   ) { }
 
   ngOnInit(): void {
@@ -30,10 +33,10 @@ export class LoginComponent implements OnInit {
     this.loginForm.disable();
 
     await this.firebaseServiсe.signin(email, password)
-      .catch(() => {      
+      .catch((errorCode) => {     
         this.loginForm.reset();
         this.loginForm.enable();
-        this.err = true;
+        this.err = this.errorService.getErrorString(errorCode.code);
       })
   }
 }

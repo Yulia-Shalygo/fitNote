@@ -60,6 +60,10 @@
         width: 1000px;
         height: 200px;
     }
+    .image {
+        width: 200px;
+        height: 200px;
+    }
 }
 @media (max-width: 992px) {
     .form-control {
@@ -80,7 +84,7 @@
         width: 100px;
     }
     .textarea {
-        width: 400px;
+        width: 200px;
         height: 200px;
     }
     .info {
