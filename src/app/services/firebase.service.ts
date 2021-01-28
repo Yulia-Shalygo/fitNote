@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -64,9 +66,10 @@ export class FirebaseService {
   }
 
   async signin(email: string, password: string): Promise<void> {
-    return this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+    await this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       return this.fireAuth.signInWithEmailAndPassword(email, password).then(res => {        
         let userId = firebase.auth().currentUser.uid;
+        console.log(userId)
 
         this.isAdmin(userId).then(admin => {  
           if (admin) {
@@ -75,14 +78,8 @@ export class FirebaseService {
             this.router.navigate(['/diary']);
           }
         });
-      }).catch((error) => {
-        this.error = error;
-        this.router.errorHandler(error);
+      })
       });
-    }).catch((error) => {
-      this.error = error;
-      this.router.errorHandler(error);
-    });
   }
 
   logout(): void {

@@ -66,7 +66,7 @@
                         <div class="img">
                             <img [src]="url" class="image" accept=".png,.jpg">
                         </div>
-                        <input type="file" formControlName="imageUrl" (change)="onFileSelected($event)">
+                        <input type="file" formControlName="imageUrl" accept="image/x-png,image/gif,image/jpeg" (change)="onFileSelected($event)">
 
                     </div>
                 </div>
