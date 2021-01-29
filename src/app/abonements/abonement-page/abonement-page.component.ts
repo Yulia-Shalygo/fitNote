@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { getUsers } from '../store/actions/abonement.actions';
 
 @Component({
   selector: 'app-abonement-page',
@@ -17,6 +19,7 @@ export class AbonementPageComponent implements OnInit {
 
   constructor(
     private firebaseService: FirebaseService,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +27,7 @@ export class AbonementPageComponent implements OnInit {
       this.users = users;
       this.needUsers = users;
     });
+    this.store.dispatch(getUsers());
   }
 
   public updateSearch(searchTextValue: string): any {

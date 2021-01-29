@@ -15,6 +15,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { AbonementGuard } from '../guards/abonement.guard';
 import { CalendarPageMModule } from '../calend/calendar-page-m/calendar-page-m.module';
+import { StoreModule } from '@ngrx/store';
+import { AbonementReducer, ABONEMENT_REDUCER_NODE } from './store/reducers/abonement.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AbonementEffects } from './store/effects/abonement.effects';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -46,6 +50,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+
+    StoreModule.forFeature(ABONEMENT_REDUCER_NODE, AbonementReducer),
+    EffectsModule.forFeature([AbonementEffects])
   ],
   exports: [RouterModule],
 

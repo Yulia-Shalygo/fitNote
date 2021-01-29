@@ -42,7 +42,7 @@ export class CalendarComponent implements OnInit {
     this.calendarForm = new FormGroup({
       description: new FormControl(null,
         [Validators.required])
-    })
+    });
     this.store.dispatch(getUser());
     this.store.dispatch(readAllTasks());
 

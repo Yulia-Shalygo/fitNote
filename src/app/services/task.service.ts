@@ -22,8 +22,6 @@ export class TaskService {
   }
 
   async readAll(userId: string): Promise<Task[]> {
-    console.log(userId)
-
     const snapshot = await firebase.database().ref(`users/admins/${userId}/tasks`).once('value');
     return Object.values(snapshot.val() || {});
   }
