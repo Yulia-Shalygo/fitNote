@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { getUsers } from '../store/actions/abonement.actions';
+import { getUsersSelector } from '../store/selectors/abonement.selectors';
 
 @Component({
   selector: 'app-abonement-page',
@@ -23,11 +24,11 @@ export class AbonementPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.firebaseService.getAllUsers().then(users => {
+    this.store.dispatch(getUsers());
+    this.store.select(getUsersSelector).subscribe(users => {
       this.users = users;
       this.needUsers = users;
     });
-    this.store.dispatch(getUsers());
   }
 
   public updateSearch(searchTextValue: string): any {

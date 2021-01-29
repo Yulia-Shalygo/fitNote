@@ -27,4 +27,4 @@ export const errorSelector = createFeatureSelector('auth');
 export const getError = createSelector(
     errorSelector,
     (state: State) => state.errorCode
-)
+);

@@ -43,19 +43,19 @@ export class CreateAdminComponent implements OnInit {
   }
 
   createAdmin(): void {
-    const {name, email, birth, phone, comment, workExperience, education, address, workSchedule} = this.adminForm.value;
+    // const {name, email, birth, phone, comment, workExperience, education, address, workSchedule} = this.adminForm.value;
 
-    let user: User = {
-      name, email, birth, phone, comment, isAdmin: false, workExperience, education, address, workSchedule
-    };
-    this.adminForm.disable();
-    this.firebaseService.createUser(email, 'qwerty', user, 'admin').then(() =>
-      this.router.navigate(['/abonement'])
-    ).catch(() => {
-      this.adminForm.reset();
-      this.adminForm.enable();
-      this.err = true;
-    })
+    // let user: User = {
+    //   name, email, birth, phone, comment, isAdmin: false, workExperience, education, address, workSchedule
+    // };
+    // this.adminForm.disable();
+    // this.firebaseService.createUser(email, 'qwerty', user, 'admin').then(() =>
+    //   this.router.navigate(['/abonement'])
+    // ).catch(() => {
+    //   this.adminForm.reset();
+    //   this.adminForm.enable();
+    //   this.err = true;
+    // })
   }
 
   onFileSelected(event): void {

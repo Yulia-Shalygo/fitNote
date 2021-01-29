@@ -5,20 +5,7 @@
 
             <nav class="nav menu">
                 <a routerLink="/abonement" class="links nav__link">Абонементы</a>
-                
-                <ul class="menu__list">
-                    <li>
-                        <a routerLink="/abonement/create-user" class="links menu__link nav__link">Новый пользователь</a>
-                        <ul class="sub-menu__list">
-                            <li>
-                                <a routerLink="/abonement/create-trainer" class="links sub-menu__link nav__link">Новый тренер</a>
-                            </li>
-                            <li>
-                                <a routerLink="/abonement/create-admin" class="links sub-menu__link nav__link">Новый администратор</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <a routerLink="/abonement/create-user" class="links menu__link nav__link">Новый пользователь</a>
 
                 <a (click)="logout()" class="links nav__link">Выйти</a>
             </nav>

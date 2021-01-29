@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
 import { ErrorService } from 'src/app/services/error.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { createClient, getUsers } from '../store/actions/abonement.actions';
+import { getAbonementError } from '../store/selectors/abonement.selectors';
 
 @Component({
   selector: 'app-create-user',
@@ -16,10 +20,13 @@ export class CreateUserComponent implements OnInit {
   err: string = '';
   trainer: boolean = false;
 
+  subscription: Subscription;
+
   constructor(
     private firebaseService: FirebaseService,
     private router: Router,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private store: Store,
   ) { }
 
   ngOnInit(): void {
@@ -46,13 +53,13 @@ export class CreateUserComponent implements OnInit {
     };
     this.userForm.disable();
 
-    this.firebaseService.createUser(email, 'qwerty', user, null).then(() =>
-      this.router.navigate(['/abonement'])
-    ).catch((errorCode) => {
-      this.userForm.reset();
-      this.userForm.enable();
+    this.store.dispatch(createClient({ user }));
 
-      this.err = this.errorService.getErrorString(errorCode.code);
-    })
+    this.subscription = this.store.pipe(select(getAbonementError)).subscribe(errorCode => {
+      if(errorCode){
+        this.err = this.errorService.getErrorString(errorCode);
+        this.userForm.enable();
+      }
+    });
   }
 }

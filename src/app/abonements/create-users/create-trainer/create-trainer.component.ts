@@ -37,19 +37,19 @@ export class CreateTrainerComponent implements OnInit {
 
   createTrainer(): void {
 
-    const {name, email, birth, phone, comment, workExperience, education} = this.userForm.value;
+    // const {name, email, birth, phone, comment, workExperience, education} = this.userForm.value;
 
-    let user: User = {
-      name, email, birth, phone, comment, isAdmin: false, workExperience, education
-    };
-    this.userForm.disable();
-    this.firebaseService.createUser(email, 'qwerty', user, 'trainer').then(() =>
-      this.router.navigate(['/abonement'])
-    ).catch(() => {
-      this.userForm.reset();
-      this.userForm.enable();
-      this.err = true;
-    })
+    // let user: User = {
+    //   name, email, birth, phone, comment, isAdmin: false, workExperience, education
+    // };
+    // this.userForm.disable();
+    // this.firebaseService.createUser(email, 'qwerty', user, 'trainer').then(() =>
+    //   this.router.navigate(['/abonement'])
+    // ).catch(() => {
+    //   this.userForm.reset();
+    //   this.userForm.enable();
+    //   this.err = true;
+    // })
   }
 
 }

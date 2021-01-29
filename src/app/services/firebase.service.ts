@@ -22,6 +22,8 @@ export class FirebaseService {
     private router: Router,
   ) { }
 
+  
+
   async getAdmin(userUID: string) {
     const snapshot = await firebase.database().ref(`users/admins/${ userUID }`).once('value');
     return Object.values(snapshot.val() || {});
@@ -47,20 +49,40 @@ export class FirebaseService {
     return admin;
   }
 
-  createUser(email: string, password: string, user: User, trainer: string): Promise<void> {   
-    return firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
-      let userUID = firebase.auth().currentUser.uid;
+  createClient(user: User): any {
+    let config = {
+      apiKey: "AIzaSyAHqE5p2InD3QOctLQ4zA__WwS0SbnQhXY",
+      authDomain: "fitnote-ad140.firebaseapp.com",
+      databaseURL: "https://fitnote-ad140-default-rtdb.firebaseio.com"
+    };
+    let secondaryApp = firebase.initializeApp(config, "Secondary");
 
-      if (trainer === null) {
-        firebase.database().ref(`users/clients/${userUID}`).set(user);
-      } else if (trainer === 'trainer') {
-        firebase.database().ref(`users/trainers/${userUID}`).set(user);
-      } else {
-        user.isAdmin = true;
-        firebase.database().ref(`users/admins/${userUID}`).set(user);
-      }
-    })
+    return secondaryApp.auth().createUserWithEmailAndPassword(user.email, 'qwerty').then(function(newUser) {
+      firebase.database().ref(`users/clients/${newUser.user.uid}`).set(user);
+      secondaryApp.auth().signOut();
+      secondaryApp.delete();
+
+    }).then(() => this.router.navigate(['/abonement']))
+      .catch(error => {
+        secondaryApp.delete();
+        this.router.errorHandler(error);
+    });
   }
+
+  // createUser(email: string, password: string, user: User, trainer: string): any {   
+  //   return firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+  //     let userUID = firebase.auth().currentUser.uid;
+
+  //     if (trainer === null) {
+  //       firebase.database().ref(`users/clients/${userUID}`).set(user);
+  //     } else if (trainer === 'trainer') {
+  //       firebase.database().ref(`users/trainers/${userUID}`).set(user);
+  //     } else {
+  //       user.isAdmin = true;
+  //       firebase.database().ref(`users/admins/${userUID}`).set(user);
+  //     }
+  //   })
+  // }
 
   async signin(email: string, password: string): Promise<string> {
     await this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {

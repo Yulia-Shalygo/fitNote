@@ -32,3 +32,35 @@ export const getUsersError = createAction(
     AbonementActionType.getUsersError,
     props<{ error: any }>()
 );
+
+// CREATE CLIENT
+export const createClient = createAction(
+    AbonementActionType.createClient,
+    props<{ user: User }>()
+);
+
+export const createClientSuccess = createAction(
+    AbonementActionType.createClientSuccess,
+    props<{ user: User }>()
+);
+
+export const createClientError = createAction(
+    AbonementActionType.createClientError,
+    props<{ error: any }>()
+);
+
+// CREATE ADMIN
+export const createAdmin = createAction(
+    AbonementActionType.createAdmin,
+    props<{ user: User }>()
+);
+
+export const createAdminSuccess = createAction(
+    AbonementActionType.createAdminSuccess,
+    props<{ user: User }>()
+);
+
+export const createAdminError = createAction(
+    AbonementActionType.createAdminError,
+    props<{ error: any }>()
+);

@@ -4,19 +4,8 @@
             <a routerLink="" class="nav__link logo">FitNote</a>
             
             <nav class="nav menu">
-                <ul class="menu__list">
-                    <li>
-                        <a routerLink="create-user" class="links menu__link nav__link">Новый пользователь</a>
-                        <ul class="sub-menu__list">
-                            <li>
-                                <a routerLink="create-trainer" class="links sub-menu__link nav__link">Новый тренер</a>
-                            </li>
-                            <li>
-                                <a routerLink="create-admin" class="links sub-menu__link nav__link">Новый администратор</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <a routerLink="create-user" class="links menu__link nav__link">Новый пользователь</a>
+
                 <a routerLink="create-abonement" class="links nav__link">Новый абонемент</a>
                 <a (click)="logout()" class="links nav__link">Выйти</a>
             </nav>

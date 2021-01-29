@@ -46,23 +46,3 @@
 .nav__link:hover:after{
 	opacity: 1;
 }
-
-.menu li {
-	position: relative;
-}
-.menu__link {
-	color: #333;
-}
-
-.sub-menu__list {
-	display: none;
-	position: absolute;
-	left: 0;
-	color: #333;
-	background-color: #fff;
-	min-width: 250px;
-	
-}
-.menu__list:hover .sub-menu__list {
-	display: block;
-}
