@@ -14,7 +14,7 @@
                 <th class="little numDay">Число дней</th>
                 <th>Форма</th>
                 <th>Стоимость</th>
-                <th>Тренер</th>
+                <th class="trainer">Тренер</th>
             </tr>
         </thead>
     </table>
@@ -23,7 +23,7 @@
             <tbody *ngFor="let user of needUsers">
                 <tr>
                     <td class="little btn_lit" [routerLink]="['create-abonement', user.userId]">
-                        <span class="btn_text">+</span>
+                        <span class="btn_text">Ред.</span>
                     </td>
                     <td class="name">{{user.name}}</td>
                     <td class="phone">{{user.phone}}</td>
@@ -32,8 +32,8 @@
                     <td class="little numDay">{{user.numberOfDays}}</td>
                     <td>{{user.nameOfAbonement}}</td>
                     <td>{{user.cost}}</td>
-                    <td *ngIf="user.trainer">Да</td>
-                    <td *ngIf="!user.trainer"></td>
+                    <td class="trainer" *ngIf="user.trainer">Да</td>
+                    <td class="trainer" *ngIf="!user.trainer"></td>
                 </tr>
             </tbody>
         </table>

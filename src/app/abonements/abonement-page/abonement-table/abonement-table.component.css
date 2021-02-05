@@ -108,7 +108,7 @@ td, th {
 	font-size: 14px;
 }
 .little {
-	width: 70px;
+	width: 100px;
 }
 .btn_text {
 	border: 1px solid rgba(215, 215, 218, 0.5);
@@ -119,7 +119,7 @@ td, th {
 	font-weight: 700;
 }
 .btn_lit {
-	width: 50px;
+	width: 70px;
 }
 .numDay {
 	width: 80px;
@@ -129,4 +129,7 @@ td, th {
 }
 .phone {
 	width: 140px;
+}
+.trainer {
+	width: 100px;
 }
