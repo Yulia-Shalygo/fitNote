@@ -12,7 +12,7 @@ export const AuthReducer = createReducer(
 
     on(logOutError, (state, action) => ({
         ...state,
-        errorMessage: action.error.message
+        errorMessage: action.error.code
     })),
 
     on(signInSuccess, (state, action) => ({

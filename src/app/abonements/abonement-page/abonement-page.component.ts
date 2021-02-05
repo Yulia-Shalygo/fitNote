@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
-import { FirebaseService } from 'src/app/services/firebase.service';
 import { getUsers } from '../store/actions/abonement.actions';
 import { getUsersSelector } from '../store/selectors/abonement.selectors';
 
@@ -19,7 +18,6 @@ export class AbonementPageComponent implements OnInit {
   needUsers: User[];
 
   constructor(
-    private firebaseService: FirebaseService,
     private store: Store
   ) { }
 
@@ -42,6 +40,10 @@ export class AbonementPageComponent implements OnInit {
 
     this._searchSubject.next(searchTextValue);
     this.needUsers = this.users.filter(user => user.name.toLocaleLowerCase().includes(searchTextValue));
+  }
+
+  getNeedUser(user: any): void {
+    console.log(user);
   }
 
 }

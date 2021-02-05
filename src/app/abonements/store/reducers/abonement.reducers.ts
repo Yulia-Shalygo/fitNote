@@ -1,7 +1,7 @@
-import { Action, createReducer, on } from "@ngrx/store";
-import { logOutSuccess } from "src/app/auth/store/actions/auth.actions";
-import { createAdminSuccess, createClientError, createClientSuccess, getUsersError, getUsersSuccess } from "../actions/abonement.actions";
-import { abonementInitialState, AbonementState } from "../state/abonement.state";
+import { Action, createReducer, on } from '@ngrx/store';
+import { logOutSuccess } from 'src/app/auth/store/actions/auth.actions';
+import { createAbonementError, createAbonementSuccess, createClientError, createClientSuccess, getShapes, getShapesError, getShapesSuccess, getUsersError, getUsersSuccess } from '../actions/abonement.actions';
+import { abonementInitialState, AbonementState } from '../state/abonement.state';
 
 export const ABONEMENT_REDUCER_NODE = 'abonement';
 
@@ -9,12 +9,12 @@ export const AbonementReducer = createReducer(
     abonementInitialState,
 
     on(getUsersSuccess, (state, { users }) => ({
-        users: users
+        users: [...users]
     })),
 
     on(getUsersError, (state, action) => ({
         ...state,
-        error: action.error.message
+        error: action.error.code
     })),
 
     // CREATE CLIENT
@@ -28,11 +28,27 @@ export const AbonementReducer = createReducer(
         error: action.error.code
     })),
 
-    // CREATE ADMIN
-    // on(createAdminSuccess, (state, { user }) => ({
-        
-    // })),
+    // CREATE ABONEMENT
+    on(createAbonementSuccess, (state, action) => ({
+        ...state,
+        users: [...state.users, action.abonement]
+    })),
 
+    on(createAbonementError, (state, action) => ({
+        ...state,
+        error: action.error.code
+    })),
+
+    // GET SHAPES OF ABONEMENTS
+    on(getShapesSuccess, (state, { shapes }) => ({
+        ...state,
+        shapes: [...shapes]
+    })),
+
+    on(getShapesError, (state, action) => ({
+        ...state,
+        error: action.error.code
+    })),
 
     on(logOutSuccess, () => ({
         users: []

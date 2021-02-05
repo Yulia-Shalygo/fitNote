@@ -1,5 +1,7 @@
-import { createAction, props } from "@ngrx/store";
-import { User } from "src/app/auth/store/models/user.model";
+import { createAction, props } from '@ngrx/store';
+import { User } from 'src/app/auth/store/models/user.model';
+import { Abonement } from '../models/abonement.model';
+import { Shape } from '../models/shape.model';
 
 export enum AbonementActionType {
     getUsers = '[Abonement] Get Users',
@@ -10,13 +12,14 @@ export enum AbonementActionType {
     createClientSuccess = '[Abonement] Create Client Success',
     createClientError = '[Abonement] Create Client Error',
 
-    createAdmin = '[Abonement] Create Admin',
-    createAdminSuccess = '[Abonement] Create Admin Success',
-    createAdminError = '[Abonement] Create Admin Error',
+    createAbonement = '[Abonement] Create Abonement',
+    createAbonementSuccess = '[Abonement] Create Abonement Success',
+    createAbonementError = '[Abonement] Create Abonement Error',
 
-    createTrainer = '[Abonement] Create Trainer',
-    createTrainerSuccess = '[Abonement] Create Trainer Success',
-    createTrainerError = '[Abonement] Create Trainer Error',
+
+    getShapes = '[Abonement] Get Shapes',
+    getShapesSuccess = '[Abonement] Get Shapes Success',
+    getShapesError = '[Abonement] Get Shapes Error',
 };
 
 export const getUsers = createAction(
@@ -49,18 +52,34 @@ export const createClientError = createAction(
     props<{ error: any }>()
 );
 
-// CREATE ADMIN
-export const createAdmin = createAction(
-    AbonementActionType.createAdmin,
-    props<{ user: User }>()
+
+// CREATE ABONEMENT
+export const createAbonement = createAction(
+    AbonementActionType.createAbonement,
+    props<{ abonement: Abonement }>()
 );
 
-export const createAdminSuccess = createAction(
-    AbonementActionType.createAdminSuccess,
-    props<{ user: User }>()
+export const createAbonementSuccess = createAction(
+    AbonementActionType.createAbonementSuccess,
+    props<{ abonement: Abonement }>()
 );
 
-export const createAdminError = createAction(
-    AbonementActionType.createAdminError,
+export const createAbonementError = createAction(
+    AbonementActionType.createAbonementError,
+    props<{ error: any }>()
+);
+
+// GET SHAPES OF ABONEMENTS
+export const getShapes = createAction(
+    AbonementActionType.getShapes
+);
+
+export const getShapesSuccess = createAction(
+    AbonementActionType.getShapesSuccess,
+    props<{ shapes: Shape[] }>()
+);
+
+export const getShapesError = createAction(
+    AbonementActionType.getShapesError,
     props<{ error: any }>()
 );

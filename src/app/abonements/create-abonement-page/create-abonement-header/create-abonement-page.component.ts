@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from 'src/app/services/firebase.service';
+import { Store } from '@ngrx/store';
+import { logOut } from 'src/app/auth/store/actions/auth.actions';
 
 @Component({
   selector: 'app-create-abonement-page',
@@ -10,15 +11,15 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CreateAbonementPageComponent implements OnInit {
 
   constructor(
-    private firebaseService: FirebaseService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
   }
 
   logout(): void {
-    this.firebaseService.logout();
+    this.store.dispatch(logOut());
     this.router.navigate(['/login']);
   }
 }

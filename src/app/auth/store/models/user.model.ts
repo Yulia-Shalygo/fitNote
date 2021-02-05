@@ -1,13 +1,9 @@
-// export interface User {
-//     id?: string,
-//     email: string;
-//     password: string;
-// };
+import { Abonement } from "src/app/abonements/store/models/abonement.model";
 
 export interface User {
+    userId?: string;
     email: string;
     password?: string;
-    isAdmin?: boolean;
     name?: string;
     birth?: string;
     phone?: string;
@@ -16,4 +12,9 @@ export interface User {
     education?: string;
     address?: string;
     workSchedule?: string;
+
+    abonement?: Abonement;
+    image?: any;
+
+    role?: string;
 };

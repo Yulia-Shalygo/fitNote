@@ -18,11 +18,11 @@ export class TaskService {
   ) { }
 
   create(task: Task): any { 
-    return firebase.database().ref(`users/admins/${task.user}/tasks/${task.date}`).set(task);
+    return firebase.database().ref(`club/users/${task.user}/tasks/${task.date}`).set(task);
   }
 
   async readAll(userId: string): Promise<Task[]> {
-    const snapshot = await firebase.database().ref(`users/admins/${userId}/tasks`).once('value');
+    const snapshot = await firebase.database().ref(`club/users/${userId}/tasks`).once('value');
     return Object.values(snapshot.val() || {});
   }
 }

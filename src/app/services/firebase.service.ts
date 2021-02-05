@@ -1,55 +1,66 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import { getAdminsSelector } from '../abonements/store/selectors/abonement.selectors';
 import { User } from '../auth/store/models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  error: string;
   userId: any;
-  public currentUser: any;
-
-  admin: boolean;
-  static url = 'https://fitnote-ad140-default-rtdb.firebaseio.com/users';
 
   constructor(
     public fireAuth: AngularFireAuth, 
     private router: Router,
+    private store: Store
   ) { }
 
-  
+  async getUserById(userId: string): Promise<any> {
+    const snapshot = await firebase.database().ref(`club/users/${ userId }`).once('value');
+    return Object.values(snapshot.val() || {});
+  }
 
-  async getAdmin(userUID: string) {
-    const snapshot = await firebase.database().ref(`users/admins/${ userUID }`).once('value');
+  // TODO rename ref ???? get user
+  async getAdmin(userUID: string): Promise<any> {
+    const snapshot = await firebase.database().ref(`club/users/${ userUID }`).once('value');
     return Object.values(snapshot.val() || {});
   }
 
   async getAllUsers(): Promise<User[]> {
-    const snapshot = await firebase.database().ref(`users/clients`).once('value');
+    const snapshot = await firebase.database().ref(`club/users`).once('value');
     return Object.values(snapshot.val() || {});
   }
 
-  async isAdmin(userUID: string): Promise<boolean> {
-    let admin: boolean;
+  getAllAdmins() {
+    let admins;
 
-   await this.getAdmin(userUID).then((user) => {
-      if (user.length != 0) {
-        admin = true;
-        localStorage.setItem("admin", "true");
-      } else {
-        admin = false;
-        localStorage.setItem("admin", "false");
-      }
-    })
-    return admin;
+    this.store.select(getAdminsSelector).subscribe(adms => {
+      console.log(admins);
+      admins = adms;
+    });
+    return admins;
   }
 
-  createClient(user: User): any {
+  async isAdmin(userUID: string): Promise<string> {
+    let role: string;
+    await this.getAdmin(userUID).then((user) => {
+      if (user.includes('admin')) {
+        role = 'admin';
+      } else if(user.includes('super')) {
+        role = 'super';
+      } else {
+        role = 'client';
+      }
+    });
+    return role;
+  }
+
+  createClient(user: User): Promise<any> {
     let config = {
       apiKey: "AIzaSyAHqE5p2InD3QOctLQ4zA__WwS0SbnQhXY",
       authDomain: "fitnote-ad140.firebaseapp.com",
@@ -58,42 +69,74 @@ export class FirebaseService {
     let secondaryApp = firebase.initializeApp(config, "Secondary");
 
     return secondaryApp.auth().createUserWithEmailAndPassword(user.email, 'qwerty').then(function(newUser) {
-      firebase.database().ref(`users/clients/${newUser.user.uid}`).set(user);
+      firebase.database().ref(`club/users/${newUser.user.uid}`).update({...user, userId: newUser.user.uid}); // .set(user);
+
       secondaryApp.auth().signOut();
       secondaryApp.delete();
-
-    }).then(() => this.router.navigate(['/abonement']))
+      
+      return newUser.user.uid;
+    }).then((userId) => this.router.navigate([`/abonement/create-abonement/${userId}`]))
       .catch(error => {
         secondaryApp.delete();
         this.router.errorHandler(error);
     });
   }
 
-  // createUser(email: string, password: string, user: User, trainer: string): any {   
-  //   return firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
-  //     let userUID = firebase.auth().currentUser.uid;
+  createAdmin(user: User) {
+    let config = {
+      apiKey: "AIzaSyAHqE5p2InD3QOctLQ4zA__WwS0SbnQhXY",
+      authDomain: "fitnote-ad140.firebaseapp.com",
+      databaseURL: "https://fitnote-ad140-default-rtdb.firebaseio.com"
+    };
+    let secondaryApp = firebase.initializeApp(config, "Secondary");
 
-  //     if (trainer === null) {
-  //       firebase.database().ref(`users/clients/${userUID}`).set(user);
-  //     } else if (trainer === 'trainer') {
-  //       firebase.database().ref(`users/trainers/${userUID}`).set(user);
-  //     } else {
-  //       user.isAdmin = true;
-  //       firebase.database().ref(`users/admins/${userUID}`).set(user);
-  //     }
-  //   })
-  // }
+    return secondaryApp.auth().createUserWithEmailAndPassword(user.email, 'qwerty').then(function(newAdmin) {
+      firebase.database().ref(`club/users/${newAdmin.user.uid}`).update({...user, userId: newAdmin.user.uid});
+      secondaryApp.auth().signOut();
+      secondaryApp.delete();
+    }).catch(error => {
+      secondaryApp.delete();
+      this.router.errorHandler(error);
+    });
+  }
+  
+  createTrainer(user: User) {
+    let config = {
+      apiKey: "AIzaSyAHqE5p2InD3QOctLQ4zA__WwS0SbnQhXY",
+      authDomain: "fitnote-ad140.firebaseapp.com",
+      databaseURL: "https://fitnote-ad140-default-rtdb.firebaseio.com"
+    };
+    let secondaryApp = firebase.initializeApp(config, "Secondary");
+
+    return secondaryApp.auth().createUserWithEmailAndPassword(user.email, 'qwerty').then(function(newAdmin) {
+      firebase.database().ref(`club/users/${newAdmin.user.uid}`).update({...user, userId: newAdmin.user.uid});
+      secondaryApp.auth().signOut();
+      secondaryApp.delete();
+    }).then(() => this.router.navigate([`/admin-page`]))
+    .catch(error => {
+      secondaryApp.delete();
+      this.router.errorHandler(error);
+    });
+  }
 
   async signin(email: string, password: string): Promise<string> {
     await this.fireAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       return this.fireAuth.signInWithEmailAndPassword(email, password).then(() => {        
         this.userId = firebase.auth().currentUser.uid;
-
         this.isAdmin(this.userId).then(admin => {  
-          if (admin) {
-            this.router.navigate(['/abonement']);
-          } else {
-            this.router.navigate(['/diary']);
+          switch (admin) {
+            case 'admin': {
+              this.router.navigate(['/abonement']);
+              break;
+            }
+            case 'super': {
+              this.router.navigate(['/admin-page']);
+              break;
+            }
+            case 'client': {
+              this.router.navigate(['/diary']);
+              break;
+            }
           }
         });
       })
@@ -102,8 +145,6 @@ export class FirebaseService {
   }
 
   logout(): any {
-    localStorage.setItem("admin", "guest");
-
     return firebase.auth().signOut();
   }
 

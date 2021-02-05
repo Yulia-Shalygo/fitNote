@@ -3,46 +3,71 @@
 <div class="section">
     <div class="container">
         <div class="col">
+
             <form class="form-group" [formGroup]="abonementForm">  
 
-                <!-- SELECT USER -->
+                <div class="info">
 
-                <!-- <form name="selectUser">Client:
-                    <select name="user" id="user">
-                      <option *ngFor="let user of users" value="{{user.id}}" >{{user.name}}</option>
-                    </select>
-                </form>  -->
-
-                <div class="form-group">
-                    <input #user formControlName="user" type="text" class="form-control" placeholder="Имя и фамилия">
-                    <!-- <span *ngIf="abonementForm.get('user').invalid && abonementForm.get('user').touched" class="error-text">This field can't be empty</span> -->
-                </div>
+                    <div class="main">
+                        <div class="form-group">
+                            <input [(ngModel)]="abonement.start_date" #dateOfStart formControlName="dateOfStart" type="text" class="date-abon abon-info form-control" placeholder="Дата начала" onfocus="(this.type='date')">
+                        </div>
             
+                        <div class="form-group">
+                            <input  [(ngModel)]="abonement.end_date" #dateOfEnd formControlName="dateOfEnd" type="text" class="date-abon abon-info form-control" placeholder="Дата конца" onfocus="(this.type='date')">
+                        </div>
+                    </div>
 
-                <div class="main">
-                    <div class="form-group">
-                        <input #dateOfStart formControlName="dateOfStart" type="text" class="form-control" placeholder="Дата начала" onfocus="(this.type='date')">
+                    <div class="shape">
+                    
+                        <div class="main">
+                            <div class="form-group">
+                                <button (click)="withoutTrainerAbon(0)" class="btn-without headShape form-control">Без тренера</button>
+                            </div>
+        
+                            <div class="form-group">
+                                <button (click)="withTrainerAbon(0)" class="btn-without headShape form-control">С тренером</button>
+                            </div>
+    
+                            <div class="form-group">
+                                <button (click)="specialAbon(0)" class="btn-without headShape form-control">Специальные</button>
+                            </div>
+                        </div>
+    
+                        <div *ngIf="withoutTrainer" class="with">
+                            <div class="main">
+                                <div *ngFor="let shape of shapesWithoutTrainer" class="form-group">
+                                    <button (click)="withoutTrainerAbon(shape.id)" class="btn-without form-control">{{shape.nameOfAbonement}}</button>
+                                </div>
+    
+                            </div>
+                        </div>
+    
+                        <div *ngIf="withTrainer" class="with">
+                            <div class="main">
+                                <div *ngFor="let shape of shapesWithTrainer" class="form-group">
+                                    <button (click)="withTrainerAbon(shape.id)" class="btn-without form-control">{{shape.nameOfAbonement}}</button>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div *ngIf="special" class="with">
+                            <div class="main">
+                                <div *ngFor="let shape of shapesSpecial" class="form-group">
+                                    <button (click)="specialAbon(shape.id)" class="btn-without form-control">{{shape.nameOfAbonement}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
 
                     <div class="form-group">
-                        <input #dateOfEnd formControlName="dateOfEnd" type="text" class="form-control" placeholder="Дата конца" onfocus="(this.type='date')">
+                        <textarea  #comment formControlName="comment" class="form-control textarea" rows="7" placeholder="Комментарии"></textarea>
                     </div>
+
+                    <input  type="submit" class="btn btn-default" (click)="createAbonement()" value="Сохранить" />
                 </div>
 
-                <div class="main">
-                    <div class="form-group">
-                        <input #numberDays formControlName="numberDays" placeholder="Число дней" class="form-control" type="number">
-                        <span *ngIf="abonementForm.get('numberDays').invalid && abonementForm.get('numberDays').touched" class="error-text">This field can't be empty</span>
-                    </div>
-
-                    <div class="form-group">
-                        <input #cost formControlName="cost" type="number" class="form-control" placeholder="Стоимость" value="{{getCost(numberDays.value)}}">
-                        <!-- <span *ngIf="userForm.get('phone').invalid && userForm.get('phone').touched" class="error-text">This field can't be empty</span> -->
-                    </div>
-                </div>
-
-                
-                <input  type="submit" class="btn btn-default"  value="Сохранить" />
             </form>
         </div>
     </div>

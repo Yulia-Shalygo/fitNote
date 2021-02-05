@@ -9,28 +9,21 @@ import { CreateAbonementPageComponent } from './create-abonement-page/create-abo
 import { CreateAbonementFormComponent } from './create-abonement-page/create-abonement-form/create-abonement-form.component';
 import { CreateUserComponent } from './create-users/create-user.component';
 import { CreateUserHeaderComponent } from './create-users/create-user-header/create-user-header.component';
-// import { CreateAdminComponent } from './create-users/create-admin/create-admin.component';
-// import { CreateTrainerComponent } from './create-users/create-trainer/create-trainer.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
-import { AbonementGuard } from '../guards/abonement.guard';
 import { CalendarPageMModule } from '../calend/calendar-page-m/calendar-page-m.module';
 import { StoreModule } from '@ngrx/store';
 import { AbonementReducer, ABONEMENT_REDUCER_NODE } from './store/reducers/abonement.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AbonementEffects } from './store/effects/abonement.effects';
+import { AbonementTableComponent } from './abonement-page/abonement-table/abonement-table.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  { path: '', component: AbonementComponent, },
-  { path: 'create-abonement', component: CreateAbonementFormComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  { path: 'create-user', component: CreateUserComponent,  canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-
-  // TO ADMIN-PAGE
-
-  // { path: 'create-trainer', component: CreateTrainerComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  // { path: 'create-admin', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: '', component: AbonementComponent, }, // AbonementGuard ниже в две ссылки
+  { path: 'create-abonement/:id', component: CreateAbonementFormComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: 'create-user', component: CreateUserComponent,  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
 ];
 
 @NgModule({
@@ -42,8 +35,7 @@ const routes: Routes = [
 
     CreateUserComponent,
     CreateUserHeaderComponent,
-    // CreateTrainerComponent,
-    // CreateAdminComponent,
+    AbonementTableComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

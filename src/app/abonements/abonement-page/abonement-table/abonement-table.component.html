@@ -1,0 +1,42 @@
+<form class="search-container">
+    <form action="" method="post" class="search">
+        <input (keyup)="updateSearch($event.target.value)" type="search" name="search" placeholder="Поиск..." class="input" />
+    </form>
+    
+    <table class="table scroll-table">
+        <thead>
+            <tr>
+                <th class="little btn_lit"></th>
+                <th class="name">Имя и фамилия</th>
+                <th class="phone">Телефон</th>
+                <th class="date">Дата начала</th>
+                <th class="date">Дата конца</th>
+                <th class="little numDay">Число дней</th>
+                <th>Форма</th>
+                <th>Стоимость</th>
+                <th>Тренер</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scroll-table-body">
+        <table class="table">
+            <tbody *ngFor="let user of needUsers">
+                <tr>
+                    <td class="little btn_lit" [routerLink]="['create-abonement', user.userId]">
+                        <span class="btn_text">+</span>
+                    </td>
+                    <td class="name">{{user.name}}</td>
+                    <td class="phone">{{user.phone}}</td>
+                    <td class="date">{{user.abonement.start_date}}</td>
+                    <td class="date">{{user.abonement.end_date}}</td>
+                    <td class="little numDay">{{user.numberOfDays}}</td>
+                    <td>{{user.nameOfAbonement}}</td>
+                    <td>{{user.cost}}</td>
+                    <td *ngIf="user.trainer">Да</td>
+                    <td *ngIf="!user.trainer"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</form>

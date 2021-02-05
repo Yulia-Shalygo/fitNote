@@ -1,4 +1,4 @@
-<app-create-user-header></app-create-user-header>
+<app-create-trainer-header></app-create-trainer-header>
 
 <div class="section">
     <div class="container">
@@ -15,6 +15,7 @@
                     <div class="form-group">
                         <input #email formControlName="email" type="email" class="form-control" placeholder="E-mail">
                         <span *ngIf="userForm.get('email').invalid && userForm.get('email').touched" class="error-text">Это обязательное поле.</span>
+                        <span *ngIf="err" class="error-text">{{err}}</span>
                     </div>
                 </div>
 

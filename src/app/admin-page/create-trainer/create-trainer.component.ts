@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
-import { FirebaseService } from 'src/app/services/firebase.service';
+import { ErrorService } from 'src/app/services/error.service';
+import { createTrainer } from '../store/actions/admin-page.actions';
+import { getAdminErrors } from '../store/selectors/admin-page.selectors';
 
 @Component({
   selector: 'app-create-trainer',
@@ -12,11 +15,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CreateTrainerComponent implements OnInit {
   
   userForm: FormGroup;
-  err = false;
+  err: string = '';
 
+  subscription: Subscription;
+  
   constructor(
-    private firebaseService: FirebaseService,
-    private router: Router
+    private store: Store,
+    private errorService: ErrorService
   ) { }
 
   ngOnInit(): void {
@@ -32,24 +37,24 @@ export class CreateTrainerComponent implements OnInit {
       comment: new FormControl(null),
       workExperience: new FormControl(null),
       education: new FormControl(null, Validators.required)
-    })
+    });
   }
 
   createTrainer(): void {
+    const {name, email, birth, phone, comment, workExperience, education} = this.userForm.value;
 
-    // const {name, email, birth, phone, comment, workExperience, education} = this.userForm.value;
+    let trainer: User = {
+      name, email, birth, phone, comment, workExperience, education, role: 'trainer'
+    };
+    this.userForm.disable();
+    this.store.dispatch(createTrainer({ trainer }));
 
-    // let user: User = {
-    //   name, email, birth, phone, comment, isAdmin: false, workExperience, education
-    // };
-    // this.userForm.disable();
-    // this.firebaseService.createUser(email, 'qwerty', user, 'trainer').then(() =>
-    //   this.router.navigate(['/abonement'])
-    // ).catch(() => {
-    //   this.userForm.reset();
-    //   this.userForm.enable();
-    //   this.err = true;
-    // })
+    this.subscription = this.store.pipe(select(getAdminErrors)).subscribe(errorCode => {
+      if(errorCode) {
+        this.err = this.errorService.getErrorString(errorCode);
+        this.userForm.enable();
+      }
+    });
   }
 
 }

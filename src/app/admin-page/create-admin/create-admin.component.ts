@@ -1,9 +1,12 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
-import { FirebaseService } from 'src/app/services/firebase.service';
+import { ErrorService } from 'src/app/services/error.service';
+import { createAdmin } from '../store/actions/admin-page.actions';
+import { getAdminErrors } from '../store/selectors/admin-page.selectors';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-create-admin',
@@ -13,13 +16,18 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class CreateAdminComponent implements OnInit {
 
   adminForm: FormGroup;
-  err = false;
+  err: string = '';
 
-  url: string = "/assets/img/user.png"
+  url: string = '/assets/img/user.png';
+  subscription: Subscription;
+
+  file: any;
+  fileName: any;
   
   constructor(
-    private firebaseService: FirebaseService,
-    private router: Router,
+    private store: Store,
+    private errorService: ErrorService,
+    private fireStorage: AngularFireStorage,
   ) { }
 
   ngOnInit(): void {
@@ -43,22 +51,35 @@ export class CreateAdminComponent implements OnInit {
   }
 
   createAdmin(): void {
-    // const {name, email, birth, phone, comment, workExperience, education, address, workSchedule} = this.adminForm.value;
+    const { name, email, birth, phone, comment, workExperience, education, address, workSchedule } = this.adminForm.value;
 
-    // let user: User = {
-    //   name, email, birth, phone, comment, isAdmin: false, workExperience, education, address, workSchedule
-    // };
-    // this.adminForm.disable();
-    // this.firebaseService.createUser(email, 'qwerty', user, 'admin').then(() =>
-    //   this.router.navigate(['/abonement'])
-    // ).catch(() => {
-    //   this.adminForm.reset();
-    //   this.adminForm.enable();
-    //   this.err = true;
-    // })
+    let admin: User = {
+      name, email, birth, phone, comment, workExperience, education, address, workSchedule, role: 'admin', image: this.fileName
+    };
+    if (this.fileName && this.file) {
+      this.fireStorage.upload(this.fileName, this.file);
+    }
+
+    this.adminForm.disable();
+    this.store.dispatch(createAdmin({ admin }));
+  
+    this.subscription = this.store.pipe(select(getAdminErrors)).subscribe(errorCode => {
+      if(errorCode) {
+        this.err = this.errorService.getErrorString(errorCode);
+        this.adminForm.enable();
+      } else {
+        this.adminForm.reset();
+        // this.url = '/assets/img/user.png';
+      }
+    });   
+    
+    // this.router.navigate(['/admin-page']);
   }
 
   onFileSelected(event): void {
+    this.file = event.target.files[0];
+    this.fileName = this.file.name;
+
     if (event.target.files) {
       let reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);

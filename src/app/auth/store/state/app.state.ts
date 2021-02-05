@@ -7,7 +7,7 @@ export interface State {
   abonement: AbonementState;
   errorCode: string;
   errorMessage: string;
-}
+};
 
 export const authInitialState: UserState = {
    userId: ''
@@ -15,5 +15,5 @@ export const authInitialState: UserState = {
 
 export interface UserState {
   userId: string;
-}
+};
 

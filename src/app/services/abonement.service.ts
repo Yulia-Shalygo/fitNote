@@ -1,4 +1,11 @@
 import { Injectable } from '@angular/core';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { getUsers } from '../abonements/store/actions/abonement.actions';
+import { Shape } from '../abonements/store/models/shape.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,14 +14,27 @@ export class AbonementService {
 
   costOfDay: number = 5;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private store: Store
+  ) { }
 
-  createAbonement() {
-
+  createAbonement(abonement: any) {
+    return firebase.database().ref(`club/users/${abonement.userId}/abonement`).set(abonement)
+      .then(() => {
+        this.store.dispatch(getUsers());
+        // this.router.navigate(['/abonement'])
+      })
+      .catch(error => this.router.errorHandler(error));
   }
 
   getCost(days: number): number {
     return this.costOfDay * days;
+  }
+
+  async getAllFormOfAbonement(): Promise<Shape[]> {
+    const snapshot = await firebase.database().ref(`club/abonement-form`).once('value');
+    return Object.values(snapshot.val() || {});
   }
   
 }

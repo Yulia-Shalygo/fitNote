@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
 import { ErrorService } from 'src/app/services/error.service';
-import { FirebaseService } from 'src/app/services/firebase.service';
-import { createClient, getUsers } from '../store/actions/abonement.actions';
-import { getAbonementError } from '../store/selectors/abonement.selectors';
+import { createClient } from '../store/actions/abonement.actions';
+import { getAbonementError, getUsersSelector } from '../store/selectors/abonement.selectors';
 
 @Component({
   selector: 'app-create-user',
@@ -18,13 +16,10 @@ export class CreateUserComponent implements OnInit {
 
   userForm: FormGroup;
   err: string = '';
-  trainer: boolean = false;
 
   subscription: Subscription;
 
   constructor(
-    private firebaseService: FirebaseService,
-    private router: Router,
     private errorService: ErrorService,
     private store: Store,
   ) { }
@@ -39,20 +34,20 @@ export class CreateUserComponent implements OnInit {
         [Validators.required]),
       phone: new FormControl(null,
         [Validators.required]),
-      comment: new FormControl(null,
-        [Validators.required])
-    })
+      comment: new FormControl(null)
+    });
+
+    this.store.select(getUsersSelector);
   }
 
   createUser(): void {
-
-    const {name, email, birth, phone, comment} = this.userForm.value;
+    const { name, email, birth, phone, comment } = this.userForm.value;
 
     let user: User = {
-      name, email, birth, phone, comment, isAdmin: false
+      name, email, birth, phone, comment, role: 'client'
     };
-    this.userForm.disable();
 
+    this.userForm.disable();
     this.store.dispatch(createClient({ user }));
 
     this.subscription = this.store.pipe(select(getAbonementError)).subscribe(errorCode => {
