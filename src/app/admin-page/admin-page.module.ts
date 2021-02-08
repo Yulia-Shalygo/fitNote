@@ -24,8 +24,10 @@ const routes: Routes = [
      // { path: '', component: CreateAdminComponent, },
     { path: '', component: MainPageComponent, },
     { path: 'create-trainer', component: CreateTrainerComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }}, // AbonementGuard
+    { path: 'create-admin/:id', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
     { path: 'create-admin', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-];
+
+  ];
 
 @NgModule({
     declarations: [

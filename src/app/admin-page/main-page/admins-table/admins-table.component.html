@@ -19,7 +19,7 @@
         <table class="table">
             <tbody *ngFor="let admin of needAdmins">
                 <tr>
-                    <td class="little btn_lit" routerLink = 'create-admin'>
+                    <td class="little btn_lit" [routerLink] = "['create-admin', admin.userId]">
                         <span class="btn_text">Ред.</span>
                     </td>
                     <td class="name">{{admin.name}}</td>
