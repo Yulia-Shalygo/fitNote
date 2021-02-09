@@ -5,27 +5,37 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { FirebaseService } from "../services/firebase.service";
 import { TaskService } from "../services/task.service";
-import { CreateAdminComponent } from "./create-admin/create-admin.component";
-import { CreateTrainerComponent } from "./create-trainer/create-trainer.component";
-import { AdminPageHeaderComponent } from './admin-page-header/admin-page-header.component';
+import { CreateAdminComponent } from "./admin/create-admin/create-admin.component";
+import { CreateTrainerComponent } from "./trainer/create-trainer/create-trainer.component";
+import { AdminPageHeaderComponent } from './admin/admin-page-header/admin-page-header.component';
 import { UploadFileService } from "../services/upload-file.service";
-import { CreateTrainerHeaderComponent } from './create-trainer-header/create-trainer-header.component';
 import { StoreModule } from "@ngrx/store";
 import { AdminReducer, ADMIN_PAGE_NODE } from "./store/reducers/admin-page.reducers";
 import { EffectsModule } from "@ngrx/effects";
 import { AdminEffects } from "./store/effects/admin-page.effects";
-import { MainPageComponent } from './main-page/main-page/main-page.component';
-import { AdminsTableComponent } from './main-page/admins-table/admins-table.component';
-import { MainPageHeaderComponent } from './main-page/main-page-header/main-page-header.component';
+import { MainPageComponent } from './admin/main-page/main-page/main-page.component';
+import { AdminsTableComponent } from './admin/main-page/admins-table/admins-table.component';
+import { MainPageHeaderComponent } from './admin/main-page/main-page-header/main-page-header.component';
+import { TrainerPageComponent } from './trainer/trainer-page/trainer-page.component';
+import { TrainerTableComponent } from './trainer/trainer-page/trainer-table/trainer-table.component';
+import { TrainerPageHeaderComponent } from "./trainer/trainer-page/trainer-page-header/trainer-page-header.component";
+import { AdminGuard } from "../guards/admin.guard";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-     // { path: '', component: CreateAdminComponent, },
-    { path: '', component: MainPageComponent, },
-    { path: 'create-trainer', component: CreateTrainerComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }}, // AbonementGuard
-    { path: 'create-admin/:id', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-    { path: 'create-admin', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+    { 
+      path: '', 
+      component: MainPageComponent, 
+      canActivate: [AdminGuard], 
+      data: { authGuardPipe: redirectUnauthorizedToLogin },
+     },
+    { path: 'create-admin/:id', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard, AdminGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+    { path: 'create-admin', component: CreateAdminComponent, canActivate: [AngularFireAuthGuard, AdminGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+    
+    { path: 'trainers', component: TrainerPageComponent, canActivate: [AngularFireAuthGuard, AdminGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+    { path: 'create-trainer', component: CreateTrainerComponent, canActivate: [AngularFireAuthGuard, AdminGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }}, // AbonementGuard
+    { path: 'create-trainer/:id', component: CreateTrainerComponent, canActivate: [AngularFireAuthGuard, AdminGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }}, // AbonementGuard
 
   ];
 
@@ -34,10 +44,12 @@ const routes: Routes = [
         CreateTrainerComponent,
         CreateAdminComponent,
         AdminPageHeaderComponent,
-        CreateTrainerHeaderComponent,
         MainPageComponent,
         AdminsTableComponent,
-        MainPageHeaderComponent
+        MainPageHeaderComponent,
+        TrainerPageComponent,
+        TrainerTableComponent,
+        TrainerPageHeaderComponent
     ],
     imports: [
       RouterModule.forChild(routes),

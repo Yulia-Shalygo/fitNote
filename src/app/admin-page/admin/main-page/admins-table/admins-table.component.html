@@ -1,0 +1,35 @@
+<form class="search-container">
+    <form action="" method="post" class="search">
+        <input (keyup)="updateSearch($event.target.value)" type="search" name="search" placeholder="Поиск..." class="input" />
+    </form>
+    
+    <table class="table scroll-table">
+        <thead>
+            <tr>
+                <th class="little btn_lit"></th>
+                <th class="name">Имя и фамилия</th>
+                <th class="phone">Телефон</th>
+                <th class="email">e-mail</th>
+                <th class="date">Адрес</th>
+                <th class="">График</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scroll-table-body">
+        <table class="table">
+            <tbody *ngFor="let admin of needAdmins">
+                <tr>
+                    <td class="little btn_lit" [routerLink] = "['create-admin', admin.userId]">
+                        <span class="btn_text">Ред.</span>
+                    </td>
+                    <td class="name">{{admin.name}}</td>
+                    <td class="phone">{{admin.phone}}</td>
+                    <td class="date">{{admin.email}}</td>
+                    <td class="date">{{admin.address}}</td>
+                    <td>{{admin.workSchedule}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</form>

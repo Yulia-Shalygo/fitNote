@@ -6,23 +6,31 @@ import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from
 import { LoginComponent } from './auth/login/login.component';
 import { AboutComponent } from './auth/about/about/about.component';
 import { DiaryGuard } from './guards/diary.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundGuard } from './guards/notFound.duard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToDiary = () => redirectLoggedInTo(['diary']);
 const redirectLoggedInToAbonement = () => redirectLoggedInTo(['abonement']);
 
 const routes: Routes = [
-  { path: '', component: AuthComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToAbonement }, children: [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'about', component: AboutComponent },
-  ]},
-  // canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, 
+  { 
+    path: '',
+    component: AuthComponent, 
+    canActivate: [AngularFireAuthGuard], 
+    data: { authGuardPipe: redirectLoggedInToAbonement }, 
+
+    children: [
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent },
+      { path: 'about', component: AboutComponent },
+    ]
+  },
+  { path: 'not-found', component: NotFoundComponent, canActivate: [NotFoundGuard] },
   { path: 'abonement', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./abonements/abonement.module').then(m => m.AbonementPageMModule)},
 
-  { path: 'admin-page', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./admin-page/admin-page.module').then(m => m.AdminPageMModule)}, // AdminPageMModule
-
+  { path: 'admin-page',  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./admin-page/admin-page.module').then(m => m.AdminPageMModule)}, 
   { path: 'diary', component: AuthComponent, canActivate: [AngularFireAuthGuard, DiaryGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, }, //  loadChildren: () => import('./calend/calendar-page-m.module').then(m => m.CalendarPageMModule)
+
 ];
 
 @NgModule({

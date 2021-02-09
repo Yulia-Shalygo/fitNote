@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
-import { getAdmins } from '../../store/actions/admin-page.actions';
-import { getAllAdmins } from '../../store/selectors/admin-page.selectors';
+import { getAdmins } from '../../../store/actions/admin-page.actions';
+import { getAllAdmins } from '../../../store/selectors/admin-page.selectors';
 
 @Component({
   selector: 'app-admins-table',

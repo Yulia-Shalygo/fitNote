@@ -20,3 +20,17 @@ export const getAdminById = (adminId: string) => createSelector(
         else return null;
     }
 );
+
+export const getAllTrainers = createSelector(
+    adminSelector,
+    (state: AdminState) => state.trainers
+);
+
+export const getTrainerById = (trainerId: string) => createSelector(
+    adminSelector,
+    (state: AdminState) => {
+        const trainer = state.trainers.find((item) => item.userId === trainerId);
+        if (trainer) return trainer;
+        else return null;
+    }
+);

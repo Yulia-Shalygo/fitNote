@@ -9,16 +9,16 @@ import 'firebase/database';
 @Injectable({
   providedIn: 'root'
 })
-export class AbonementGuard implements CanActivate {
+export class NotFoundGuard implements CanActivate {
 
-  userId: any;
+    userId: any;
 
-  constructor(
-    private router: Router,
-    private firebaseService: FirebaseService,
-  ) {
-    this.userId = firebase.auth().currentUser;
-  }
+    constructor(
+        private router: Router,
+        private firebaseService: FirebaseService,
+    ) {
+        this.userId = firebase.auth().currentUser;
+    }
   
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,17 +26,16 @@ export class AbonementGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     if (this.userId != null) {
-      return new Promise((resolve) => {
-          this.firebaseService.getUserById(this.userId.uid).then(user => {
-              this.userId = firebase.auth().currentUser;
-              if (user.includes('admin')) {
-                resolve(true);
-              } else {
-                this.router.navigate(['/not-found']);
-                resolve(false);
-              }
-          })
-      });
+        return new Promise((resolve) => {
+            this.firebaseService.getUserById(this.userId.uid).then(user => {
+                this.userId = firebase.auth().currentUser;
+                if(user) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            })
+        });
     } else return false;
   }
 }

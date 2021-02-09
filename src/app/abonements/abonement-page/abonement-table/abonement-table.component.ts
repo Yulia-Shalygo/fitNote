@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
+import { AbonementService } from 'src/app/services/abonement.service';
 import { getShapes, getUsers } from '../../store/actions/abonement.actions';
+import { Abonement } from '../../store/models/abonement.model';
 import { getAllShapes, getUsersSelector } from '../../store/selectors/abonement.selectors';
 
 @Component({
@@ -16,9 +18,13 @@ export class AbonementTableComponent implements OnInit {
   private _searchSubject: Subject<string> = new Subject();
 
   needUsers: User[];
+  finish: boolean = false;
+
+  days: number;
 
   constructor(
     private store: Store,
+    private abonementService: AbonementService
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +53,7 @@ export class AbonementTableComponent implements OnInit {
         if (users) {
           this.users = arr;
           this.needUsers = arr;
+          // console.log(this.needUsers)
         } else this.users = [];
       })
     });
@@ -65,4 +72,11 @@ export class AbonementTableComponent implements OnInit {
     this.needUsers = this.users.filter(user => user.name.toLocaleLowerCase().includes(searchTextValue));
   }
 
+  changeDays(abonement: Abonement) {
+    if (abonement.days.valueOf() < 0) {
+      console.log("null")
+      this.finish = true;
+    }
+    this.abonementService.changeDays(abonement);    
+  }
 }

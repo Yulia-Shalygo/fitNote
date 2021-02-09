@@ -7,13 +7,17 @@ export enum AdminPageActionType {
     getAdminsSuccess = '[AdminPage] Get Admins Success',
     getAdminsError = '[AdminPage] Get Admins Error',
 
+    getTrainers = '[AdminPage] Get Trainers',
+    getTrainersSuccess = '[AdminPage] Get Trainers Success',
+    getTrainersError = '[AdminPage] Get Trainers Error',
+
     createAdmin = '[AdminPage] Create Admin',
     createAdminSuccess = '[AdminPage] Create Admin Success',
     createAdminError = '[AdminPage] Create Admin Error',
 
     createTrainer = '[AdminPage] Create Trainer',
     createTrainerSuccess = '[AdminPage] Create Trainer Success',
-    createTrainerError = '[AdminPage] Create Trainer Error'
+    createTrainerError = '[AdminPage] Create Trainer Error',
 };
 
 // GET ADMINS
@@ -31,6 +35,21 @@ export const getAdminsError = createAction(
     props<{ error: any }>()
 );
 
+// GET TRAINERS 
+
+export const getTrainers = createAction(
+    AdminPageActionType.getTrainers
+);
+
+export const getTrainersSuccess = createAction(
+    AdminPageActionType.getTrainersSuccess,
+    props<{ trainers: User[] }>()
+);
+
+export const getTrainersError = createAction(
+    AdminPageActionType.getTrainersError,
+    props<{ error: any }>()
+);
 // CREATE ADMIN
 export const createAdmin = createAction(
     AdminPageActionType.createAdmin,

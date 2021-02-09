@@ -1,5 +1,6 @@
+import { state } from "@angular/animations";
 import { Action, createReducer, on } from "@ngrx/store";
-import { createAdminError, createAdminSuccess, createTrainerError, createTrainerSuccess, getAdminsError, getAdminsSuccess } from "../actions/admin-page.actions";
+import { createAdminError, createAdminSuccess, createTrainerError, createTrainerSuccess, getAdminsError, getAdminsSuccess, getTrainersError, getTrainersSuccess } from "../actions/admin-page.actions";
 import { adminInitialState, AdminState } from "../state/admin-page.state";
 
 export const ADMIN_PAGE_NODE = 'admins';
@@ -13,6 +14,17 @@ export const AdminReducer = createReducer(
     })),
 
     on(getAdminsError, (state, action) => ({
+        ...state,
+        error: action.error.code
+    })),
+
+    // GET TRAINERS
+    on(getTrainersSuccess, (state, { trainers }) => ({
+        ...state,
+        trainers: [...trainers]
+    })),
+
+    on(getTrainersError, (state, action) => ({
         ...state,
         error: action.error.code
     })),

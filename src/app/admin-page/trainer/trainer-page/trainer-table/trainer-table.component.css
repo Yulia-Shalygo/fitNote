@@ -42,7 +42,7 @@ input[type="search"] {
 /* TABLE */
 @font-face {
     font-family: Poppins-Medium;
-    src: url('../../../../fonts/poppins/Poppins-Medium.ttf'); 
+    src: url('../../../../../fonts/poppins/Poppins-Medium.ttf'); 
 }
 .table {
 	word-break: break-all;
@@ -118,16 +118,11 @@ td, th {
 	font-weight: 700;
 }
 .btn_lit {
+	cursor: pointer;
+	outline: none;
 	width: 50px;
 }
 
-/* .numDay {
-	width: 80px;
-}
-
-.phone {
-	width: 140px;
-} */
 .name {
 	width: 100px;
 }

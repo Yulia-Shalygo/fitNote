@@ -94,7 +94,7 @@ export class FirebaseService {
       firebase.database().ref(`club/users/${newAdmin.user.uid}`).update({...user, userId: newAdmin.user.uid});
       secondaryApp.auth().signOut();
       secondaryApp.delete();
-    }).catch(error => {
+    }).then(() => this.router.navigate(['/admin-page'])).catch(error => {
       secondaryApp.delete();
       this.router.errorHandler(error);
     });
@@ -112,7 +112,7 @@ export class FirebaseService {
       firebase.database().ref(`club/users/${newAdmin.user.uid}`).update({...user, userId: newAdmin.user.uid});
       secondaryApp.auth().signOut();
       secondaryApp.delete();
-    }).then(() => this.router.navigate([`/admin-page`]))
+    }).then(() => this.router.navigate([`/admin-page/trainers`]))
     .catch(error => {
       secondaryApp.delete();
       this.router.errorHandler(error);

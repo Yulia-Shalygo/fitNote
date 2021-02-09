@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { logOut } from 'src/app/auth/store/actions/auth.actions';
 
 @Component({
-  selector: 'app-create-trainer-header',
-  templateUrl: './create-trainer-header.component.html',
-  styleUrls: ['./create-trainer-header.component.css']
+  selector: 'app-trainer-page-header',
+  templateUrl: './trainer-page-header.component.html',
+  styleUrls: ['./trainer-page-header.component.css']
 })
-export class CreateTrainerHeaderComponent implements OnInit {
+export class TrainerPageHeaderComponent implements OnInit {
 
   constructor(
     private store: Store,

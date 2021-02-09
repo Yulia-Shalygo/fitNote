@@ -22,7 +22,8 @@ export class CreateAbonementFormComponent implements OnInit {
   abonement: Abonement = {
     start_date: null,
     end_date: null,
-    shape: null
+    shape: null,
+    days: null,
   };
 
   shapesWithoutTrainer: Shape[];
@@ -97,7 +98,8 @@ export class CreateAbonementFormComponent implements OnInit {
       shape: shapeId,
       trainer,
       comment,
-      userId: userId
+      userId: userId,
+      days: needShape.numberOfDays
     };
 
     this.abonementForm.disable();

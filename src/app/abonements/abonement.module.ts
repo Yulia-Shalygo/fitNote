@@ -17,13 +17,19 @@ import { AbonementReducer, ABONEMENT_REDUCER_NODE } from './store/reducers/abone
 import { EffectsModule } from '@ngrx/effects';
 import { AbonementEffects } from './store/effects/abonement.effects';
 import { AbonementTableComponent } from './abonement-page/abonement-table/abonement-table.component';
+import { AbonementGuard } from '../guards/abonement.guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  { path: '', component: AbonementComponent, }, // AbonementGuard ниже в две ссылки
-  { path: 'create-abonement/:id', component: CreateAbonementFormComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  { path: 'create-user', component: CreateUserComponent,  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { 
+    path: '',
+    component: AbonementComponent,
+    canActivate: [AbonementGuard], 
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
+  },
+  { path: 'create-abonement/:id', component: CreateAbonementFormComponent, canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: 'create-user', component: CreateUserComponent,  canActivate: [AngularFireAuthGuard, AbonementGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }},
 ];
 
 @NgModule({

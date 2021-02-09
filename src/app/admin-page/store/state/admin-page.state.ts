@@ -8,7 +8,7 @@ export const adminInitialState: AdminState = {
 }
 
 export interface AdminState {
-    trainers: [];
+    trainers: User[];
     admins: User[];
     error: any;
 }

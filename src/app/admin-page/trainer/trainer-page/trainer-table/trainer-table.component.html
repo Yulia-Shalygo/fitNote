@@ -9,24 +9,24 @@
                 <th class="little btn_lit"></th>
                 <th class="name">Имя и фамилия</th>
                 <th class="phone">Телефон</th>
-                <th class="date">e-mail</th>
-                <th class="date">Адрес</th>
-                <th class="">График</th>
+                <th class="email">e-mail</th>
+                <th class="date">Дата рождения</th>
+                <th class="education">Образование</th>
             </tr>
         </thead>
     </table>
     <div class="scroll-table-body">
         <table class="table">
-            <tbody *ngFor="let admin of needAdmins">
+            <tbody *ngFor="let trainer of needTrainers">
                 <tr>
-                    <td class="little btn_lit" [routerLink] = "['create-admin', admin.userId]">
+                    <td class="little btn_lit" [routerLink] = "['/admin-page/create-trainer', trainer.userId]">
                         <span class="btn_text">Ред.</span>
                     </td>
-                    <td class="name">{{admin.name}}</td>
-                    <td class="phone">{{admin.phone}}</td>
-                    <td class="date">{{admin.email}}</td>
-                    <td class="date">{{admin.address}}</td>
-                    <td>{{admin.workSchedule}}</td>
+                    <td class="name">{{trainer.name}}</td>
+                    <td class="phone">{{trainer.phone}}</td>
+                    <td class="date">{{trainer.email}}</td>
+                    <td class="date">{{trainer.birth}}</td>
+                    <td>{{trainer.education}}</td>
                 </tr>
             </tbody>
         </table>

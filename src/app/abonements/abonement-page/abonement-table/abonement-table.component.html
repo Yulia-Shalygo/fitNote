@@ -29,7 +29,10 @@
                     <td class="phone">{{user.phone}}</td>
                     <td class="date">{{user.abonement.start_date}}</td>
                     <td class="date">{{user.abonement.end_date}}</td>
-                    <td class="little numDay">{{user.numberOfDays}}</td>
+                    <td name="days" class="little numDay">
+                        <span *ngIf="user.abonement.days > 0" (click)="changeDays(user.abonement)" class="btn_text">-</span>
+                        {{user.abonement.days}}
+                    </td>
                     <td>{{user.nameOfAbonement}}</td>
                     <td>{{user.cost}}</td>
                     <td class="trainer" *ngIf="user.trainer">Да</td>

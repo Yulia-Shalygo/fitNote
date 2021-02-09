@@ -4,8 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/auth/store/models/user.model';
 import { ErrorService } from 'src/app/services/error.service';
-import { createAdmin, getAdmins } from '../store/actions/admin-page.actions';
-import { getAdminById, getAdminErrors } from '../store/selectors/admin-page.selectors';
+import { createAdmin, getAdmins } from '../../store/actions/admin-page.actions';
+import { getAdminById, getAdminErrors } from '../../store/selectors/admin-page.selectors';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { ActivatedRoute } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
@@ -108,10 +108,6 @@ export class CreateAdminComponent implements OnInit {
       if (adminId.id != undefined) {
         this.update = true;
 
-        // let admin: User = {
-        //   name, email, birth, phone, comment, workExperience, education, address, workSchedule, role: 'admin', image: this.url, userId: this.adminId
-        // };
-
         this.adminService.updateAdmin(admin, adminId.id);
       } else {
         if (this.fileName && this.file) {
@@ -120,10 +116,6 @@ export class CreateAdminComponent implements OnInit {
             rst.ref.getDownloadURL().then(url => this.url = url);
           });
         };
-
-        // let admin: User = {
-        //   name, email, birth, phone, comment, workExperience, education, address, workSchedule, role: 'admin', image: this.url, userId: this.adminId
-        // };
 
         this.adminForm.disable();
         this.store.dispatch(createAdmin({ admin }));

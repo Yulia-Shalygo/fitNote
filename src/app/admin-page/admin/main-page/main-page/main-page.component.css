@@ -3,10 +3,12 @@
     justify-content: flex-end;
     padding-top: 10px;
     min-height: 590px;
-    background: url('../../../../assets/img/abonement.jpg') no-repeat center;
+    background: url('../../../../../assets/img/abonement.jpg') no-repeat center;
     background-size: 100%;
 }
 .little {
+    cursor: pointer;
+    outline: none;
     margin-top: 50px;
     border: 1px solid rgba(144, 144, 144, 0.5);
 	border-radius: 20px;
