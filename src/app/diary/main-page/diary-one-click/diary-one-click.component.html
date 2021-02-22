@@ -1,0 +1,290 @@
+<div class="header">
+  <app-diary-header></app-diary-header>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="col0">
+
+      <form class="form-group" [formGroup]="diaryForm">
+        <mat-horizontal-stepper [linear]="true" class="wind" #stepper>
+          <mat-step [stepControl]="firstFormGroup" [editable]="true">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Выберите дату</ng-template>
+                <div class="calend">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label class="calend-title">Выберите дату</mat-label>
+                        <input matInput (dateChange)="getDate($event.value)" formControlName="date" matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <div>
+                      <button mat-button matStepperNext>Далее</button>
+                    </div>
+                </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="secondFormGroup" >
+            <form class="secondFormGroup" [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Выберите упражнения</ng-template>
+
+              <mat-accordion class="acc">
+                <div class="col">
+                  <mat-expansion-panel (opened)="getExercises(1)" (closed)="panelOpenState = false" class="mat-accordion">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="title">Плечи</mat-panel-title>
+                      <mat-panel-description></mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="elements">
+                      <div *ngFor="let item of exercisesByBody">
+                        <p>
+                          <input type="checkbox" (change)="toArray(item)" id="item.id" value="item.id"/>
+                          {{item.name}}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(2)" (closed)="panelOpenState = false"class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Грудь</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(3)" (closed)="panelOpenState = false" class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Бицепс</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(4)" (closed)="panelOpenState = false" class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Трицепс</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                </div>
+
+                <div class="col">
+                  <mat-expansion-panel (opened)="getExercises(5)" (closed)="panelOpenState = false" class="mat-accordion">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="title">Предплечье</mat-panel-title>
+                      <mat-panel-description></mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="elements">
+                      <div *ngFor="let item of exercisesByBody">
+                        <p>
+                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          {{item.name}}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel (opened)="getExercises(12)" (closed)="panelOpenState = false" class="mat-accordion">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="title">Трапеция</mat-panel-title>
+                      <mat-panel-description></mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="elements">
+                      <div *ngFor="let item of exercisesByBody">
+                        <p>
+                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          {{item.name}}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+
+                  <mat-expansion-panel (opened)="getExercises(6)" (closed)="panelOpenState = false" class="mat-accordion">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="title">Широчайшие мышцы спины</mat-panel-title>
+                      <mat-panel-description></mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="elements">
+                      <div *ngFor="let item of exercisesByBody">
+                        <p>
+                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          {{item.name}}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(7)" (closed)="panelOpenState = false" class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Пресс</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                    </mat-expansion-panel>
+                </div>
+  
+                <div class="col">
+                  <mat-expansion-panel (opened)="getExercises(8)" (closed)="panelOpenState = false" class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Ягодицы</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(9)" (closed)="panelOpenState = false" class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Квадрицепс</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(10)" (closed)="panelOpenState = false" class="mat-accordion">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title class="title">Бицепс бедра</mat-panel-title>
+                        <mat-panel-description></mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <div class="elements">
+                        <div *ngFor="let item of exercisesByBody">
+                          <p>
+                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                            {{item.name}}
+                          </p>
+                        </div>
+                      </div>
+                  </mat-expansion-panel>
+  
+                  <mat-expansion-panel (opened)="getExercises(11)" (closed)="panelOpenState = false" class="mat-accordion">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title class="title">Голень</mat-panel-title>
+                      <mat-panel-description></mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div class="elements">
+                      <div *ngFor="let item of exercisesByBody">
+                        <p>
+                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          {{item.name}}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+              </mat-accordion>
+              
+            </form>
+            <div>
+              <button class="mat-button" mat-button (click)="stepper.reset()">Сбросить всё</button>
+              <button class="next" mat-button matStepperNext (click)="showData()">Далее</button>
+            </div>
+          </mat-step>
+
+          <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+              <ng-template matStepLabel>Данные о тренировке</ng-template>
+                <table class="table scroll-table">
+                  <thead>
+                    <tr class="tr-row">
+                      <th class="exer">Упражнение</th>
+                      <th class="th-title info">1 подх.</th>
+                      <th class="th-title info">2 подх.</th>
+                      <th class="th-title info">3 подх.</th>
+                      <th class="th-title info">4 подх.</th>
+                      <th class="th-title info">5 подх.</th>
+                    </tr>
+                  </thead>
+                </table>
+
+                <div class="scroll-table-body table">
+                  <table>   
+                    <tbody *ngFor="let item of items.controls; let i = index;">
+                      <div [formGroup]="item">
+                        <tr class="item">
+                          <td class="exer">
+                            <input class="exercise-name" formControlName="exerciseName"/>
+                          </td>
+                          <td class="info input-info">
+                            <input formControlName="firstRepeated" type="number" min="1" class="input-repeated form-control">
+                            <input formControlName="firstWeigth" type="number" min="1" placeholder="кг." class="input-repeated form-control">
+                          </td>
+                          <td class="info input-info">
+                            <input formControlName="secondRepeated" type="number" class="input-repeated form-control">
+                            <input formControlName="secondWeigth" type="number" placeholder="кг." class="input-repeated form-control">
+                          </td>
+                          <td class="info input-info">
+                            <input formControlName="thirdRepeated" type="number" class="input-repeated form-control">
+                            <input formControlName="thirdWeigth" type="number" placeholder="кг." class="input-repeated form-control">
+                          </td>
+                          <td class="info input-info">
+                            <input formControlName="fourthRepeated" type="number" class="input-repeated form-control">
+                            <input formControlName="fourthWeigth" type="number" placeholder="кг." class="input-repeated form-control">
+                          </td>
+                          <td class="info input-info">
+                            <input formControlName="fifthRepeated" type="number" class="input-repeated form-control">
+                            <input formControlName="fifthWeigth" type="number" placeholder="кг." class="input-repeated form-control">
+                          </td>
+                        </tr>
+                      </div>
+                    </tbody>
+                  </table>
+                </div>
+
+              <div>
+                <button class="mat-button" mat-button (click)="stepper.reset()">Сбросить всё</button>
+                <button class="mat-button save" mat-button (click)="submit()">Сохранить</button>
+              </div>
+
+            </form>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </form>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

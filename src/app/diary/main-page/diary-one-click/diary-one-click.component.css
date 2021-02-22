@@ -1,0 +1,117 @@
+.section {
+  min-height: 590px;
+  background: url('../../../../assets/img/abonement.jpg') no-repeat center;
+  background-size: 100%;
+}
+.col0 {
+  padding-top: 10px;
+  width: 1200px;
+}
+.mat-accordion {
+  width: 300px;
+}
+.wind {
+  border-radius: 20px;
+  height: 550px;
+}
+.form-control {
+  width: 500px;
+  margin-top: 5px;
+  margin-right: 5px;
+  background-color: rgba(108, 108, 108, 0.5);
+  border: none;
+  color: #333;
+}
+.title {
+  font-weight: 500;
+}
+.col {
+  display: flex;
+  margin-left: 30px;
+
+  flex-direction: column;
+}
+.acc {
+  display: flex;
+  margin: 30px 0px;
+}
+.secondFormGroup {
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+/* SELECT TABLE */
+.mat-stepper-horizontal {
+  min-height: 500px;
+
+  margin-top: 8px;
+}
+.mat-form-field {
+  margin-top: 16px;
+}
+.mat-button {
+  border: .5px solid #333;
+  margin-right: 5px;
+}
+.elements {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+.exercise-name {
+  font-size: 18px;
+}
+.next .save{
+  margin-left: 5px;
+}
+
+/* CALEND */
+.calend-title {
+  font-weight: 700;
+}
+
+/* TABLE */
+.table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+}
+.table thead th {
+	font-weight: bold;
+	border: none;
+	padding: 10px 15px;
+	background: #d8d8d8;
+	font-size: 14px;
+}
+.info {
+  width: 190px;
+}
+.scroll-table-body {
+	height: 300px;
+	overflow-x: auto;
+}
+.form-control {
+  width: 60px;
+  background-color: rgba(221, 221, 221, 0.5);
+  color: #333;
+}
+.input-info {
+  display: flex;
+  flex-direction: row;
+}
+.item {
+  display: flex;
+}
+.exer {
+  word-break: break-all;
+  width: 200px;
+}
+.tr-row {
+  text-align: left;
+}
+.input-info {
+  align-items: center;
+}
+.exercise-name {
+  font-size: 14px;
+}

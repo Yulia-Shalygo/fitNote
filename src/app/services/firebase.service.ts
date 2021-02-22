@@ -17,7 +17,7 @@ export class FirebaseService {
   constructor(
     public fireAuth: AngularFireAuth, 
     private router: Router,
-    private store: Store
+    private store: Store,
   ) { }
 
   async getUserById(userId: string): Promise<any> {
@@ -34,6 +34,11 @@ export class FirebaseService {
   async getAllUsers(): Promise<User[]> {
     const snapshot = await firebase.database().ref(`club/users`).once('value');
     return Object.values(snapshot.val() || {});
+  }
+
+  deleteUser(userId: string): void {
+    // firebase.database().ref()
+    // admin.auth().deleteUser(userId).then(() => console.log("delete ", userId)).catch((error) => console.log(error))
   }
 
   getAllAdmins() {

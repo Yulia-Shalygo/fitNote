@@ -105,8 +105,6 @@ export class CreateAbonementFormComponent implements OnInit {
     this.abonementForm.disable();
     this.store.dispatch(createAbonement({ abonement }));
     this.store.dispatch(getUsers());
-
-    // this.router.navigate(['/abonement']);
   }
   
   withoutTrainerAbon(shapeid: number): void {

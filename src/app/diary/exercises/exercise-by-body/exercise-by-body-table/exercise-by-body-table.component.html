@@ -1,0 +1,28 @@
+<form class="search-container">
+    <form action="" method="post" class="search">
+        <input (keyup)="updateSearch($event.target.value)" type="search" name="search" placeholder="Поиск..." class="input" />
+    </form>
+    
+    <table class="table scroll-table">
+        <thead>
+            <tr class="header">
+                <th class="name">Название</th>
+                <th class="phone">Описание</th>
+                <th class="email">Дополнение</th>
+            </tr>
+        </thead>
+    </table>
+    <div class="scroll-table-body">
+        <table class="table">
+            <tbody *ngFor="let exercise of needExercises">
+                <tr>
+                    <!-- [routerLink] = "['create-admin', admin.userId]" -->
+                    <td class="name">{{exercise.name}}</td>
+                    <td class="phone">{{exercise.description}}</td>
+                    <td class="email">{{exercise.comment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</form>

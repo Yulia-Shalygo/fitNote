@@ -8,7 +8,6 @@ import { TaskService } from "../services/task.service";
 import { CreateAdminComponent } from "./admin/create-admin/create-admin.component";
 import { CreateTrainerComponent } from "./trainer/create-trainer/create-trainer.component";
 import { AdminPageHeaderComponent } from './admin/admin-page-header/admin-page-header.component';
-import { UploadFileService } from "../services/upload-file.service";
 import { StoreModule } from "@ngrx/store";
 import { AdminReducer, ADMIN_PAGE_NODE } from "./store/reducers/admin-page.reducers";
 import { EffectsModule } from "@ngrx/effects";
@@ -66,7 +65,6 @@ const routes: Routes = [
     providers: [
         FirebaseService,
         TaskService,
-        UploadFileService
     ],
   
   })

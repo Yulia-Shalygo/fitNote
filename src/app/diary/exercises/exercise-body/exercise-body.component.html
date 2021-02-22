@@ -1,0 +1,14 @@
+<app-exercises-body-header></app-exercises-body-header>
+
+<div class="section">
+    <div  class="grid">
+        <div *ngFor="let body of bodies" class="grid__item">
+            <div [routerLink] = "['body', body.id]" class="card">
+                <img class="card__img" [src]="body.img" alt="Snowy Mountains">
+                <div class="card__content">
+                <h1 class="card__text">{{body.name}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

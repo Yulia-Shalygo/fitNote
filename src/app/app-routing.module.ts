@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'abonement', canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./abonements/abonement.module').then(m => m.AbonementPageMModule)},
 
   { path: 'admin-page',  canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./admin-page/admin-page.module').then(m => m.AdminPageMModule)}, 
-  { path: 'diary', component: AuthComponent, canActivate: [AngularFireAuthGuard, DiaryGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, }, //  loadChildren: () => import('./calend/calendar-page-m.module').then(m => m.CalendarPageMModule)
+  { path: 'diary',  canActivate: [AngularFireAuthGuard, DiaryGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, loadChildren: () => import('./diary/diary.module').then(m => m.DiaryModule)},
 
 ];
 

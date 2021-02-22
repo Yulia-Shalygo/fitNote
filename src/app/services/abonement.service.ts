@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getUsers } from '../abonements/store/actions/abonement.actions';
 import { Shape } from '../abonements/store/models/shape.model';
-import { User } from '../auth/store/models/user.model';
 import { Abonement } from '../abonements/store/models/abonement.model';
 
 @Injectable({
@@ -35,9 +34,7 @@ export class AbonementService {
   }
 
   changeDays(abonement: Abonement) {
-    let day = abonement.days.valueOf() - 1
-    // console.log(abonement.days.valueOf() - 1)
-    // console.log(abonement)
+    let day = abonement.days.valueOf() - 1;
     firebase.database().ref(`club/users/${abonement.userId}/abonement`).update({...abonement, days: day});
   }
   async getAllFormOfAbonement(): Promise<Shape[]> {

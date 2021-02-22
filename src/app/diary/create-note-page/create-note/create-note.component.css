@@ -1,0 +1,11 @@
+.section {
+    padding-top: 100px;
+    min-height: 590px;
+    /* display: flex;
+    justify-content: space-around; */
+    background: url('../../../../assets/img/abonement.jpg') no-repeat center;
+    background-size: 100%;
+}
+.calend-title {
+    font-weight: 700;
+}
