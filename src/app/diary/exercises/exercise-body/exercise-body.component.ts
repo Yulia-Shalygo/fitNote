@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { getUser } from 'src/app/auth/store/actions/auth.actions';
+import { DiaryService } from 'src/app/services/diary.service';
 import { getBodies, getExercises } from '../../store/actions/diary.actions';
 import { getBodiesSelector } from '../../store/selectors/diary.selectors';
 
@@ -16,6 +17,7 @@ export class ExerciseBodyComponent implements OnInit {
 
   constructor(
     private store: Store,
+    private diaryService: DiaryService
   ) { }
 
   ngOnInit(): void {
@@ -23,9 +25,7 @@ export class ExerciseBodyComponent implements OnInit {
     this.store.dispatch(getBodies());
     this.store.dispatch(getExercises());
 
-    this.store.select(getBodiesSelector).subscribe(bodies => {
-      this.bodies = bodies;
-    });
+    this.diaryService.getBodies().then(bodies => this.bodies = bodies);
   }
 
 }

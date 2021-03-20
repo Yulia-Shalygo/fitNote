@@ -30,6 +30,11 @@ import { ExercisesBodyHeaderComponent } from './exercises/exercises-body-header/
 import { ExerciseByBodyComponent } from './exercises/exercise-by-body/exercise-by-body/exercise-by-body.component';
 import { ExerciseByBodyHeaderComponent } from './exercises/exercise-by-body/exercise-by-body-header/exercise-by-body-header.component';
 import { ExerciseByBodyTableComponent } from './exercises/exercise-by-body/exercise-by-body-table/exercise-by-body-table.component';
+import { ExercisesCalendarPageComponent } from "./exercises-calendar/exercises-calendar-page/exercises-calendar-page.component";
+import { CalendarHeaderComponent } from "./exercises-calendar/calendar-header/calendar-header.component";
+import { MomentPipe } from "../pipes/moment.pipe";
+import { ShowNoteComponent } from './show-note/show-note/show-note.component';
+import { ShowNoteHeaderComponent } from "./show-note/show-note-header/show-note-header.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -39,21 +44,34 @@ const routes: Routes = [
 
     { path: 'exercises', component: ExerciseBodyComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
     { path: 'exercises/body/:id', component: ExerciseByBodyComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
+
+    { path: 'exercises-calendar', component: ExercisesCalendarPageComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
+    { path: 'exercises-calendar/note/:date', component: ShowNoteComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
 ];
 
 @NgModule({
     declarations: [
         DiaryHeaderComponent,
         DiaryOneClickComponent,
+
         StubMatRowDefDirective,
         matHeaderCellDef,
+
         CreateNoteComponent,
         CreateDiaryHeaderComponent,
+
         ExerciseBodyComponent,
         ExercisesBodyHeaderComponent,
+
         ExerciseByBodyComponent,
         ExerciseByBodyHeaderComponent,
         ExerciseByBodyTableComponent,
+        
+        ExercisesCalendarPageComponent,
+        CalendarHeaderComponent,
+
+        ShowNoteComponent,
+        ShowNoteHeaderComponent
     ],
     imports: [
         RouterModule.forChild(routes),

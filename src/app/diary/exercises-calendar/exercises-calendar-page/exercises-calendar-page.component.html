@@ -1,0 +1,41 @@
+<app-calendar-header></app-calendar-header>
+
+<div class="calendar-header">
+    <i class="material-icons" (click)="minusMonth()">arrow_left</i>
+    <div class="month month--feb year">{{dataService.date | async | date: 'MMMM-YYYY'}}</div>
+    <i class="material-icons" (click)="plusMonth()">arrow_right</i>
+</div>
+
+<div class="main-content">
+    <tbody>
+        <tr class="trow" *ngFor="let week of calendar; let i = index">
+            <td class="date" *ngFor="let day of week.days; let i = index" [class.day--disabled]="day.disable">
+                <div class="day">{{day.value | date: 'd'}}</div>
+                <div *ngFor="let note of notes">
+                    <span class="header" *ngIf="note[day.value | date: 'YYYY-M-d']; else addNote">
+                        <div [routerLink] = "['note', day.value | date: 'YYYY-M-d']" class="training">Тренировка</div>
+                        <!-- <div (click)="removeTraining(note[day.value])" class="remove-training">x</div> -->
+                    </span>
+                    <ng-template #addNote>  
+                        <div class="addNote editNote" routerLink="/diary">+</div>  
+                    </ng-template>  
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</div>
+
+
+    <!-- <div class="month month--title" style="--color:#7ab6db">you've got plans</div>
+    <div class="explanation" style="--color:#7ab2db">Part of the <a href="https://codepen.io/collection/DQvYpQ/" target="_blank">CSS Grid collection here</a>.</div>
+    <footer style="--color:#7ab2db"><a href="https://twitter.com/meowlivia_" target="_blank"><i class="icon-social-twitter icons"></i></a><a href="https://github.com/oliviale" target="_blank"><i class="icon-social-github icons"></i></a><a href="https://dribbble.com/oliviale" target="_blank"><i class="icon-social-dribbble icons"></i></a></footer> -->
+
+
+    <!-- <div class="calendar-container">
+    <div class="calendar-header">
+        <i class="material-icons" (click)="minusMonth()">arrow_left</i>
+        <div class="year">{{dataService.date | async | date: 'MMMM-YYYY'}}</div>
+        <i class="material-icons" (click)="plusMonth()">arrow_right</i>
+    </div>
+    
+</div> -->

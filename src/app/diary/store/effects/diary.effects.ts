@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { from, of } from "rxjs";
 import { catchError, exhaustMap, map } from "rxjs/operators";
 import { DiaryService } from "src/app/services/diary.service";
-import { getBodies, getBodiesError, getBodiesSuccess, getExercises, getExercisesError, getExercisesSuccess } from "../actions/diary.actions";
+import { getAllNotes, getAllNotesError, getAllNotesSuccess, getBodies, getBodiesError, getBodiesSuccess, getExercises, getExercisesError, getExercisesSuccess } from "../actions/diary.actions";
 
 @Injectable()
 export class DiaryEffects {
@@ -28,4 +28,17 @@ export class DiaryEffects {
             catchError((error) => of(getExercisesError({ error })))
         ))
     ));
+
+    getAllNotes = createEffect(() => this.action.pipe(
+        ofType(getAllNotes),
+        exhaustMap(() => from(this.diaryService.getAllNotes()).pipe(
+            map(notes => getAllNotesSuccess({ notes })),
+            catchError((error) => of(getAllNotesError({ error })))
+        ))
+    ));
+
+    // createNote = createEffect(() => this.action.pipe(
+    //     ofType(createNote),
+    //     exhaustMap(() => from(this.diaryService.createNote()).pipe())
+    // ));
 }

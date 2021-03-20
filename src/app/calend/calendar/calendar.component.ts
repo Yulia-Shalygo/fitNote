@@ -9,11 +9,13 @@ import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { addTask, readAllTasks } from '../store/actions/calendar.actions';
 import { getTaskByDate, selectUserId } from '../store/selectors/calendar.selectors';
 import { Week } from '../store/models/week.model';
+import { MomentPipe } from 'src/app/pipes/moment.pipe';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  providers: [MomentPipe]
 })
 export class CalendarComponent implements OnInit {
 

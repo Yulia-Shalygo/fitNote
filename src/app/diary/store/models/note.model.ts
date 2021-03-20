@@ -2,7 +2,21 @@ import { Exercise } from "./exercise.model";
 
 export interface Note {
     id?: string;
-    exerciseId: number; // Exercise;
-    repeated: number;
+    exercise: Exercise;
+    firstRepeated: number;
+    firstWeigth?: number;
+
+    secondRepeated?: number;
+    secondWeigth?: number;
+
+    thirdRepeated?: number;
+    thirdWeigth?: number;
+
+    fourthRepeated?: number;
+    fourthWeigth?: number;
+
+    fifthRepeated?: number;
+    fifthWeigth?: number;
+
     date: any;
 }

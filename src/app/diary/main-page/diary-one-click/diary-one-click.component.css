@@ -58,9 +58,7 @@
   max-height: 100px;
   overflow-y: scroll;
 }
-.exercise-name {
-  font-size: 18px;
-}
+
 .next .save{
   margin-left: 5px;
 }
@@ -102,10 +100,6 @@
 .item {
   display: flex;
 }
-.exer {
-  word-break: break-all;
-  width: 200px;
-}
 .tr-row {
   text-align: left;
 }
@@ -113,5 +107,8 @@
   align-items: center;
 }
 .exercise-name {
+  word-break: break-all;
+  background-color: #fff;
+  width: 180px;
   font-size: 14px;
 }

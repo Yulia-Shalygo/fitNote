@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { getBodies, getExercises } from '../../store/actions/diary.actions';
+import { getAllNotes, getBodies, getExercises } from '../../store/actions/diary.actions';
 import { Exercise } from '../../store/models/exercise.model';
 import { getBodiesSelector, getExercisesSelector } from '../../store/selectors/diary.selectors';
 
 import {FormBuilder, Validators} from '@angular/forms';
 import { getUser } from 'src/app/auth/store/actions/auth.actions';
-
+import { DiaryService } from 'src/app/services/diary.service';
 
 @Component({
   selector: 'app-diary-one-click',
@@ -38,7 +38,8 @@ export class DiaryOneClickComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private diaryService: DiaryService
   ) { }  
 
   ngOnInit(): void {
@@ -50,9 +51,7 @@ export class DiaryOneClickComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       date: ['', Validators.required], 
     });
-    this.secondFormGroup = this._formBuilder.group({
-      // secondCtrl: ['', Validators.required]
-    });
+    this.secondFormGroup = this._formBuilder.group({ });
     this.thirdFormGroup = this._formBuilder.group({
       items: new FormArray([]),
     });
@@ -63,6 +62,7 @@ export class DiaryOneClickComponent implements OnInit {
     this.store.dispatch(getUser());
     this.store.dispatch(getExercises());
     this.store.dispatch(getBodies());
+    this.store.dispatch(getAllNotes());
 
     this.store.select(getExercisesSelector).subscribe(exercises => {
       this.allExercises = exercises;
@@ -71,6 +71,9 @@ export class DiaryOneClickComponent implements OnInit {
     });
 
     this.store.select(getBodiesSelector).subscribe(bodies => this.bodies = bodies);
+
+    // this.diaryService.getAllNotesByDate('2021-2-3').then(items => console.log(items));
+    // this.diaryService.getAllNotes().then(item => console.log(item));
   }
 
   get form() {
@@ -81,13 +84,12 @@ export class DiaryOneClickComponent implements OnInit {
   }
 
   showData(): void {
-    console.log("showData")
     const numberOfExercises = this.currExercises.length;
     if (this.items.length < numberOfExercises) {
       for (let i = this.items.length; i < numberOfExercises; i++) {
         this.items.push(this._formBuilder.group({
           exercise: [this.currExercises[i]],
-          exerciseName: [this.currExercises[i].name],
+          exerciseName: new FormControl({ value: this.currExercises[i].name, disabled: true}),
 
           firstRepeated: ['', Validators.required],
           firstWeigth: [''],
@@ -113,12 +115,16 @@ export class DiaryOneClickComponent implements OnInit {
   }
   
   submit(): void {
-    console.log(JSON.stringify(this.thirdFormGroup.value, null, 4));
+    let data = new Date(this.date);
+    let stringParceDate = data.getFullYear() + '-' + (data.getMonth() + 1) + '-' + data.getDate();
+    let exercises = this.thirdFormGroup.value;
+
+    for (let i = 0; i < exercises.items.length; i++) {
+      this.diaryService.createNote(exercises.items[i], stringParceDate, exercises.items[i].exercise.id);
+    }
   }
   getDate(date: any) {
-
     this.date = date;
-    console.log(date)
   }
 
   groupBy(key: any): any {

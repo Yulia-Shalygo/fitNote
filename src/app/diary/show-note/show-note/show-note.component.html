@@ -1,0 +1,86 @@
+<app-show-note-header></app-show-note-header>
+
+<div class="section">
+    <div class="items">
+        <div *ngFor="let note of notes" class="cards">
+            <div class="container center">
+                <div class="card">
+                    <p class="title">{{ note.exercise.name }}</p>
+                    <hr/>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <img rel="icon" class="icon" (click)="editNote(note)" type="image/x-icon" src="../../../../assets/img/edit_note.png">
+                                </td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>пов.</td>
+                                <td>{{ note.firstWeigth }}</td>
+                                <td>{{ note.secondWeigth }}</td>
+                                <td>{{ note.thirdWeigth }}</td>
+                                <td>{{ note.fourthWeigth }}</td>
+                                <td>{{ note.fifthWeigth }}</td>
+                            </tr>
+                            <tr>
+                                <td>кг.</td>
+                                <td>{{ note.fifthRepeated }}</td>
+                                <td>{{ note.secondRepeated }}</td>
+                                <td>{{ note.thirdRepeated }}</td>
+                                <td>{{ note.fourthRepeated }}</td>
+                                <td>{{ note.fifthRepeated }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button (click)="remove(note)" class="btn-delete">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <!-- <div class="card selected modal fade" [class.show]="modal">
+        <p class="title">{{ selectedNote.exercise.name }}</p>
+        <hr/>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>пов.</td>
+                    <td>{{ selectedNote.firstWeigth }}</td>
+                    <td>{{ selectedNote.secondWeigth }}</td>
+                    <td>{{ selectedNote.thirdWeigth }}</td>
+                    <td>{{ selectedNote.fourthWeigth }}</td>
+                    <td>{{ selectedNote.fifthWeigth }}</td>
+                </tr>
+                <tr>
+                    <td>кг.</td>
+                    <td>{{ selectedNote.fifthRepeated }}</td>
+                    <td>{{ selectedNote.secondRepeated }}</td>
+                    <td>{{ selectedNote.thirdRepeated }}</td>
+                    <td>{{ selectedNote.fourthRepeated }}</td>
+                    <td>{{ selectedNote.fifthRepeated }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+
+</div>

@@ -24,7 +24,6 @@ export class AbonementService {
     return firebase.database().ref(`club/users/${abonement.userId}/abonement`).set(abonement)
       .then(() => {
         this.store.dispatch(getUsers());
-        // this.router.navigate(['/abonement'])
       })
       .catch(error => this.router.errorHandler(error));
   }
