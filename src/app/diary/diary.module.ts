@@ -36,6 +36,8 @@ import { MomentPipe } from "../pipes/moment.pipe";
 import { ShowNoteComponent } from './show-note/show-note/show-note.component';
 import { ShowNoteHeaderComponent } from "./show-note/show-note-header/show-note-header.component";
 import { EditNoteComponent } from './show-note/edit-note/edit-note/edit-note.component';
+import { SettingsPageComponent } from "./settings-page/settings-page.component";
+import { SettingsHeaderComponent } from "./settings-page/settings-header/settings-header.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -50,6 +52,7 @@ const routes: Routes = [
     { path: 'exercises-calendar/note/:date', component: ShowNoteComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
     { path: 'exercises-calendar/note/:date/edit/:id', component: EditNoteComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
     
+    { path: 'settings', component: SettingsPageComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
 ];
 
 @NgModule({
@@ -75,7 +78,10 @@ const routes: Routes = [
 
         ShowNoteComponent,
         ShowNoteHeaderComponent,
-        EditNoteComponent
+        EditNoteComponent,
+        
+        SettingsPageComponent,
+        SettingsHeaderComponent
     ],
     imports: [
         RouterModule.forChild(routes),

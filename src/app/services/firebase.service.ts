@@ -156,4 +156,14 @@ export class FirebaseService {
   getUser(): string {
     return firebase.auth().currentUser.uid;
   }
+
+  getUserEmail(): string {
+    return firebase.auth().currentUser.email;
+  }
+
+  updatePassword() {
+    let email = firebase.auth().currentUser.email;
+    firebase.auth().sendPasswordResetEmail(email).catch(error => console.log(error));
+  }
+  
 }

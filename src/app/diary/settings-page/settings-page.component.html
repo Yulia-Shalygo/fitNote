@@ -1,0 +1,32 @@
+<app-settings-header></app-settings-header>
+
+<div class="section">
+    <div class="main">
+
+        <div class="sidenav">
+            <a (click)="account()">Аккаунт</a>
+            <a (click)="password()">Пароль</a>
+        </div>
+
+        <div *ngIf="!isAccount && !isPassword" class="item">
+            <img rel="icon" class="icon-email icon-settings" type="image/x-icon" src="../../../assets/img/settings.png">
+        </div>
+
+        <div *ngIf="isAccount && !isPassword" class="item">
+            <div class="username title">{{ userName }}</div>
+            <div class="form-group">
+                <img rel="icon" class="icon-email" type="image/x-icon" src="../../../assets/img/email.png">
+                <input [(ngModel)]="userEmail" value="{{userEmail}}" readonly formControlName="userEmail" type="text" class="form-control" >
+            </div>
+            <div class="form-group">
+                <img rel="icon" class="icon-email" type="image/x-icon" src="../../../assets/img/phone2.png">
+                <input [(ngModel)]="userPhone" value="{{userPhone}}" readonly formControlName="userPhone" type="text" class="form-control" >
+            </div>
+        </div>
+        <div *ngIf="!isAccount && isPassword" class="item">
+            <div class="title">Смена пароля</div>
+            <p>Для смены необходимо отправить сообщение на адрес {{ userEmail }} с ссылкой для перехода на страницу сброса пароля.</p>
+            <button (click)="send()" class="btn-delete">Отправить</button>
+        </div>
+    </div>
+</div>
