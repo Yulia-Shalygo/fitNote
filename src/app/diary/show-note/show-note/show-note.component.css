@@ -196,3 +196,7 @@ button {
 .table tbody tr:nth-child(even) {
   background: #f3f3f3;
 }
+.icon {
+  cursor: pointer;
+  outline: none;
+}

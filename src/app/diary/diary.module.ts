@@ -35,6 +35,7 @@ import { CalendarHeaderComponent } from "./exercises-calendar/calendar-header/ca
 import { MomentPipe } from "../pipes/moment.pipe";
 import { ShowNoteComponent } from './show-note/show-note/show-note.component';
 import { ShowNoteHeaderComponent } from "./show-note/show-note-header/show-note-header.component";
+import { EditNoteComponent } from './show-note/edit-note/edit-note/edit-note.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -47,6 +48,8 @@ const routes: Routes = [
 
     { path: 'exercises-calendar', component: ExercisesCalendarPageComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
     { path: 'exercises-calendar/note/:date', component: ShowNoteComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
+    { path: 'exercises-calendar/note/:date/edit/:id', component: EditNoteComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },},
+    
 ];
 
 @NgModule({
@@ -71,7 +74,8 @@ const routes: Routes = [
         CalendarHeaderComponent,
 
         ShowNoteComponent,
-        ShowNoteHeaderComponent
+        ShowNoteHeaderComponent,
+        EditNoteComponent
     ],
     imports: [
         RouterModule.forChild(routes),

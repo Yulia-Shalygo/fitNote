@@ -31,6 +31,11 @@ export class DiaryService {
       .catch(error => this.router.errorHandler(error));
   }
 
+  updateNote(note: Note, exerId: number): void {
+    let userId = firebase.auth().currentUser.uid;
+    firebase.database().ref(`club/users/${userId}/diary/${note.date}/${exerId}`).update({...note});
+  }
+
   async getAllNotesByDate(date: string): Promise<Note[]> {
     let userId = firebase.auth().currentUser.uid;
     const snapshot = await firebase.database().ref(`club/users/${userId}/diary/${date}`).once('value');

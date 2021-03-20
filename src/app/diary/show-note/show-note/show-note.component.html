@@ -11,7 +11,7 @@
                         <thead>
                             <tr>
                                 <td>
-                                    <img rel="icon" class="icon" (click)="editNote(note)" type="image/x-icon" src="../../../../assets/img/edit_note.png">
+                                    <img rel="icon" class="icon" (click)="editNote(note)" [routerLink] = "['edit', note.exercise.id]"  type="image/x-icon" src="../../../../assets/img/edit_note.png">
                                 </td>
                                 <td>1</td>
                                 <td>2</td>
@@ -23,19 +23,19 @@
                         <tbody>
                             <tr>
                                 <td>пов.</td>
+                                <td>{{ note.firstRepeated }}</td>
+                                <td>{{ note.secondRepeated }}</td>
+                                <td>{{ note.thirdRepeated }}</td>
+                                <td>{{ note.fourthRepeated }}</td>
+                                <td>{{ note.fifthRepeated }}</td>
+                            </tr>
+                            <tr>
+                                <td>кг.</td>
                                 <td>{{ note.firstWeigth }}</td>
                                 <td>{{ note.secondWeigth }}</td>
                                 <td>{{ note.thirdWeigth }}</td>
                                 <td>{{ note.fourthWeigth }}</td>
                                 <td>{{ note.fifthWeigth }}</td>
-                            </tr>
-                            <tr>
-                                <td>кг.</td>
-                                <td>{{ note.fifthRepeated }}</td>
-                                <td>{{ note.secondRepeated }}</td>
-                                <td>{{ note.thirdRepeated }}</td>
-                                <td>{{ note.fourthRepeated }}</td>
-                                <td>{{ note.fifthRepeated }}</td>
                             </tr>
                         </tbody>
                     </table>

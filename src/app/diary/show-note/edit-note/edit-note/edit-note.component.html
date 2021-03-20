@@ -1,0 +1,46 @@
+<app-show-note-header></app-show-note-header>
+
+<div class="section">
+    <div class="items">
+        <div class="container center">
+            <div [formGroup]="noteForm" class="card">
+                <p class="title">{{ currNote.exercise.name }}</p>
+                <hr/>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>пов.</td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.firstRepeated" formControlName="firstRepeated"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.secondRepeated" formControlName="secondRepeated"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.thirdRepeated" formControlName="thirdRepeated"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.fourthRepeated" formControlName="fourthRepeated"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.fifthRepeated" formControlName="fifthRepeated"></td>
+                        </tr>
+                        <tr>
+                            <td>кг.</td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.firstWeigth" formControlName="firstWeigth"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.secondWeigth" formControlName="secondWeigth"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.thirdWeigth" formControlName="thirdWeigth"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.fourthWeigth" formControlName="fourthWeigth"></td>
+                            <td><input class="form-control-mini" type="number" [(ngModel)]="currNote.fifthWeigth" formControlName="fifthWeigth"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btns">
+                    <button (click)="back()" class="btn btn-back">Назад</button>
+                    <button (click)="save()" class="btn btn-save">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

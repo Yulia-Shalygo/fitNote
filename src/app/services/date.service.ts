@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'platform'
 })
 export class DateService {
 

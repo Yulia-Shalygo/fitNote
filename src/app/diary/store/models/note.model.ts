@@ -2,7 +2,7 @@ import { Exercise } from "./exercise.model";
 
 export interface Note {
     id?: string;
-    exercise: Exercise;
+    exercise?: Exercise;
     firstRepeated: number;
     firstWeigth?: number;
 
@@ -18,5 +18,5 @@ export interface Note {
     fifthRepeated?: number;
     fifthWeigth?: number;
 
-    date: any;
+    date?: any;
 }

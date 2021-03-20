@@ -28,6 +28,8 @@ export class ShowNoteComponent implements OnInit {
     firstRepeated: null
   };
 
+  isEdit: boolean = false;
+
   constructor(
     private store: Store,
     private activationRoute: ActivatedRoute,
