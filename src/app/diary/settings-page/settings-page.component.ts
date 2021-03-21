@@ -16,6 +16,8 @@ export class SettingsPageComponent implements OnInit {
   userEmail: string = '';
   userPhone: string = '';
 
+  active: boolean = false;
+
   constructor(
     private settingsService: SettingsService,
     private firebaseService: FirebaseService
@@ -28,11 +30,13 @@ export class SettingsPageComponent implements OnInit {
   }
 
   account(): void {
+    this.active = true;
     this.isAccount = true;
     this.isPassword = false;
   }
 
   password(): void {
+    this.active = true;
     this.isPassword = true;
     this.isAccount = false;
   }

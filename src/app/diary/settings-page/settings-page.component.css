@@ -86,3 +86,6 @@
 .main-title {
     font-size: 25px;
 }
+.active {
+    font-weight: 700;
+}

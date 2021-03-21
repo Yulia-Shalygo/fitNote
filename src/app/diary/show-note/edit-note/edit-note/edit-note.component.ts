@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { getAllNotes } from 'src/app/diary/store/actions/diary.actions';
-import { Exercise } from 'src/app/diary/store/models/exercise.model';
 import { Note } from 'src/app/diary/store/models/note.model';
 import { DiaryService } from 'src/app/services/diary.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
@@ -30,8 +29,6 @@ export class EditNoteComponent implements OnInit {
   noteForm: FormGroup;
   date: string;
   exerciseId: number;
-
-  // currNote: any;
 
   constructor(
     private store: Store,
@@ -68,9 +65,6 @@ export class EditNoteComponent implements OnInit {
     });
   }
 
-  update(): void {
-    this.firebaseService.updatePassword();
-  }
   back(): void {
     this.route.navigate([`/diary/exercises-calendar/note/${this.date}`]);
   }

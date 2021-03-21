@@ -8,6 +8,7 @@ import { getBodiesSelector, getExercisesSelector } from '../../store/selectors/d
 import {FormBuilder, Validators} from '@angular/forms';
 import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { DiaryService } from 'src/app/services/diary.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-diary-one-click',
@@ -39,7 +40,8 @@ export class DiaryOneClickComponent implements OnInit {
   constructor(
     private store: Store,
     private _formBuilder: FormBuilder,
-    private diaryService: DiaryService
+    private diaryService: DiaryService,
+    private router: Router
   ) { }  
 
   ngOnInit(): void {
@@ -122,6 +124,8 @@ export class DiaryOneClickComponent implements OnInit {
     for (let i = 0; i < exercises.items.length; i++) {
       this.diaryService.createNote(exercises.items[i], stringParceDate, exercises.items[i].exercise.id);
     }
+
+    window.location.reload();
   }
   getDate(date: any) {
     this.date = date;

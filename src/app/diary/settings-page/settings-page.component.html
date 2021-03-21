@@ -4,8 +4,8 @@
     <div class="main">
 
         <div class="sidenav">
-            <a (click)="account()">Аккаунт</a>
-            <a (click)="password()">Пароль</a>
+            <a [class.active]="isAccount" (click)="account()">Аккаунт</a>
+            <a [class.active]="isPassword" (click)="password()">Пароль</a>
         </div>
 
         <div *ngIf="!isAccount && !isPassword" class="item">
