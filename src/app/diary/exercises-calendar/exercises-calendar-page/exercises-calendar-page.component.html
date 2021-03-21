@@ -2,7 +2,7 @@
 
 <div class="calendar-header">
     <i class="material-icons" (click)="minusMonth()">arrow_left</i>
-    <div class="month month--feb year">{{dataService.date | async | date: 'MMMM-YYYY'}}</div>
+    <div class="month month--feb year">{{ currMonth }}</div>
     <i class="material-icons" (click)="plusMonth()">arrow_right</i>
 </div>
 

@@ -38,6 +38,7 @@ import { ShowNoteHeaderComponent } from "./show-note/show-note-header/show-note-
 import { EditNoteComponent } from './show-note/edit-note/edit-note/edit-note.component';
 import { SettingsPageComponent } from "./settings-page/settings-page.component";
 import { SettingsHeaderComponent } from "./settings-page/settings-header/settings-header.component";
+import { DateService } from "../services/date.service";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -105,6 +106,6 @@ const routes: Routes = [
         EffectsModule.forFeature([DiaryEffects])
     ],
     exports: [],
-    providers: []
+    providers: [DateService]
 })
 export class DiaryModule { }

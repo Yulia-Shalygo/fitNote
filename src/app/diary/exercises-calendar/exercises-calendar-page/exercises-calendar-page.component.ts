@@ -7,9 +7,9 @@ import { Week } from 'src/app/calend/store/models/week.model';
 import { MomentPipe } from 'src/app/pipes/moment.pipe';
 import { DiaryService } from 'src/app/services/diary.service';
 import { Note } from '../../store/models/note.model';
-import { getNotesSelector } from '../../store/selectors/diary.selectors';
 import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { getAllNotes, getBodies, getExercises } from '../../store/actions/diary.actions';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-exercises-calendar-page',
@@ -32,7 +32,9 @@ export class ExercisesCalendarPageComponent implements OnInit {
   userUID: any;
 
   calendar: Week[];
-  date: any;
+  public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
+
+  currMonth: string;
 
   notes: any;
 
@@ -41,7 +43,7 @@ export class ExercisesCalendarPageComponent implements OnInit {
     this.store.dispatch(getAllNotes());
     
     this.dataService.date.subscribe(this.calend.bind(this));
-    this.date = this.dataService.date;
+    this.currMonth = this.date.value.format('MMMM-YYYY');
     
     this.diaryService.getAllNotes().then(items => {
       this.notes = [[(items[2])][0]];
@@ -52,18 +54,15 @@ export class ExercisesCalendarPageComponent implements OnInit {
     this.store.dispatch(getBodies());
   }
 
-  // removeTraining(note: any) {
-  //   console.log(note);
-  // }
   minusMonth(): void {
-    this.dataService.minusMonth();
-    this.date = this.dataService.date;
+    const value = this.date.value.add(-1, 'month');
+    this.date.next(value);
+    this.currMonth = this.date.value.format('MMMM-YYYY');
   }
-
   plusMonth(): void {
-    this.dataService.plusMonth();
-    this.date = this.dataService.date;
-    console.log('this.dataService.date: ', this.dataService.date);
+    const value =  this.date.value.add(1, 'month');
+    this.date.next(value);
+    this.currMonth = this.date.value.format('MMMM-YYYY');
   }
 
   calend(curDate: moment.Moment): void {
