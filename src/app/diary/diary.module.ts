@@ -106,6 +106,6 @@ const routes: Routes = [
         EffectsModule.forFeature([DiaryEffects])
     ],
     exports: [],
-    providers: [DateService]
+    // providers: [DateService]
 })
 export class DiaryModule { }

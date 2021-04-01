@@ -8,7 +8,6 @@ import { getBodiesSelector, getExercisesSelector } from '../../store/selectors/d
 import {FormBuilder, Validators} from '@angular/forms';
 import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { DiaryService } from 'src/app/services/diary.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-diary-one-click',
@@ -37,11 +36,12 @@ export class DiaryOneClickComponent implements OnInit {
 
   exercises: any;
 
+  checked: [];
+
   constructor(
     private store: Store,
     private _formBuilder: FormBuilder,
     private diaryService: DiaryService,
-    private router: Router
   ) { }  
 
   ngOnInit(): void {
@@ -73,9 +73,6 @@ export class DiaryOneClickComponent implements OnInit {
     });
 
     this.store.select(getBodiesSelector).subscribe(bodies => this.bodies = bodies);
-
-    // this.diaryService.getAllNotesByDate('2021-2-3').then(items => console.log(items));
-    // this.diaryService.getAllNotes().then(item => console.log(item));
   }
 
   get form() {
@@ -114,6 +111,7 @@ export class DiaryOneClickComponent implements OnInit {
         this.items.removeAt(i);
       }
     }
+    this.checked = this.thirdFormGroup.value;
   }
   
   submit(): void {
@@ -142,11 +140,11 @@ export class DiaryOneClickComponent implements OnInit {
     };
   }
   
-  getExercises(bodyId: any): any {
+  getExercises(bodyId: number): void {
     this.exercisesByBody = this.exercises[bodyId];
   }
 
-  toArray(item: Exercise) {
+  toArray(item: Exercise): void {
     if (this.selectedExercises.has(item)) { 
       this.selectedExercises.delete(item);
     } else {
@@ -155,7 +153,13 @@ export class DiaryOneClickComponent implements OnInit {
     this.currExercises = [...this.selectedExercises];
   }
 
-  deleteAll(): any {
+  deleteItem(item: any): void {
+    this.items.removeAt(item.value.id);
+    this.selectedExercises.delete(item.value.exercise);
+    this.currExercises = [...this.selectedExercises];
+  } 
+
+  deleteAll(): void {
     this.selectedExercises.clear();
     this.currExercises = [];
   }

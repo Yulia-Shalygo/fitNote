@@ -5,7 +5,7 @@
 }
 .col0 {
   padding-top: 10px;
-  width: 1200px;
+  width: 1230px;
 }
 .mat-accordion {
   width: 300px;
@@ -107,8 +107,26 @@
   align-items: center;
 }
 .exercise-name {
+  resize: none;
   word-break: break-all;
   background-color: #fff;
   width: 180px;
   font-size: 14px;
+}
+
+.list:active, .list:hover {
+  background-color: rgba(221, 221, 221, 0.5);
+  transition: opacity 0.4s linear;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.delete {
+  width: 5px;
+  font-weight: 700;
+  color: red;
+  cursor: pointer;
+}
+.exer {
+  word-break: break-all;
+  max-width: 180px;
 }

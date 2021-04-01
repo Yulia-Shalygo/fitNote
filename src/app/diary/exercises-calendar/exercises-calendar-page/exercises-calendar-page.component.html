@@ -8,13 +8,12 @@
 
 <div class="main-content">
     <tbody>
-        <tr class="trow" *ngFor="let week of calendar; let i = index">
-            <td class="date" *ngFor="let day of week.days; let i = index" [class.day--disabled]="day.disable">
+        <tr class="trow" *ngFor="let week of calendar">
+            <td class="date" *ngFor="let day of week.days" [class.day--disabled]="day.disable">
                 <div class="day">{{day.value | date: 'd'}}</div>
                 <div *ngFor="let note of notes">
                     <span class="header" *ngIf="note[day.value | date: 'YYYY-M-d']; else addNote">
                         <div [routerLink] = "['note', day.value | date: 'YYYY-M-d']" class="training">Тренировка</div>
-                        <!-- <div (click)="removeTraining(note[day.value])" class="remove-training">x</div> -->
                     </span>
                     <ng-template #addNote>  
                         <div class="addNote editNote" routerLink="/diary">+</div>  

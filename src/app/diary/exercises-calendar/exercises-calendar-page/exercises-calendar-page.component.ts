@@ -55,11 +55,13 @@ export class ExercisesCalendarPageComponent implements OnInit {
   }
 
   minusMonth(): void {
+    this.dataService.minusMonth();
     const value = this.date.value.add(-1, 'month');
     this.date.next(value);
     this.currMonth = this.date.value.format('MMMM-YYYY');
   }
   plusMonth(): void {
+    this.dataService.plusMonth();
     const value =  this.date.value.add(1, 'month');
     this.date.next(value);
     this.currMonth = this.date.value.format('MMMM-YYYY');

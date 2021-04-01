@@ -38,8 +38,7 @@
                     </mat-expansion-panel-header>
                     <div class="elements">
                       <div *ngFor="let item of exercisesByBody">
-                        <p>
-                          <input type="checkbox" (change)="toArray(item)" id="item.id" value="item.id"/>
+                        <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                           {{item.name}}
                         </p>
                       </div>
@@ -53,8 +52,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -68,8 +66,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -83,8 +80,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -100,8 +96,7 @@
                     </mat-expansion-panel-header>
                     <div class="elements">
                       <div *ngFor="let item of exercisesByBody">
-                        <p>
-                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                        <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                           {{item.name}}
                         </p>
                       </div>
@@ -115,8 +110,7 @@
                     </mat-expansion-panel-header>
                     <div class="elements">
                       <div *ngFor="let item of exercisesByBody">
-                        <p>
-                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                        <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                           {{item.name}}
                         </p>
                       </div>
@@ -130,8 +124,7 @@
                     </mat-expansion-panel-header>
                     <div class="elements">
                       <div *ngFor="let item of exercisesByBody">
-                        <p>
-                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                        <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                           {{item.name}}
                         </p>
                       </div>
@@ -145,8 +138,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -162,8 +154,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -177,8 +168,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -192,8 +182,7 @@
                       </mat-expansion-panel-header>
                       <div class="elements">
                         <div *ngFor="let item of exercisesByBody">
-                          <p>
-                            <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                          <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                             {{item.name}}
                           </p>
                         </div>
@@ -207,8 +196,7 @@
                     </mat-expansion-panel-header>
                     <div class="elements">
                       <div *ngFor="let item of exercisesByBody">
-                        <p>
-                          <input type="checkbox" (change)="toArray(item)" value="item.id"/>
+                        <p (click)="toArray(item)" id="item.id" class="list" value="item.id">
                           {{item.name}}
                         </p>
                       </div>
@@ -230,6 +218,7 @@
                 <table class="table scroll-table">
                   <thead>
                     <tr class="tr-row">
+                      <th class="th-title info delete"></th>
                       <th class="exer">Упражнение</th>
                       <th class="th-title info">1 подх.</th>
                       <th class="th-title info">2 подх.</th>
@@ -245,8 +234,9 @@
                     <tbody *ngFor="let item of items.controls; let i = index;">
                       <div [formGroup]="item">
                         <tr class="item">
+                          <td class="input-info info delete" (click)="deleteItem(item)">x</td>
                           <td class="exer">
-                            <input class="exercise-name" formControlName="exerciseName"/>
+                            <textarea class="exercise-name" formControlName="exerciseName"></textarea>
                           </td>
                           <td class="info input-info">
                             <input formControlName="firstRepeated" type="number" min="1" class="input-repeated form-control">

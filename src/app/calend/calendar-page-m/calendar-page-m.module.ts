@@ -31,7 +31,7 @@ import { DateService } from 'src/app/services/date.service';
   exports: [
     CalendarComponent
   ],
-  providers: [FirebaseService, TaskService, DateService],
+  providers: [FirebaseService, TaskService],
 
 })
 export class CalendarPageMModule { }

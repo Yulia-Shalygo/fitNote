@@ -9,7 +9,8 @@ export class DateService {
 
  public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
   
-  constructor() { }
+  constructor() { 
+  }
 
   changeDate(date: moment.Moment): void {
     const value = this.date.value.set({
