@@ -7,7 +7,6 @@ import { FirebaseService } from "../services/firebase.service";
 import { TaskService } from "../services/task.service";
 import { CreateAdminComponent } from "./admin/create-admin/create-admin.component";
 import { CreateTrainerComponent } from "./trainer/create-trainer/create-trainer.component";
-import { AdminPageHeaderComponent } from './admin/admin-page-header/admin-page-header.component';
 import { StoreModule } from "@ngrx/store";
 import { AdminReducer, ADMIN_PAGE_NODE } from "./store/reducers/admin-page.reducers";
 import { EffectsModule } from "@ngrx/effects";
@@ -17,7 +16,6 @@ import { AdminsTableComponent } from './admin/main-page/admins-table/admins-tabl
 import { MainPageHeaderComponent } from './admin/main-page/main-page-header/main-page-header.component';
 import { TrainerPageComponent } from './trainer/trainer-page/trainer-page.component';
 import { TrainerTableComponent } from './trainer/trainer-page/trainer-table/trainer-table.component';
-import { TrainerPageHeaderComponent } from "./trainer/trainer-page/trainer-page-header/trainer-page-header.component";
 import { AdminGuard } from "../guards/admin.guard";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -40,15 +38,13 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        CreateTrainerComponent,
-        CreateAdminComponent,
-        AdminPageHeaderComponent,
-        MainPageComponent,
-        AdminsTableComponent,
-        MainPageHeaderComponent,
-        TrainerPageComponent,
-        TrainerTableComponent,
-        TrainerPageHeaderComponent
+      CreateTrainerComponent,
+      CreateAdminComponent,
+      MainPageComponent,
+      AdminsTableComponent,
+      MainPageHeaderComponent,
+      TrainerPageComponent,
+      TrainerTableComponent
     ],
     imports: [
       RouterModule.forChild(routes),
