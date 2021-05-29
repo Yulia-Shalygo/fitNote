@@ -8,7 +8,7 @@ import { logOut } from './store/actions/auth.actions';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['../styles/header.css']
 })
 export class AuthComponent implements OnInit {
 
