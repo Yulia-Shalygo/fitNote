@@ -11,9 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AdminService {
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router) { }
 
   updateAdmin(admin: User, adminId: any) {
     return firebase.database().ref(`club/users/${adminId}`).set(admin).then(() => this.router.navigate(['/admin-page']));

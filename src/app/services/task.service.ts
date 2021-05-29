@@ -13,9 +13,7 @@ import { DateService } from './date.service';
 export class TaskService {
   static url: string = 'https://fitnote-ad140-default-rtdb.firebaseio.com/users';
 
-  constructor(
-    public dataService: DateService,
-  ) { }
+  constructor(public dataService: DateService) { }
 
   create(task: Task): any { 
     return firebase.database().ref(`club/users/${task.user}/tasks/${task.date}`).set(task);

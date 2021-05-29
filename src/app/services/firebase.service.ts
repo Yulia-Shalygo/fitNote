@@ -25,7 +25,6 @@ export class FirebaseService {
     return Object.values(snapshot.val() || {});
   }
 
-  // TODO rename ref ???? get user
   async getAdmin(userUID: string): Promise<any> {
     const snapshot = await firebase.database().ref(`club/users/${ userUID }`).once('value');
     return Object.values(snapshot.val() || {});
@@ -34,11 +33,6 @@ export class FirebaseService {
   async getAllUsers(): Promise<User[]> {
     const snapshot = await firebase.database().ref(`club/users`).once('value');
     return Object.values(snapshot.val() || {});
-  }
-
-  deleteUser(userId: string): void {
-    // firebase.database().ref()
-    // admin.auth().deleteUser(userId).then(() => console.log("delete ", userId)).catch((error) => console.log(error))
   }
 
   getAllAdmins() {
@@ -74,7 +68,7 @@ export class FirebaseService {
     let secondaryApp = firebase.initializeApp(config, "Secondary");
 
     return secondaryApp.auth().createUserWithEmailAndPassword(user.email, 'qwerty').then(function(newUser) {
-      firebase.database().ref(`club/users/${newUser.user.uid}`).update({...user, userId: newUser.user.uid}); // .set(user);
+      firebase.database().ref(`club/users/${newUser.user.uid}`).update({...user, userId: newUser.user.uid});
 
       secondaryApp.auth().signOut();
       secondaryApp.delete();

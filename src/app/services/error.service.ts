@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class ErrorService {
 
-  constructor() { }
-
   getErrorString(errorCode: string): string {
     switch (errorCode) {
       case 'auth/too-many-requests': return 'Слишком много запросов.';

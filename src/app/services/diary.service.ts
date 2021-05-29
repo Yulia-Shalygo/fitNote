@@ -10,9 +10,7 @@ import { Note } from '../diary/store/models/note.model';
 })
 export class DiaryService {
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router) { }
 
   async getBodies(): Promise<Body[]> {
     const snapshot = await firebase.database().ref(`club/exercises`).once('value');

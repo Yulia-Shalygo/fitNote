@@ -8,9 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 export class DateService {
 
  public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
-  
-  constructor() { 
-  }
 
   changeDate(date: moment.Moment): void {
     const value = this.date.value.set({
