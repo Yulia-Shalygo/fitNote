@@ -19,17 +19,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ExercisesCalendarPageComponent implements OnInit {
 
-  selectedNotes: Set<Note> = new Set();
-  currNotes: any;
-
   constructor(
     public dataService: DateService,
     public taskService: TaskService,
     public diaryService: DiaryService,
     private store: Store
   ) { }
-
-  userUID: any;
 
   calendar: Week[];
   public date: BehaviorSubject<moment.Moment> = new BehaviorSubject(moment());
@@ -47,7 +42,6 @@ export class ExercisesCalendarPageComponent implements OnInit {
     
     this.diaryService.getAllNotes().then(items => {
       this.notes = [[(items[2])][0]];
-      console.log(this.notes);
     });
     
     this.store.dispatch(getExercises());

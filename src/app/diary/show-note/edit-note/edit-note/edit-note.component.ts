@@ -6,7 +6,6 @@ import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { getAllNotes } from 'src/app/diary/store/actions/diary.actions';
 import { Note } from 'src/app/diary/store/models/note.model';
 import { DiaryService } from 'src/app/services/diary.service';
-import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-edit-note',
@@ -34,8 +33,7 @@ export class EditNoteComponent implements OnInit {
     private store: Store,
     private activationRoute: ActivatedRoute,
     private diaryService: DiaryService,
-    private route: Router,
-    private firebaseService: FirebaseService,
+    private route: Router
   ) { }
 
   ngOnInit(): void {

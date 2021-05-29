@@ -16,8 +16,4 @@ export class CreateNoteComponent implements OnInit {
       start: new FormControl(null,)
     })
   }
-
-  getDate(date: any) {
-   console.log(date)
-  }
 }

@@ -12,7 +12,6 @@ import { getBodiesSelector } from '../../store/selectors/diary.selectors';
 })
 export class ExerciseBodyComponent implements OnInit {
 
-  url: string; 
   bodies: Body[] = [];
 
   constructor(

@@ -1,10 +1,10 @@
-<app-create-diary-header></app-create-diary-header>
+<app-exercises-body-header></app-exercises-body-header>
 
 <div class="section">
     <div class="calend">
         <mat-form-field [formGroup]="range" class="example-full-width" appearance="fill">
             <mat-label class="calend-title">Выберите дату</mat-label>
-            <input (dateChange)="getDate($event.value)" formControlName="start" matInput [matDatepicker]="picker">
+            <input formControlName="start" matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

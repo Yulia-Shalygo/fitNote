@@ -22,23 +22,18 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatNativeDateModule, MatRippleModule } from "@angular/material/core";
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { CreateDiaryHeaderComponent } from './create-note-page/create-diary-header/create-diary-header.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ExerciseBodyComponent } from './exercises/exercise-body/exercise-body.component';
-import { ExercisesBodyHeaderComponent } from './exercises/exercises-body-header/exercises-body-header.component';
+import { ExercisesBodyHeaderComponent } from './exercises/exercise-by-body/exercise-by-body/exercises-body-header/exercises-body-header.component';
 import { ExerciseByBodyComponent } from './exercises/exercise-by-body/exercise-by-body/exercise-by-body.component';
-import { ExerciseByBodyHeaderComponent } from './exercises/exercise-by-body/exercise-by-body-header/exercise-by-body-header.component';
 import { ExerciseByBodyTableComponent } from './exercises/exercise-by-body/exercise-by-body-table/exercise-by-body-table.component';
 import { ExercisesCalendarPageComponent } from "./exercises-calendar/exercises-calendar-page/exercises-calendar-page.component";
 import { CalendarHeaderComponent } from "./exercises-calendar/calendar-header/calendar-header.component";
-import { MomentPipe } from "../pipes/moment.pipe";
 import { ShowNoteComponent } from './show-note/show-note/show-note.component';
-import { ShowNoteHeaderComponent } from "./show-note/show-note-header/show-note-header.component";
 import { EditNoteComponent } from './show-note/edit-note/edit-note/edit-note.component';
 import { SettingsPageComponent } from "./settings-page/settings-page.component";
 import { SettingsHeaderComponent } from "./settings-page/settings-header/settings-header.component";
-import { DateService } from "../services/date.service";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
@@ -65,20 +60,17 @@ const routes: Routes = [
         matHeaderCellDef,
 
         CreateNoteComponent,
-        CreateDiaryHeaderComponent,
-
+        
         ExerciseBodyComponent,
         ExercisesBodyHeaderComponent,
-
-        ExerciseByBodyComponent,
-        ExerciseByBodyHeaderComponent,
+        
         ExerciseByBodyTableComponent,
+        ExerciseByBodyComponent,
         
         ExercisesCalendarPageComponent,
         CalendarHeaderComponent,
 
         ShowNoteComponent,
-        ShowNoteHeaderComponent,
         EditNoteComponent,
         
         SettingsPageComponent,
@@ -105,7 +97,6 @@ const routes: Routes = [
         StoreModule.forFeature(DIARY_PAGE_NODE, DiaryReducer),
         EffectsModule.forFeature([DiaryEffects])
     ],
-    exports: [],
-    // providers: [DateService]
+    exports: []
 })
 export class DiaryModule { }

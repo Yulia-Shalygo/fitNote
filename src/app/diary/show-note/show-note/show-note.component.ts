@@ -5,7 +5,6 @@ import { getUser } from 'src/app/auth/store/actions/auth.actions';
 import { DiaryService } from 'src/app/services/diary.service';
 import { getAllNotes, getBodies, getExercises } from '../../store/actions/diary.actions';
 import { Note } from '../../store/models/note.model';
-import { getNotesByDateSelector } from '../../store/selectors/diary.selectors';
 
 @Component({
   selector: 'app-show-note',
@@ -28,8 +27,6 @@ export class ShowNoteComponent implements OnInit {
     firstRepeated: null
   };
 
-  isEdit: boolean = false;
-
   constructor(
     private store: Store,
     private activationRoute: ActivatedRoute,
@@ -45,22 +42,10 @@ export class ShowNoteComponent implements OnInit {
     this.activationRoute.params.subscribe(date => {
       this.date = date.date;
       this.updateNotes();
-      
-      // this.store.select(getNotesByDateSelector(this.date)).subscribe(notes => {
-      //   console.log(notes);        
-
-      // })
-      // this.store.select(getExercisesByBodyId(bodyId.id)).subscribe(body => console.log(body));
     });
-
-  }
-
-  editNote(note): void {
-    console.log(note);
   }
 
   remove(note: Note) {
-    console.log('note: ', note);
     this.diaryService.removeNote(note);
     this.updateNotes();
   }

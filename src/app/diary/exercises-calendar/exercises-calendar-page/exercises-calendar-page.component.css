@@ -13,7 +13,6 @@ body {
 
 	display: flex;
 	justify-content: space-around;
-	/* padding: 20px 40px; */
     background-color: #7abfdb;
 }
 .material-icons {
@@ -23,7 +22,6 @@ body {
     font-weight: 300;
 }
 .date {
-    /* border: 2px solid red; */
     background: var(--color);
     padding: 97.5px;
     position: relative;
@@ -117,97 +115,6 @@ body {
     cursor: pointer;
     opacity: 0.8;
 }
-
-/* html,
-body {
-    width: 100%;
-    height: 100%;
-}
-body {
-    background: #f5f7fa;
-    padding: 40px 0;
-    box-sizing: border-box;
-    font-family: Montserrat, "sans-serif";
-    color: #51565d;
-}
-.calendar {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-.calendar span {
-    padding: 0px 74px;
-    padding-bottom: 3px;
-}
-.calendar-container {
-    width: 90%;
-    margin: auto;
-    overflow: hidden;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    background: #fff;
-    max-width: 1200px;
-}
-.calendar-header{
-    background: var(--color);
-    font: 900 40px "Montserrat", sans-serif;
-    text-transform: uppercase;
-    text-align: center;
-    text-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
-
-    padding: 10px 0;
-    background: linear-gradient(
-        to bottom,
-        #fafbfd 0%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-	display: flex;
-	justify-content: space-between;
-	padding: 20px 40px;
-    
-}
-.material-icons {
-    cursor: pointer;
-    font-size: 1.4em;
-    font-weight: 300;
-}
-.calendar-header h1 {
-    margin: 0;
-    font-size: 18px;
-}
-.calendar-header p {
-  margin: 5px 0 0 0;
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(81, 86, 93, 0.4);
-}
-.calendar-header button {
-  background: 0;
-  border: 0;
-  padding: 0;
-  color: rgba(81, 86, 93, 0.7);
-  cursor: pointer;
-  outline: 0;
-}
-
-
-
-.day-name {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #99a1a7;
-    text-align: center;
-    border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-    line-height: 50px;
-    font-weight: 500;
-}
-.day--disabled {
-    color: rgba(152, 160, 166, 0.6);
-    background-color: #ffffff;
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-    cursor: pointer;
-} */
 
 .task {
     border-left-width: 3px;
@@ -309,7 +216,6 @@ body {
     top: 10px;
     cursor: pointer;
     outline: none;
-    /* top: 80px; */
     background-color: rgba(81, 255, 7, 0.728);
     padding: 3px 10px;
     border-radius: 20px;
