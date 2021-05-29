@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-page',
-  templateUrl: './calendar-page.component.html',
-  styleUrls: ['./calendar-page.component.css']
+  template: `
+    <div>
+      <app-calendar></app-calendar>
+    </div>
+  `
 })
-export class CalendarPageComponent implements OnInit {
+export class CalendarPageComponent {
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

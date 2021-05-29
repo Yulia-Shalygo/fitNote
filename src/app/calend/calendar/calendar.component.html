@@ -6,7 +6,7 @@
 
                 <div class="date__header">
                     <i class="material-icons" (click)="minusMonth()">arrow_left</i>
-                    <div class="year">{{dataService.date | async | moment}}</div>
+                    <div class="year">{{ dataService.date | async | moment }}</div>
                     <i class="material-icons" (click)="plusMonth()">arrow_right</i>
                 </div>
 

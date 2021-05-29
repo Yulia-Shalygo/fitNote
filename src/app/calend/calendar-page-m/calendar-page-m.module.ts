@@ -11,7 +11,6 @@ import { StoreModule } from '@ngrx/store';
 import { CalendarReducer, CALENDAR_REDUCER_NODE } from '../store/reducers/calendar.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { CalendarEffects } from '../store/effects/calendar.effects';
-import { DateService } from 'src/app/services/date.service';
 
 @NgModule({
   declarations: [

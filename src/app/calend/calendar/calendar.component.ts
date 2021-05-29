@@ -48,7 +48,7 @@ export class CalendarComponent implements OnInit {
     this.store.dispatch(getUser());
     this.store.dispatch(readAllTasks());
 
-    this.store.select(selectUserId).subscribe((id) => this.userUID = id);
+    this.store.select(selectUserId).subscribe(id => this.userUID = id);
   }
 
   calend(curDate: moment.Moment): void {
