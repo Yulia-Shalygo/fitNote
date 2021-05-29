@@ -20,8 +20,6 @@ export class AbonementTableComponent implements OnInit {
   needUsers: User[];
   finish: boolean = false;
 
-  days: number;
-
   constructor(
     private store: Store,
     private abonementService: AbonementService
@@ -31,6 +29,10 @@ export class AbonementTableComponent implements OnInit {
     this.store.dispatch(getUsers());
     this.store.dispatch(getShapes());
 
+    this.selectAllUsers();    
+  }
+
+  selectAllUsers(): void {
     this.store.select(getUsersSelector).subscribe(users => {
       this.store.select(getAllShapes).subscribe(shapes => {
         let arr = [];
@@ -53,7 +55,6 @@ export class AbonementTableComponent implements OnInit {
         if (users) {
           this.users = arr;
           this.needUsers = arr;
-          // console.log(this.needUsers)
         } else this.users = [];
       })
     });
@@ -74,9 +75,8 @@ export class AbonementTableComponent implements OnInit {
 
   changeDays(abonement: Abonement) {
     if (abonement.days.valueOf() < 0) {
-      console.log("null")
       this.finish = true;
     }
-    this.abonementService.changeDays(abonement);    
+    this.abonementService.changeDays(abonement);
   }
 }
