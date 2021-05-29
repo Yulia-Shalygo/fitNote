@@ -10,9 +10,9 @@
 
 .form-control {
     min-width: 300px;
+    
     margin-top: 5px;
     background-color: rgba(244, 244, 245, 0.762);
-
     border: none;
     color: #333;
 }

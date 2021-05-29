@@ -6,7 +6,7 @@ import { logOut } from 'src/app/auth/store/actions/auth.actions';
 @Component({
   selector: 'app-main-page-header',
   templateUrl: './main-page-header.component.html',
-  styleUrls: ['./main-page-header.component.css']
+  styleUrls: ['../../../../styles/header.css']
 })
 export class MainPageHeaderComponent implements OnInit {
 

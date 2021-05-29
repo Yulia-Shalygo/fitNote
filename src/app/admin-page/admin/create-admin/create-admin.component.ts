@@ -20,13 +20,11 @@ export class CreateAdminComponent implements OnInit {
   adminForm: FormGroup;
   err: string = '';
 
-  url: string = '/assets/img/user.png';
+  defaultUrl: string = '/assets/img/user.png';
   subscription: Subscription;
 
   file: any;
   fileName: any;
-
-  update = false;
   
   adminId: string;
   admin: User = {
@@ -81,7 +79,7 @@ export class CreateAdminComponent implements OnInit {
         this.admin.education = admin.education;
         this.admin.comment = admin.comment;
         this.admin.image = admin.image;
-        this.url = admin.image;
+        this.defaultUrl = admin.image;
       } else {
         this.admin.name = '';
         this.admin.email = '';
@@ -101,19 +99,17 @@ export class CreateAdminComponent implements OnInit {
     const { name, email, birth, phone, comment, workExperience, education, address, workSchedule } = this.adminForm.value;
 
     let admin: User = {
-      name, email, birth, phone, comment, workExperience, education, address, workSchedule, role: 'admin', image: this.url, userId: this.adminId
+      name, email, birth, phone, comment, workExperience, education, address, workSchedule, role: 'admin', image: this.defaultUrl, userId: this.adminId
     };
 
     this.activationRoute.params.subscribe(adminId => {
       if (adminId.id != undefined) {
-        this.update = true;
-
         this.adminService.updateAdmin(admin, adminId.id);
       } else {
         if (this.fileName && this.file) {
           this.fireStorage.upload(this.fileName, this.file)
           .then(rst => { 
-            rst.ref.getDownloadURL().then(url => this.url = url);
+            rst.ref.getDownloadURL().then(url => this.defaultUrl = url);
           });
         };
 
@@ -140,7 +136,7 @@ export class CreateAdminComponent implements OnInit {
       let reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (event: any) => {
-        this.url = event.target.result; 
+        this.defaultUrl = event.target.result; 
       }
     }
   }
