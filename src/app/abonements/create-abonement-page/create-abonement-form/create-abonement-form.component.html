@@ -5,9 +5,7 @@
         <div class="col">
 
             <form class="form-group" [formGroup]="abonementForm">  
-
                 <div class="info">
-
                     <div class="main">
                         <div class="form-group">
                             <input [(ngModel)]="abonement.start_date" #dateOfStart formControlName="dateOfStart" type="text" class="date-abon abon-info form-control" placeholder="Дата начала" onfocus="(this.type='date')">
@@ -19,7 +17,6 @@
                     </div>
 
                     <div class="shape">
-                    
                         <div class="main">
                             <div class="form-group">
                                 <button (click)="withoutTrainerAbon(0)" class="btn-without headShape form-control">Без тренера</button>
@@ -67,8 +64,8 @@
 
                     <input  type="submit" class="btn btn-default" (click)="createAbonement()" value="Сохранить" />
                 </div>
-
             </form>
+
         </div>
     </div>
 </div>

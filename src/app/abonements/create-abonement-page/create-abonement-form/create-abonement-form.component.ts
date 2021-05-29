@@ -7,7 +7,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import { createAbonement, getShapes, getUsers } from '../../store/actions/abonement.actions';
 import { Abonement } from '../../store/models/abonement.model';
 import { Shape } from '../../store/models/shape.model';
-import { getAbonementByUserIdSelector, getShapeByID, getShapesWithoutTrainer, getShapesWithTrainer, getSpecialShapes } from '../../store/selectors/abonement.selectors';
+import { 
+  getAbonementByUserIdSelector,
+  getShapeByID,
+  getShapesWithoutTrainer,
+  getShapesWithTrainer,
+  getSpecialShapes
+} from '../../store/selectors/abonement.selectors';
 
 @Component({
   selector: 'app-create-abonement-form',
@@ -68,7 +74,7 @@ export class CreateAbonementFormComponent implements OnInit {
     this.firebaseService.getAllUsers();
     this.store.dispatch(getShapes());
     this.store.select(getShapesWithoutTrainer).subscribe(shapes => {
-      this.shapesWithoutTrainer = shapes
+      this.shapesWithoutTrainer = shapes;
     });
     this.store.select(getShapesWithTrainer).subscribe(shapes => this.shapesWithTrainer = shapes);
     this.store.select(getSpecialShapes).subscribe(shapes => this.shapesSpecial = shapes);

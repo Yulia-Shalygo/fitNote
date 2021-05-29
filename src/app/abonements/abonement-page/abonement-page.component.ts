@@ -7,7 +7,16 @@ import { getUsersSelector } from '../store/selectors/abonement.selectors';
 
 @Component({
   selector: 'app-abonement-page',
-  templateUrl: './abonement-page.component.html',
+
+  template: `
+    <div class="section">
+      <div class="calendar">
+          <app-calendar></app-calendar>
+      </div>
+      <app-abonement-table></app-abonement-table>
+    </div>
+  `,
+
   styleUrls: ['./abonement-page.component.css']
 })
 export class AbonementPageComponent implements OnInit {

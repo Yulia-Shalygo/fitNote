@@ -6,7 +6,7 @@ import { logOut } from 'src/app/auth/store/actions/auth.actions';
 @Component({
   selector: 'app-create-user-header',
   templateUrl: './create-user-header.component.html',
-  styleUrls: ['./create-user-header.component.css']
+  styleUrls: ['../../../styles/header.css']
 })
 export class CreateUserHeaderComponent implements OnInit {
 

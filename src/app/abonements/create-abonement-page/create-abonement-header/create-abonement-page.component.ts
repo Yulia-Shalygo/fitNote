@@ -6,7 +6,7 @@ import { logOut } from 'src/app/auth/store/actions/auth.actions';
 @Component({
   selector: 'app-create-abonement-page',
   templateUrl: './create-abonement-page.component.html',
-  styleUrls: ['./create-abonement-page.component.css']
+  styleUrls: ['../../../styles/header.css']
 })
 export class CreateAbonementPageComponent implements OnInit {
 

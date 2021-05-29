@@ -6,7 +6,7 @@ import { logOut } from 'src/app/auth/store/actions/auth.actions';
 @Component({
   selector: 'app-abonement',
   templateUrl: './abonement.component.html',
-  styleUrls: ['./abonement.component.css']
+  styleUrls: ['../styles/header.css']
 })
 export class AbonementComponent implements OnInit {
   

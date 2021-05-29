@@ -18,7 +18,6 @@ export class AbonementTableComponent implements OnInit {
   private _searchSubject: Subject<string> = new Subject();
 
   needUsers: User[];
-  finish: boolean = false;
 
   constructor(
     private store: Store,
@@ -74,9 +73,6 @@ export class AbonementTableComponent implements OnInit {
   }
 
   changeDays(abonement: Abonement) {
-    if (abonement.days.valueOf() < 0) {
-      this.finish = true;
-    }
     this.abonementService.changeDays(abonement);
   }
 }
